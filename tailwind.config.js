@@ -3,15 +3,15 @@ module.exports = {
   purge: {
     content: [
       "./src/pages/**/*.{js,jsx,ts,tsx}",
-      "./src/components/**/*.{js,jsx,ts,tsx}",
-      "./src/atomicComponents/**/*.{js,jsx,ts,tsx}",
+      "./src/Components/**/*.{js,jsx,ts,tsx}",
+      "./src/AtomicComponents/**/*.{js,jsx,ts,tsx}",
     ],
   },
   theme: {
     extend: {
       colors: {
-        primary1: "#FFFFFF",
-        primary2: "#8C8C8C",              
+        primary1: "#F2BE5C",
+        primary2: "#000",      
         secondary1: {
           100: "#1B4ED2 50%",
           200: "rgba(181, 65, 162, 0.93) 100%",
@@ -20,6 +20,7 @@ module.exports = {
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
       },
+
       screens: {
         'lt': { 'max' : '500px'},
         'sm': { 'max': '600px' },
@@ -30,6 +31,9 @@ module.exports = {
         'xl': { 'max': "1280px" },
         "2xl": { 'max': "1536px" },
       },
+      spacing: {
+        xPadding: "120px"
+      }
     },
   },
 };
