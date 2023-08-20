@@ -111,3 +111,7 @@ form input, textarea{
   border-radius: 6px;
   padding: 7px;
 }
+
+.pryOutline{
+  color: #F2BE5C;
+}
