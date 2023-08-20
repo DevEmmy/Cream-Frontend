@@ -42,14 +42,14 @@ const DynamicBanner = ({children}) => {
             {
                 images.map((image, i)=>{
                     return(
-                        <img src={image} key={i} className='w-[100%] h-[90vh]'/>
+                        <img src={image} key={i} className='w-[100%] h-[100vh]'/>
                     )
                 })
             }
         </Carousel>
 
         <BlackOverlay />
-        <div className="textContainer absolute flex flex-col top-[20vh] left-0 right-0 items-center justify-center">
+        <div className="textContainer absolute flex flex-col top-[35vh] left-0 right-0 items-center justify-center">
             {
                 children ||
                 <>

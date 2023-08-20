@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { RiBellFill, RiMenu2Fill, RiMessage2Fill, RiUser2Fill, RiWallet2Fill } from "react-icons/ri"
-import { HiX } from "react-icons/hi"
+import { RiBellFill, RiBook2Fill, RiContactsFill, RiInformationFill, RiLogoutBoxFill, RiMenu2Fill, RiMessage2Fill, RiUser2Fill, RiWallet2Fill } from "react-icons/ri"
+import { HiUserGroup, HiX } from "react-icons/hi"
+import Line from './Line'
 
 const Nav = ({active = 0}) => {
 
@@ -62,8 +63,26 @@ const Nav = ({active = 0}) => {
             link: "/wallet"
         }
     ]
+
+    const otherNav = [
+        {
+            name: "Help & FAQ",
+            icon: <RiInformationFill />,
+            link: "/"
+        },
+        {
+            name: "About",
+            icon: <RiBook2Fill />,
+            link: "/about"
+        },
+        {
+            name: "Contact Us",
+            icon: <RiContactsFill />,
+            link: "/contact-us"
+        }
+    ]
   return (
-    <div className='bg-black text-white flex justify-between py-3 px-xPadding items-center'>
+    <div className='bg-black text-white flex justify-between py-3 px-xPadding items-center fixed top-0 left-0 right-0 z-40'>
         <div>
             Cream
         </div>
@@ -88,16 +107,21 @@ const Nav = ({active = 0}) => {
             </Link>
             
 
-            <RiMenu2Fill color='white' size={26} className='cursor-pointer' onClick={()=> setShowSideNav(true)}/>
+            <RiMenu2Fill color='white' size={24} className='cursor-pointer' onClick={()=> setShowSideNav(true)}/>
         </div>
 
-        <div className={`fixed w-[20%] top-0  bg-white h-full ${showSideNav? "right-0" : "-right-[20%]"} transition-all ease-linear text-black p-3`}>
+        <div className={`fixed w-[20%] top-0  bg-white h-full ${showSideNav? "right-0" : "-right-[20%]"} transition-all ease-linear text-black p-5`}>
             <div className='flex justify-between items-center'>
                 <p className='font-[600]'>Welcome</p>
-                <HiX size={24} onClick={()=> setShowSideNav(false)}/>
+                <HiX size={24} onClick={()=> setShowSideNav(false)} className='cursor-pointer'/>
             </div>
 
-            <div className='my-3 flex flex-col gap-4'>
+            <Line />
+            <div className='my-5 flex flex-col gap-4'>
+                            <Link href={"/"} className='flex items-center gap-3'>
+                                <HiUserGroup />
+                                <p>List With Us</p>
+                            </Link>
                 {
                     sideNav.map((item, i)=>{
                         return(
@@ -108,6 +132,26 @@ const Nav = ({active = 0}) => {
                         )
                     })
                 }
+            </div>
+
+            <Line />
+
+            <div className='my-5 flex flex-col gap-4'>
+                {
+                    otherNav.map((item, i)=>{
+                        return(
+                            <Link href={item.link} key={i} className='flex items-center gap-3'>
+                                {item.icon}
+                                <p>{item.name}</p>
+                            </Link>
+                        )
+                    })
+                }
+
+                            <Link href={"/login"} className='flex items-center gap-3'>
+                                <RiLogoutBoxFill />
+                                <p>Log Out</p>
+                            </Link>
             </div>
         </div>
         
