@@ -16,6 +16,10 @@ const Footer = () => {
                     link: "/contact-us"
                 },
                 {
+                    name: "Blogs",
+                    link: "/blogs"
+                },
+                {
                     name: "Terms & Condition",
                     link: "terms-and-condition"
                 }
