@@ -13,7 +13,7 @@ module.exports = {
         primary1: "#F2BE5C",
         primary2: "#000",      
         secondary1: {
-          100: "#1B4ED2 50%",
+          100: "rgba(255, 255, 255, 0.50)",
           200: "rgba(181, 65, 162, 0.93) 100%",
         }       
       },
