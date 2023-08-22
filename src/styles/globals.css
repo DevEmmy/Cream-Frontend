@@ -83,6 +83,15 @@
 .cflexes {
   @apply flex flex-col justify-end items-start;
 }
+
+.avatar{
+  @apply rounded-[50%]
+}
+
+.listings-container{
+  @apply grid grid-cols-3 gap-10
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

@@ -110,7 +110,7 @@ const Nav = ({active = 0}) => {
             <RiMenu2Fill color='white' size={24} className='cursor-pointer' onClick={()=> setShowSideNav(true)}/>
         </div>
 
-        <div className={`fixed w-[20%] top-0  bg-white h-full ${showSideNav? "right-0" : "-right-[20%]"} transition-all ease-linear text-black p-5`}>
+        <div className={`fixed w-[20%] top-0  bg-white h-full ${showSideNav? "right-0" : "-right-[20%]"} transition-all ease-linear text-black p-5 border-l-gray-300 border`}>
             <div className='flex justify-between items-center'>
                 <p className='font-[600]'>Welcome</p>
                 <HiX size={24} onClick={()=> setShowSideNav(false)} className='cursor-pointer'/>
@@ -120,7 +120,7 @@ const Nav = ({active = 0}) => {
             <div className='my-5 flex flex-col gap-4'>
                             <Link href={"/"} className='flex items-center gap-3'>
                                 <HiUserGroup />
-                                <p>List With Us</p>
+                                <p>Sell</p>
                             </Link>
                 {
                     sideNav.map((item, i)=>{
