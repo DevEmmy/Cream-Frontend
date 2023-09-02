@@ -54,10 +54,10 @@ const DynamicBanner = ({children}) => {
                 children ||
                 <>
                     <h1 className='text-white text-[4em] font-[700]'>
-                        LUXURY <span className='text-primary1'>REDEFINED.</span>
+                        CREAM <span className='text-primary1'>.</span>
                     </h1>
-                    <p className='text-white font-[600]'>
-                        Luxury is a mindset, CREAM is all that you need.
+                    <p className='text-white font-[600] w-[50%] text-center'>
+                        The Intelligent Market Place. Describe your desired property, automobile or resource in plain words and watch our AI do its magic.
                     </p>
 
                     <div className="flex gap-5 mt-5">

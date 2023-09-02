@@ -32,7 +32,7 @@ module.exports = {
         "2xl": { 'max': "1536px" },
       },
       spacing: {
-        xPadding: "120px"
+        xPadding: "5%"
       }
     },
   },

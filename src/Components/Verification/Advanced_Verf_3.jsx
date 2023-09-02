@@ -4,7 +4,7 @@ import ver2 from "../../Assets/ver2.png";
 import ver3 from "../../Assets/ver3.png";
 import ver4 from "../../Assets/ver4.png";
 import axios from "axios";
-import globalApi from "../../components/api";
+import globalApi from "../api";
 // import { setLoading } from "../../application/store/actions/ui";
 
 const Advanced_Verf_3 = (props) => {

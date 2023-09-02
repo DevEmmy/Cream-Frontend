@@ -25,11 +25,6 @@ const Nav = ({active = 0}) => {
             icon: null
         },
         {
-            name: "AI RECOMMENDER",
-            link: "/ai-recommender",
-            icon: null
-        },
-        {
             name: 'ABOUT',
             link: "/about",
             icon: null,
@@ -110,7 +105,7 @@ const Nav = ({active = 0}) => {
             <RiMenu2Fill color='white' size={24} className='cursor-pointer' onClick={()=> setShowSideNav(true)}/>
         </div>
 
-        <div className={`fixed w-[20%] top-0  bg-white h-full ${showSideNav? "right-0" : "-right-[20%]"} transition-all ease-linear text-black p-5 border-l-gray-300 border`}>
+        <div className={`fixed w-[15%] top-0  bg-white h-full ${showSideNav? "right-0" : "-right-[20%]"} transition-all ease-linear text-black p-5 border-l-gray-300 border`}>
             <div className='flex justify-between items-center'>
                 <p className='font-[600]'>Welcome</p>
                 <HiX size={24} onClick={()=> setShowSideNav(false)} className='cursor-pointer'/>

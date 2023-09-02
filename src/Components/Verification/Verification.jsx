@@ -9,10 +9,10 @@ import Advanced_Verf_1 from "./Advanced_Verf_1";
 import Advanced_Verf_2 from "./Advanced_verf_2";
 import Advanced_Verf_3 from "./Advanced_Verf_3";
 import Verified from "./Verified";
-import Loader from "../../atomicComponents/Loader/Loader";
+import Loader from "../../AtomicComponents/Loader/Loader";
 import Image from "next/image";
 // import { requestUserData } from "../../infrastructure/api/user/userRequest";
-import Nav from "@/atomicComponents/Nav";
+import Nav from "@/AtomicComponents/Nav";
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 const ProfileAsElement = ({ mainData }) => {

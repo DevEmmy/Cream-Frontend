@@ -11,17 +11,17 @@ const Automobile = () => {
     <Nav active={2} />
 
     <DynamicBanner>
-         <h1 className='text-white text-[4em] font-[700]'>LUXURY <span className='text-primary1'>AUTOMOBILE</span></h1>
+         <h1 className='text-white text-[4em] font-[700]'>AUTOMOBILE <span className='text-primary1'>.</span></h1>
         <p className='text-white font-[600]'>find new and preowned cars for sale</p>
 
         <div className="flex gap-3 items-center">
-            <div className='flex gap-3 border-2 border-gray-300 py-3 px-5 rounded-lg w-[100%] items-center my-3 bg-white text-black'>
-                <RiSearch2Line />
-                <input type="text" className='focus:outline-0 w-full' placeholder='Search Based on Location'/>
-            </div>
+                <div className='flex gap-3 py-3 px-5 rounded-lg w-[40VW] items-center my-3 bg-white text-black'>
+                    <RiSearch2Line />
+                    <input type="text" className='focus:outline-0 w-full' placeholder='Describe your desired property, automobile or resource in plain words and watch our AI do its magic.'/>
+                </div>
 
-            <button className='bg-primary1 text-black px-12 py-4 flex items-center rounded-md'>Filter <RiEqualizerFill /> </button>
-        </div>
+                <button className='bg-primary1 text-black px-6 py-3  gap-2 flex items-center rounded-md'>Search <RiSearch2Line /> </button>
+            </div>
         
     </DynamicBanner>
 

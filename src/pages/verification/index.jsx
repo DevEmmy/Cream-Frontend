@@ -1,5 +1,5 @@
 import MetaTags from '@/AtomicComponents/MetaTags'
-import Verification from '@/components/Verification/Verification'
+import Verification from '@/Components/Verification/Verification'
 import React from 'react'
 
 const index = () => {
@@ -11,4 +11,4 @@ const index = () => {
   )
 }
 
-export default index
+export default index// import Verification from '@/components/Verification/Verification'

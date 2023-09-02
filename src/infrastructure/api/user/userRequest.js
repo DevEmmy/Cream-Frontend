@@ -1,5 +1,5 @@
 import axios from "axios";
-import globalApi from "@/components/api";
+import globalApi from "@/Components/api";
 import services from "@/ioc/services";
 
 const BASEURL = "https://king-david-elites.onrender.com";
