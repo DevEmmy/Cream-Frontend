@@ -1,24 +1,34 @@
 import Card from '@/AtomicComponents/Card'
 import Line from '@/AtomicComponents/Line'
 import Nav from '@/AtomicComponents/Nav'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { RiPencilFill } from 'react-icons/ri'
+import TimeAgo from "react-timeago"
 
 const Profile = () => {
+    let [user, setUser] = useState()
+
+    useEffect(()=>{
+        let data = JSON.parse(localStorage.getItem("user"))
+        setUser(data)
+    })
   return (
-    <div>
+    <>
+        {
+            user &&
+            <div>
         <Nav active={10}/>
         <div className="cover h-[40vh]">
-            <img src="/i1.jpg" alt="" />
+            <img src={user.cover} alt="" />
         </div>
 
         <div className="mx-xPadding my-10">
             <div className="profile flex gap-6 items-center">
-                <img src="/bg.jpg" alt="" className='avatar w-24 h-24'/>
+                <img src={user.profilePicture} alt="" className='avatar w-24 h-24'/>
 
                 <div className="flex flex-col">
-                    <h3 className='font-[600] text-[1.2em]'>Ileri OluwaKiiye</h3>
-                    <p className='text-[0.8em]'>Joined in 2023</p>
+                    <h3 className='font-[600] text-[1.2em]'>{}</h3>
+                    <p className='text-[0.8em]'>Joined in <TimeAgo date={user.createdAt}/> </p>
                 </div>
 
                 <button className='flex gap-1 items-center bg-gray-300 py-3 px-5 rounded-md text-[0.8em]'>
@@ -28,8 +38,8 @@ const Profile = () => {
             </div>
 
            <div className='my-3'>
-                <p>Hey there! I am using CREAM.</p>
-                <p>Email: <span className='pryOutline font-[700]'>eolaosebikan60@gmail.com</span></p>
+                <p>{user.bio}</p>
+                <p>Email: <span className='pryOutline font-[700]'>{user.email}</span></p>
            </div>
 
            <Line />
@@ -47,10 +57,9 @@ const Profile = () => {
                 </div> */}
            </div>
         </div>
-
-
-        
     </div>
+        }
+    </>
   )
 }
 
