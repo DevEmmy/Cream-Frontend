@@ -40,11 +40,11 @@ const Profile = () => {
                     <p className='text-red-500 text-[0.8em]'>Note: You cannot save more than 20 Listings</p>
                 </div>
 
-                <div className="listings-container my-10">
+                {/* <div className="listings-container my-10">
                     <Card />
                     <Card />
                     <Card />
-                </div>
+                </div> */}
            </div>
         </div>
 
