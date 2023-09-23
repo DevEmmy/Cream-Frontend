@@ -1,25 +1,44 @@
+import { login } from '@/services/request'
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 
 const Login = () => {
+
+  const [details, setDetails] = useState({
+    email: "",
+    password: ""
+  })
+
+  const router = useRouter()
+
+  const handleChange = (e)=>{
+      setDetails({...details, [e.target.name]: e.target.value}) 
+  }
+
+  const submitForm = async (e)=>{
+    e.preventDefault()
+    await login(details.email, details.password, router);
+  }
+
   return (
-    <div className='bg-slate-700 w-full h-[100vh] flex flex-col items-center justify-center'>
-        <div className="container bg-white w-[40%] h-[70vh] p-10 text-center">
+    <div className='bg-slate-700 w-full h-[100vh] flex flex-col gap-3 items-center justify-center'>
+        <div className="bg-white w-[40%] h-[70vh] p-10 text-center">
             <h2 className='text-[2em] font-[700]'>CREAM</h2>
             <p>Welcome Back, We missed you!</p>
 
             <form action="" className='flex gap-5 flex-col'>
-                <input type="text" placeholder='johndoe@gmail.com' className='w-full'/>
-                <input type="text" placeholder='**** ' className='w-full'/>
+                <input type="text" placeholder='johndoe@gmail.com' className='w-full text-[0.8em] p-3' name="email" value={details["email"]} onChange={handleChange}/>
+                <input type="password" placeholder='**** ' className='w-full text-[0.8em] p-3' name="password" value={details["password"]} onChange={handleChange}/>
                 
-                <p className='text-start'>Forgotten Password? <Link href={"/forgot-password"} className='text-primary1 font-[700]'>Click Here</Link> </p>
+                <p className='text-start'>Forgotten Password? <Link href={"/forgot-password"} className='text-primary1 font-[500]'>Click Here</Link> </p>
             </form>
 
-            <button className='bg-primary1 w-full py-3 text-black rounded-md my-3'>
+            <button className='bg-primary1 w-full py-3 text-black rounded-md my-3' onClick={submitForm}>
                 Login
             </button>
 
-            <p>Don't have an account? <Link href={"/register"} className='text-primary1 font-[700]'>Register</Link> </p>
+            <p>Don't have an account? <Link href={"/register"} className='text-primary1 font-[500]'>Register</Link> </p>
         </div>
 
     </div>

@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RiBellFill, RiBook2Fill, RiContactsFill, RiInformationFill, RiLogoutBoxFill, RiMenu2Fill, RiMessage2Fill, RiUser2Fill, RiWallet2Fill } from "react-icons/ri"
 import { HiUserGroup, HiX } from "react-icons/hi"
 import Line from './Line'
+import { validateLoggedIn } from '@/services/request'
 
 const Nav = ({active = 0}) => {
 
@@ -76,6 +77,12 @@ const Nav = ({active = 0}) => {
             link: "/contact-us"
         }
     ]
+
+    const [loggedIn, setLoggedIn] = useState(false)
+
+    useEffect(()=>{
+        setLoggedIn(validateLoggedIn)
+    })
   return (
     <div className='bg-black text-white flex justify-between py-3 px-xPadding items-center fixed top-0 left-0 right-0 z-40'>
         <div>
@@ -95,11 +102,21 @@ const Nav = ({active = 0}) => {
         </div>
 
         <div className='flex gap-8 items-center'>
-            <Link href={"/login"}>
-                <button className='bg-primary1 px-6 py-3 text-[0.8em] rounded-md text-black font-[600]'>
-                LOG IN
-            </button>
-            </Link>
+           {
+                loggedIn ?
+                <Link href={"/profile"}>
+                    <button className='bg-primary1 px-6 py-3 text-[0.8em] rounded-md text-black font-[600]'>
+                        Profile
+                    </button>
+                </Link>
+                :
+
+                <Link href={"/login"}>
+                    <button className='bg-primary1 px-6 py-3 text-[0.8em] rounded-md text-black font-[600]'>
+                        LOG IN
+                    </button>
+                </Link>
+           }
             
 
             <RiMenu2Fill color='white' size={24} className='cursor-pointer' onClick={()=> setShowSideNav(true)}/>

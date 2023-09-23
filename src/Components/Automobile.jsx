@@ -2,10 +2,22 @@ import Card from '@/AtomicComponents/Card'
 import DynamicBanner from '@/AtomicComponents/DynamicBanner'
 import Footer from '@/AtomicComponents/Footer'
 import Nav from '@/AtomicComponents/Nav'
-import React from 'react'
+import { getAllListings } from '@/services/request'
+import React, { useEffect, useState } from 'react'
 import { RiEqualizerFill, RiSearch2Line } from 'react-icons/ri'
 
 const Automobile = () => {
+  const [listings, setListings] = useState(null);
+
+    const fetchData = async ()=>{
+        let data = await getAllListings()
+        console.log(data)
+        setListings(data)
+    }
+
+    useEffect(()=>{
+        fetchData()
+    }, [])
   return (
     <>
     <Nav active={2} />
@@ -29,9 +41,13 @@ const Automobile = () => {
         <h3 className='text-center my-10 text[1.5em] font-[600]'>Explore Luxury Automobiles</h3>
 
         <div className='grid grid-cols-3 gap-10'>
-            <Card />
-            <Card />
-            <Card />
+                {
+                  listings?.map((item, i)=>{
+                    return(
+                      <Card key={i} listing={item}/>
+                    )
+                })
+                }
         </div>
     </div>
 
