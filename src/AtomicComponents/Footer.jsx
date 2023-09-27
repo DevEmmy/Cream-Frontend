@@ -73,7 +73,7 @@ const Footer = () => {
     },
   ];
   return (
-    <div className="bg-black text-[0.8em] grid grid-cols-4 sm:gap-[30px] sm:grid-cols-2 py-20 sm:py-[40px] px-xPadding text-[rgb(200,200,200)]">
+    <div className="bg-black text-[0.8em] grid grid-cols-4 sm:gap-[30px] sm:grid-cols-1 py-20 sm:py-[40px] px-xPadding text-[rgb(200,200,200)]">
       {footerNav.map((nav, i) => {
         return (
           <div key={i} className="flex flex-col gap-3">
