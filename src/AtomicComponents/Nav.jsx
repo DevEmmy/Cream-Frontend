@@ -104,7 +104,7 @@ const Nav = ({ active = 0 }) => {
   });
   return (
     <div className="bg-black text-white w-full flex justify-between py-3 px-xPadding items-center fixed top-0 left-0 right-0 z-40">
-      <div>Cream</div>
+      <div>CREAM</div>
 
       <div className="block flexss font-[700] gap-5 md:hidden">
         {nav.map((item, i) => {
@@ -230,6 +230,9 @@ const Nav = ({ active = 0 }) => {
                 href={item.link}
                 key={i}
                 className="flex items-center gap-3"
+                onClick={() => {
+                  setShowSideNav(false);
+                }}
               >
                 {item.icon}
                 <p>{item.name}</p>
