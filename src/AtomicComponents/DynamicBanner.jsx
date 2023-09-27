@@ -54,10 +54,10 @@ const DynamicBanner = ({ children }) => {
             </p>
 
             <div className="flex gap-5 mt-5 sm:mt-[50px]">
-              <button className="bg-primary1 text-black px-12 py-3 rounded-xl">
+              <button className="bg-primary1 text-black px-12 py-3 rounded-md">
                 Explore
               </button>
-              <button className="bg-transparent border-2 border-primary1 text-primary1 px-5 py-3 rounded-xl">
+              <button className="bg-transparent border-2 border-primary1 text-primary1 px-5 py-3 rounded-md">
                 Download App
               </button>
             </div>
