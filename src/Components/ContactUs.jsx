@@ -1,65 +1,73 @@
-import DynamicBanner from '@/AtomicComponents/DynamicBanner'
-import Footer from '@/AtomicComponents/Footer'
-import Nav from '@/AtomicComponents/Nav'
-import React from 'react'
+import DynamicBanner from "@/AtomicComponents/DynamicBanner";
+import Footer from "@/AtomicComponents/Footer";
+import Nav from "@/AtomicComponents/Nav";
+import React from "react";
 
 const ContactUs = () => {
   return (
     <div>
-        <Nav active={5}/>
-        <DynamicBanner>
-        <h1 className='text-white text-[4em] font-[700]'>CONTACT <span className='text-primary1'>US</span></h1>
-            <p className='text-white font-[600]'>All you need to know about King David Elite.</p>
-        </DynamicBanner>
+      <Nav active={5} />
+      <DynamicBanner>
+        <h1 className="text-white text-[4em] sm:text-[40px] font-[700]">
+          CONTACT <span className="text-primary1">US</span>
+        </h1>
+        <p className="text-white font-[600] text-center">
+          All you need to know about King David Elite.
+        </p>
+      </DynamicBanner>
 
-        <div className='grid grid-cols-2 gap-20 mx-xPadding my-24 items-center'>
-            <h1 className='text-[4em] font-[600]'>
-                Have Anything In Mind? Let's talk.
-            </h1>
+      <div className="grid grid-cols-2 gap-20 sm:grid-cols-1 mx-xPadding my-24 items-center">
+        <h1 className="text-[4em] sm:text-[25px] font-[600]">
+          Have Anything In Mind? Let's talk.
+        </h1>
 
-            <form className='flex flex-col gap-3'>
-                <p>Send A Message</p>
+        <form className="flex flex-col gap-3">
+          <p>Send A Message</p>
 
-                <div className='flex gap-2 items-center'>
-                    <div>
-                        <p className='text-[0.8em]'>Name</p>
-                        <input type="text" />
-                    </div>
+          <div className="flex gap-2 items-center sm:flex-col sm:w-full">
+            <div className="sm:w-full">
+              <p className="text-[0.8em]">Name</p>
+              <input type="text" />
+            </div>
 
-                    <div>
-                        <p className='text-[0.8em]'>Email</p>
-                        <input type="email" />
-                    </div>
-                </div>
+            <div className="sm:w-full">
+              <p className="text-[0.8em]">Email</p>
+              <input type="email" />
+            </div>
+          </div>
 
-                <div className='flex gap-2 items-center'>
-                    <div>
-                        <p className='text-[0.8em]'>Your Website</p>
-                        <input type="text" />
-                    </div>
+          <div className="flex gap-2 items-center sm:flex-col sm:w-full">
+            <div className="sm:w-full">
+              <p className="text-[0.8em]">Your Website</p>
+              <input type="text" />
+            </div>
 
-                    <div>
-                        <p className='text-[0.8em]'>Phone Number</p>
-                        <input type="tel" />
-                    </div>
-                </div>
+            <div className="sm:w-full">
+              <p className="text-[0.8em]">Phone Number</p>
+              <input type="tel" />
+            </div>
+          </div>
 
-                <div>
-                    <p className='text-[0.8em]'>Comment</p>
-                    <textarea name="" id="" cols="10" rows="10" className='resize-none w-[95%]'/>
-                </div>
+          <div>
+            <p className="text-[0.8em]">Comment</p>
+            <textarea
+              name=""
+              id=""
+              cols="10"
+              rows="10"
+              className="resize-none w-[95%]"
+            />
+          </div>
 
-                <button className='bg-primary1 py-3 text-center w-[95%] rounded-md'>
-                    Send Message
-                </button>
-            </form>
-        </div>
+          <button className="bg-primary1 py-3 text-center w-[95%] rounded-md">
+            Send Message
+          </button>
+        </form>
+      </div>
 
-
-
-        <Footer />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default ContactUs
+export default ContactUs;

@@ -16,54 +16,69 @@ const Profile = () => {
     <>
         {
             user &&
-            <div>
-        <Nav active={10}/>
+               
+        <div>
+        <Nav active={10} />
         <div className="cover h-[40vh]">
             <img src={user.cover} alt="" />
         </div>
 
         <div className="mx-xPadding my-10">
-            <div className="profile flex gap-6 items-center">
-                <img src={user.profilePicture} alt="" className='avatar w-24 h-24'/>
+            <div className="profile flex sm:flex-col gap-6 items-center">
+            <div className="sm:w-full flexsm gap-[2em]">
+                <img
+                src={user.profilePicture}
+                alt=""
+                className="avatar w-24 h-24 sm:w-16 sm:h-16"
+                />
 
                 <div className="flex flex-col">
-                    <h3 className='font-[600] text-[1.2em]'>{user.firstName + " " + user.lastName}</h3>
-                    <p className='text-[0.8em]'>Joined in <TimeAgo date={user.createdAt}/> </p>
+                <h3 className="font-[600] text-[1.2em] sm:text-[1em]">
+                {user.firstName + " " + user.lastName}
+                </h3>
+                <p className="text-[0.8em]">Joined in <TimeAgo date={user.createdAt}/></p>
                 </div>
 
                 <a href="/profile/edit">
-                     <button className='flex gap-1 items-center bg-gray-300 py-3 px-5 rounded-md text-[0.8em]'>
-                        <RiPencilFill />
-                        Edit Profile
-                    </button>
-                </a>
-               
-            </div>
+                        <button className='flex gap-1 items-center bg-gray-300 py-3 px-5 rounded-md text-[0.8em]'>
+                            <RiPencilFill />
+                            Edit Profile
+                        </button>
+                    </a>
+          </div>
 
-           <div className='my-3'>
-                <p>{user.bio}</p>
-                <p>Email: <span className='pryOutline font-[700]'>{user.email}</span></p>
-           </div>
-
-           <Line />
-
-           <div className="saved my-10">
-                <div>
-                    <h3 className='text-[1.5em] font-[600]'>3 of 20 Saved Listings</h3>
-                    <p className='text-red-500 text-[0.8em]'>Note: You cannot save more than 20 Listings</p>
-                </div>
-
-                {/* <div className="listings-container my-10">
-                    <Card />
-                    <Card />
-                    <Card />
-                </div> */}
-           </div>
         </div>
-    </div>
+
+        <div className="my-3 sm:text-[16px]">
+          <p>{user.bio}</p>
+          <p>
+            Email:{" "}
+            <span className="pryOutline font-[700]">
+            {user.email}
+            </span>
+          </p>
+        </div>
+
+        <Line />
+
+        <div className="saved my-10">
+          <div>
+            <h3 className="text-[1.5em] s:text-[1.2em] font-[600]">3 of 20 Saved Listings</h3>
+            {/* <p className='text-red-500 text-[0.8em]'>Note: You cannot save more than 20 Listings</p> */}
+          </div>
+
+          <div className="listings-container my-10">
+            {/* <Card />
+                    <Card />
+                    <Card /> */}
+          </div>
+        </div>
+      </div>
+        </div>
+
         }
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;
