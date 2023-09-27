@@ -34,7 +34,6 @@ export const login = async (email, password, router)=>{
     })
 }
 
-
 export const register = async (details, router)=>{
     const toastId = loading("Registered...")
     await axiosRequest.post("/users/sign-up", details)
@@ -109,4 +108,9 @@ export const getAListing = async (id)=>{
         console.log(err)
     })
     return data
+}
+
+export const getDetails = ()=>{
+    let data = JSON.parse(localStorage.getItem("user"))
+    return data;
 }
