@@ -11,7 +11,7 @@ const Profile = () => {
     useEffect(()=>{
         let data = JSON.parse(localStorage.getItem("user"))
         setUser(data)
-    })
+    }, [])
   return (
     <>
         {
@@ -27,14 +27,17 @@ const Profile = () => {
                 <img src={user.profilePicture} alt="" className='avatar w-24 h-24'/>
 
                 <div className="flex flex-col">
-                    <h3 className='font-[600] text-[1.2em]'>{}</h3>
+                    <h3 className='font-[600] text-[1.2em]'>{user.firstName + " " + user.lastName}</h3>
                     <p className='text-[0.8em]'>Joined in <TimeAgo date={user.createdAt}/> </p>
                 </div>
 
-                <button className='flex gap-1 items-center bg-gray-300 py-3 px-5 rounded-md text-[0.8em]'>
-                    <RiPencilFill />
-                    Edit Profile
-                </button>
+                <a href="/profile/edit">
+                     <button className='flex gap-1 items-center bg-gray-300 py-3 px-5 rounded-md text-[0.8em]'>
+                        <RiPencilFill />
+                        Edit Profile
+                    </button>
+                </a>
+               
             </div>
 
            <div className='my-3'>

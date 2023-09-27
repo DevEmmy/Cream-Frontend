@@ -22,9 +22,10 @@ import MainButton from "../buttons/MainButton";
 import Loader from "@/AtomicComponents/Loader/Loader";
 import { useRouter } from "next/router";
 import { getDetails } from "@/services/request";
+import useLocalStorage from "use-local-storage";
 
 const EditProfile = () => {
-  const [mainData, setMainData] = useState({});
+  const [mainData, setMainData] = useLocalStorage("user", "");
 
   const navigate = useRouter();
   // const location = useLocation;
@@ -158,12 +159,14 @@ const EditProfile = () => {
       city: values.city,
       zipCode: values.zipCode,
     };
-    if (isEdit) {
+
+    console.log(userDetails)
+    // if (isEdit) {
       setLoader(true);
       await services.api.userRequests
         .updateUserProfile(userDetails)
         .then((res) => {
-          localStorage.setItem("user", JSON.stringify(res.mainData));
+          localStorage.setItem("user", JSON.stringify(res.data));
           setEditUserProfile(res.mainData);
           setLoader(false);          
           navigate.push("/profile");
@@ -173,7 +176,7 @@ const EditProfile = () => {
           setLoader(false);
           setPopUp(true);
         });
-    }
+    // }
   };
 
   const handleChanging = (e) => {
@@ -189,30 +192,30 @@ const EditProfile = () => {
   };
 
   const getCountryIso = (name) => {
-    var countryObject = mainmainData.countrymainData.find(
+    var countryObject = mainData.countryData.find(
       (country) => country.name === name
     );
-    setStatemainData([]);
-    setCitymainData([]);
+    setStateData([]);
+    setCityData([]);
     setIsos({ ...isos, countryIso: countryObject["iso2"] });
-    getStates(countryObject["iso2"], setStatemainData);
+    getStates(countryObject["iso2"], setStateData);
     setLocationISO(
       `${isos["cityId"]}#${isos["stateIso"]}#${countryObject["iso2"]}`
     );
   };
 
   const getStateISO = (name) => {
-    var stateObject = statemainData.find((state) => state.name === name);
-    setCitymainData([]);
+    var stateObject = stateData.find((state) => state.name === name);
+    setCityData([]);
     setIsos({ ...isos, stateIso: stateObject["iso2"] });
-    getCities(isos["countryIso"], stateObject["iso2"], setCitymainData);
+    getCities(isos["countryIso"], stateObject["iso2"], setCityData);
     setLocationISO(
       `${isos["cityId"]}#${stateObject["iso2"]}#${isos["countryIso"]}`
     );
   };
 
   const getCityId = (name) => {
-    var cityObject = citymainData.find((city) => city.name === name);
+    var cityObject = cityData.find((city) => city.name === name);
     setIsos({ ...isos, cityId: cityObject["id"] });
     setLocationISO(
       `${cityObject["id"]}#${isos["stateIso"]}#${isos["countryIso"]}`
@@ -575,6 +578,7 @@ const EditProfile = () => {
                 marginTop="1em"
                 padding="18px 24px"
                 type="submit"
+                onClick={formik.onSubmit}
               >
                 Save
               </MainButton>
