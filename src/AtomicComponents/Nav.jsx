@@ -104,7 +104,9 @@ const Nav = ({ active = 0 }) => {
   });
   return (
     <div className="bg-black text-white w-full flex justify-between py-3 px-xPadding items-center fixed top-0 left-0 right-0 z-40">
-      <div>CREAM</div>
+      <div>
+        <img src="./logo.png" className="w-[30%]" alt="" />
+      </div>
 
       <div className="block flexss font-[700] gap-5 md:hidden">
         {nav.map((item, i) => {
@@ -170,7 +172,7 @@ const Nav = ({ active = 0 }) => {
 
         <Line />
         <div className="block my-5 cflexss gap-4 md:hidden">
-          <Link href={"/"} className="flex items-center gap-3">
+          <Link href={"/create-listing"} className="flex items-center gap-3">
             <HiUserGroup />
             <p>Sell</p>
           </Link>

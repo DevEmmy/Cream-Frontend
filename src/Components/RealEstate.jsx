@@ -10,7 +10,7 @@ const RealEstate = () => {
   const [listings, setListings] = useState(null);
 
   const fetchData = async () => {
-    let data = await getAllListings();
+    let data = await getAllListings("real-estate");
     console.log(data);
     setListings(data);
   };

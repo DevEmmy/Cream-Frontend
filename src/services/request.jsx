@@ -72,9 +72,9 @@ export const validateLoggedIn = ()=>{
     return false
 }
 
-export const getAllListings = async ()=>{
+export const getAllListings = async (cat)=>{
     let data = []
-    await axiosRequest.get("/listings/all")
+    await axiosRequest.get(`/listings/all?category=${cat}`)
     .then(response =>{
         data = response.data;
     })
@@ -88,7 +88,7 @@ export const getAllListings = async ()=>{
         
         console.log(err)
     })
-    return data
+    return data.listings
 }
 
 export const getAListing = async (id)=>{

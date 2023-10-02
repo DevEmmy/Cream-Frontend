@@ -1,9 +1,12 @@
 import Card from '@/AtomicComponents/Card'
 import Line from '@/AtomicComponents/Line'
 import Nav from '@/AtomicComponents/Nav'
+import theme from '@/application/utils/Theme'
 import React, { useEffect, useState } from 'react'
+import { FaFacebook, FaInstagram } from 'react-icons/fa'
 import { RiPencilFill } from 'react-icons/ri'
 import TimeAgo from "react-timeago"
+import styled from 'styled-components'
 
 const Profile = () => {
     let [user, setUser] = useState()
@@ -49,7 +52,7 @@ const Profile = () => {
 
         </div>
 
-        <div className="my-3 sm:text-[16px]">
+        {/* <div className="my-3 sm:text-[16px]">
           <p>{user.bio}</p>
           <p>
             Email:{" "}
@@ -57,7 +60,56 @@ const Profile = () => {
             {user.email}
             </span>
           </p>
+        </div> */}
+
+<UserDetails>
+        <div className="bio">
+          {user.about}
         </div>
+        <div className="email">
+          Email: <span className="select">{user.email}</span>
+        </div>
+        {
+          user.websiteUrl && (
+            <div>
+              Wesbite: <a href={`https://${user.websiteUrl}`} className="select">{user.websiteUrl}</a>
+            </div>
+          )
+        }
+        <div className="email">
+          {user?.address}
+        </div>
+        
+        <div className="email">
+          
+        </div>
+
+        <Address>
+        {(user.facebookUrl || user.instagramUrl) && (
+          <p className="social">
+            Social:
+            {user.facebookUrl && (
+              <a href={user.facebookUrl}>
+                <FaFacebook color="blue" size={22}/>
+              </a>
+            )}
+            {user.instagramUrl && (
+              <a href={user?.instagramUrl}>
+                <FaInstagram color="#FA5936" size={22}/>
+              </a>
+            )}
+          </p>
+        )}
+      </Address>
+
+      {/* {
+        !logged && verify && verify != "APPROVED" &&
+        <Verify>
+          Verification status: {verify}
+        </Verify>
+      } */}
+  </UserDetails>
+      
 
         <Line />
 
@@ -82,3 +134,41 @@ const Profile = () => {
 };
 
 export default Profile;
+
+export const Address = styled.div`
+  width: 80%;
+  /* margin: 10px auto; */
+
+  .address {
+    font-weight: 600;
+  }
+
+  @media (max-width: 700px) {
+    width: 96%;
+    font-size: 14px;
+  }
+
+  .social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .website {
+    color: #fa5936;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+`;
+
+export const UserDetails = styled.div`
+padding: 10px;
+font-size: 14px;
+  .bio{
+    color: rgb(100,100,100);
+  }
+
+  .select{
+    color: ${theme.color};
+  }
+`

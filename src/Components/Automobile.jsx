@@ -10,7 +10,7 @@ const Automobile = () => {
   const [listings, setListings] = useState(null);
 
   const fetchData = async () => {
-    let data = await getAllListings();
+    let data = await getAllListings("cars");
     console.log(data);
     setListings(data);
   };
