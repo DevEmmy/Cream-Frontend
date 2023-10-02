@@ -2,19 +2,44 @@ import Card from '@/AtomicComponents/Card'
 import Line from '@/AtomicComponents/Line'
 import Nav from '@/AtomicComponents/Nav'
 import theme from '@/application/utils/Theme'
+
 import React, { useEffect, useState } from 'react'
 import { FaFacebook, FaInstagram } from 'react-icons/fa'
 import { RiPencilFill } from 'react-icons/ri'
 import TimeAgo from "react-timeago"
 import styled from 'styled-components'
+import ProfileList from './Profile/ProfileList'
 
 const Profile = () => {
     let [user, setUser] = useState()
+    const [active, setActive] = useState();
+    const [btn, setBtn] = useState("Stats");
 
     useEffect(()=>{
         let data = JSON.parse(localStorage.getItem("user"))
         setUser(data)
+        setActive(<ProfileList user={data}/>)
     }, [])
+
+    const options = [
+      // {
+      //   title: "Stats",
+      //   component: <ProfileStat />,
+      // },
+      {
+        title: "List",
+        component: <ProfileList user={user}/>,
+      },
+      // {
+      //   title: "Account",
+      //   component: <Account />,
+      // },
+      // {
+      //   title: "Saved Listings",
+      //   component: <ListingsSaved />,
+      // },
+    ];
+    
   return (
     <>
         {
@@ -126,9 +151,73 @@ const Profile = () => {
           </div>
         </div>
       </div>
+
+      {user.accountType ==1 ?
+       (
+        <Switch>
+          <div className="line" />
+          <div className="options">
+            {options.map((option, i) => {
+              const { title, component } = option;
+              return (
+                <>
+                  {user.accountType === 1 ? (
+                    <>
+                      {title !== "Saved Listings" && (
+                        <div
+                          key={i}
+                          className={
+                            btn === title ? "option2" : "option"
+                          }
+                          onClick={() => {
+                            setActive(component);
+                            setBtn(title);
+                          }}
+                        >
+                          {title}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {title === "Saved Listings" && (
+                        <div
+                          key={i}
+                          className={
+                            btn === title ? "option2" : "option"
+                          }
+                          onClick={() => {
+                            setActive(component);
+                            setBtn(title);
+                          }}
+                        >
+                          {title}
+                        </div>
+                      )}
+                    </>
+                  )}
+                </>
+              );
+            })}
+          </div>
+          <div className="line" />
+        </Switch>
+      )
+    :
+    
+    <>
+    </>
+      // <SavedContainer>
+      //   <h1>0 of 20 Saved Listings</h1>
+      //   <p>Note: You cannot save more than 20 listings</p>        
+      // </SavedContainer>
+
+    }
         </div>
 
         }
+
+        {active}
     </>
   );
 };
@@ -172,3 +261,59 @@ font-size: 14px;
     color: ${theme.color};
   }
 `
+
+export const Switch = styled.div`
+  margin: 50px 0;
+  .line {
+    /* width: 100%; */
+    height: 5px;
+    background-color: #e2e2e2;
+  }
+
+  .options {
+    /* display: grid;
+        grid-template-columns: repeat(3, 1fr); */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    margin: 10px auto;
+    font-size: 14px;
+
+    .option {
+      background: #e2e2e2;
+      color: black;
+      width: fit-content;
+      padding: 7px 30px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option2 {
+      background-color: #252625;
+      color: white;
+      width: fit-content;
+      padding: 7px 30px;
+      border-radius: 6px;
+    }
+
+    .option:hover {
+      background-color: #252625;
+      color: white;
+      transition: all 0.3s;
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
+      padding: 0 10px;
+      display: flex;
+      justify-content: space-between;
+
+      .option {
+        padding: 5px 20px;
+        font-size: 12px;
+        border-radius: 3px;
+        /* width: 20%; */
+      }
+    }
+  }
+`;

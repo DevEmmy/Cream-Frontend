@@ -5,6 +5,7 @@ import {
   RiBook2Fill,
   RiContactsFill,
   RiInformationFill,
+  RiLoginBoxFill,
   RiLogoutBoxFill,
   RiMenu2Fill,
   RiMessage2Fill,
@@ -57,26 +58,26 @@ const Nav = ({ active = 0 }) => {
       icon: <RiUser2Fill />,
       link: "/automobile",
     },
-    {
-      name: "Profile",
-      icon: <RiUser2Fill />,
-      link: "/profile",
-    },
-    {
-      name: "Messages",
-      icon: <RiMessage2Fill />,
-      link: "/messages",
-    },
-    {
-      name: "Notifications",
-      icon: <RiBellFill />,
-      link: "/notifications",
-    },
-    {
-      name: "My Account",
-      icon: <RiWallet2Fill />,
-      link: "/wallet",
-    },
+    // {
+    //   name: "Profile",
+    //   icon: <RiUser2Fill />,
+    //   link: "/profile",
+    // },
+    // {
+    //   name: "Messages",
+    //   icon: <RiMessage2Fill />,
+    //   link: "/messages",
+    // },
+    // {
+    //   name: "Notifications",
+    //   icon: <RiBellFill />,
+    //   link: "/notifications",
+    // },
+    // {
+    //   name: "My Account",
+    //   icon: <RiWallet2Fill />,
+    //   link: "/wallet",
+    // },
   ];
 
   const otherNav = [
@@ -172,10 +173,29 @@ const Nav = ({ active = 0 }) => {
 
         <Line />
         <div className="block my-5 cflexss gap-4 md:hidden">
-          <Link href={"/create-listing"} className="flex items-center gap-3">
-            <HiUserGroup />
-            <p>Sell</p>
+        {
+              loggedIn
+              ?
+              <Link href={"/create-listing"} className="flex items-center gap-3">
+                <HiUserGroup />
+                <p>Sell</p>
+              </Link>
+            : 
+
+                <Link href={"/login"} className="flex items-center gap-3">
+                  <RiLoginBoxFill />
+                  <p>Login</p>
+                </Link>
+            }
+
+          {
+            loggedIn && 
+            <Link href={"/profile"} className="flex items-center gap-3">
+            <RiUser2Fill />
+            <p>Profile</p>
           </Link>
+          }
+          
           {sideNav.map((item, i) => {
             return (
               <>
@@ -199,10 +219,28 @@ const Nav = ({ active = 0 }) => {
 
         <div className="hidden md:block">
           <div className="cflexss gap-[16px]">
-            <Link href={"/"} className="flex items-center gap-3">
-              <HiUserGroup />
-              <p>Sell</p>
-            </Link>
+            {
+              loggedIn
+              ?
+              <Link href={"/create-listing"} className="flex items-center gap-3">
+                <HiUserGroup />
+                <p>Sell</p>
+              </Link>
+            : 
+
+                <Link href={"/login"} className="flex items-center gap-3">
+                  <RiLoginBoxFill />
+                  <p>Login</p>
+                </Link>
+            }
+
+            {
+            loggedIn && 
+            <Link href={"/profile"} className="flex items-center gap-3">
+            <RiUser2Fill />
+            <p>Profile</p>
+          </Link>
+          }
             {sideNav.map((item, i) => {
               return (
                 <>
@@ -242,10 +280,14 @@ const Nav = ({ active = 0 }) => {
             );
           })}
 
-          <Link href={"/login"} className="flex items-center gap-3">
-            <RiLogoutBoxFill />
-            <p>Log Out</p>
-          </Link>
+          {
+            loggedIn && 
+            <Link href={"/login"} onClick={()=> localStorage.clear()} className="flex items-center gap-3">
+              <RiLogoutBoxFill />
+              <p>Log Out</p>
+            </Link>            
+          }
+          
         </div>
       </div>
     </div>
