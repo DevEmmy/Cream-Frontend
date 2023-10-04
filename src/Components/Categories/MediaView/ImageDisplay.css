@@ -1,0 +1,39 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+.ImgContainer{
+    position:fixed;
+    background:black;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+.ImgContainer > .close{
+    width: 100%;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding:1em;
+    color: white;
+}
+.ImgContainer > .close > .enclose{    
+    cursor: pointer;
+}
+.contImg{                
+    height: 80vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:2em;
+}
+.contImg > img{
+    object-fit: contain;    
+    width:100%;
+    height: 100%;
+}

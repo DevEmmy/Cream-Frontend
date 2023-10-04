@@ -33,7 +33,7 @@ const EachProperty = () => {
         const itemsArray = text.split('- [ ] ');
         return itemsArray
     }
-
+//
     return (
     <>
         <Nav />
