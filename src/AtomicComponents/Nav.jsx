@@ -240,7 +240,13 @@ const Nav = ({ active = 0 }) => {
             );
           })}
 
-          <Link href={"/login"} className="flex items-center gap-3">
+          <Link
+            href={"/login"}
+            onClick={() => {
+              localStorage.clear();
+            }}
+            className="flex items-center gap-3"
+          >
             <RiLogoutBoxFill />
             <p>Log Out</p>
           </Link>

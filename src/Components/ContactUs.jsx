@@ -12,7 +12,7 @@ const ContactUs = () => {
           CONTACT <span className="text-primary1">US</span>
         </h1>
         <p className="text-white font-[600] text-center">
-          All you need to know about King David Elite.
+          All you need to know about CREAM.
         </p>
       </DynamicBanner>
 
