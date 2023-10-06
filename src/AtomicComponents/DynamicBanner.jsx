@@ -3,8 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import BlackOverlay from "./BlackOverlay";
 
-const DynamicBanner = ({ children }) => {
-  const images = ["/i1.jpg", "/i2.jpg", "i3.jpg"];
+const DynamicBanner = ({ children, images }) => {  
 
   const responsive = {
     desktop: {
@@ -30,8 +29,8 @@ const DynamicBanner = ({ children }) => {
         showDots={false}
         autoPlay={true}
         ssr={true}
-        autoPlaySpeed={3000}
-        customTransition="all .5"
+        autoPlaySpeed={7500}
+        customTransition="all .7"
         arrows={false}
         infinite={true}
       >

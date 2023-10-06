@@ -8,6 +8,7 @@ import { RiEqualizerFill, RiSearch2Line } from "react-icons/ri";
 
 const RealEstate = () => {
   const [listings, setListings] = useState(null);
+  const images = ["pic3.jpg", "/pic1.jpg", "pic10.jpg", "pic8.jpg", "pic2.jpg", "pic14.jpg", "pic12.jpg", "pic16.jpg"];
 
   const fetchData = async () => {
     let data = await getAllListings("real-estate");
@@ -22,7 +23,7 @@ const RealEstate = () => {
     <>
       <Nav active={1} />
 
-      <DynamicBanner>
+      <DynamicBanner images={images}>
         <h1 className="text-white text-[4em] sm:text-[40px] font-[700]">
           REAL <span className="text-primary1">ESTATE</span>
         </h1>

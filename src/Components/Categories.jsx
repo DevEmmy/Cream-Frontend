@@ -8,21 +8,25 @@ const Categories = () => {
       title: "Real Estate",
       link: "/real-estate",
       available: true,
+      image: "pic14.jpg",
     },
     {
       title: "Automobiles",
-      link: "/automobiles",
+      link: "/automobile",
       available: true,
+      image: "pic7.jpg",
     },
     {
       title: "Rentals",
       link: "/resources",
       available: false,
+      image: "pic16.jpg",
     },
     {
       title: "Resources",
       link: "/",
       available: false,
+      image: "pic9.jpg",
     },
   ];
   return (
@@ -34,9 +38,9 @@ const Categories = () => {
           return (
             <div>
               {cat.available ? (
-                <Link href={cat.link}>
+                <a href={cat.link}>
                   <Category {...cat} />
-                </Link>
+                </a>
               ) : (
                 <Category {...cat} />
               )}
