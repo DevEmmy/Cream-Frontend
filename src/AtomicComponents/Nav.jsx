@@ -127,17 +127,17 @@ const Nav = ({ active = 0 }) => {
 
       <div className="block flexsm gap-8 items-center md:hidden">
         {loggedIn ? (
-          <Link href={"/profile"}>
+          <a href={"/profile"}>
             <button className="bg-primary1 px-6 py-3 text-[0.8em] rounded-md text-black font-[600]">
               Profile
             </button>
-          </Link>
+          </a>
         ) : (
-          <Link href={"/login"}>
+          <a href={"/login"}>
             <button className="bg-primary1 px-6 py-3 text-[0.8em] rounded-md text-black font-[600]">
               LOG IN
             </button>
-          </Link>
+          </a>
         )}
 
         <RiMenu2Fill
@@ -173,34 +173,30 @@ const Nav = ({ active = 0 }) => {
 
         <Line />
         <div className="block my-5 cflexss gap-4 md:hidden">
-        {
-              loggedIn
-              ?
-              <Link href={"/create-listing"} className="flex items-center gap-3">
-                <HiUserGroup />
-                <p>Sell</p>
-              </Link>
-            : 
+          {loggedIn ? (
+            <a href={"/create-listing"} className="flex items-center gap-3">
+              <HiUserGroup />
+              <p>Sell</p>
+            </a>
+          ) : (
+            <a href={"/login"} className="flex items-center gap-3">
+              <RiLoginBoxFill />
+              <p>Login</p>
+            </a>
+          )}
 
-                <Link href={"/login"} className="flex items-center gap-3">
-                  <RiLoginBoxFill />
-                  <p>Login</p>
-                </Link>
-            }
+          {loggedIn && (
+            <a href={"/profile"} className="flex items-center gap-3">
+              <RiUser2Fill />
+              <p>Profile</p>
+            </a>
+          )}
 
-          {
-            loggedIn && 
-            <Link href={"/profile"} className="flex items-center gap-3">
-            <RiUser2Fill />
-            <p>Profile</p>
-          </Link>
-          }
-          
           {sideNav.map((item, i) => {
             return (
               <>
                 {i !== 0 && i !== 1 && (
-                  <Link
+                  <a
                     href={item.link}
                     key={i}
                     className="flex items-center gap-3"
@@ -210,7 +206,7 @@ const Nav = ({ active = 0 }) => {
                   >
                     {item.icon}
                     <p>{item.name}</p>
-                  </Link>
+                  </a>
                 )}
               </>
             );
@@ -219,32 +215,28 @@ const Nav = ({ active = 0 }) => {
 
         <div className="hidden md:block">
           <div className="cflexss gap-[16px]">
-            {
-              loggedIn
-              ?
-              <Link href={"/create-listing"} className="flex items-center gap-3">
+            {loggedIn ? (
+              <a href={"/create-listing"} className="flex items-center gap-3">
                 <HiUserGroup />
                 <p>Sell</p>
-              </Link>
-            : 
+              </a>
+            ) : (
+              <a href={"/login"} className="flex items-center gap-3">
+                <RiLoginBoxFill />
+                <p>Login</p>
+              </a>
+            )}
 
-                <Link href={"/login"} className="flex items-center gap-3">
-                  <RiLoginBoxFill />
-                  <p>Login</p>
-                </Link>
-            }
-
-            {
-            loggedIn && 
-            <Link href={"/profile"} className="flex items-center gap-3">
-            <RiUser2Fill />
-            <p>Profile</p>
-          </Link>
-          }
+            {loggedIn && (
+              <a href={"/profile"} className="flex items-center gap-3">
+                <RiUser2Fill />
+                <p>Profile</p>
+              </a>
+            )}
             {sideNav.map((item, i) => {
               return (
                 <>
-                  <Link
+                  <a
                     href={item.link}
                     key={i}
                     className="flex items-center gap-3"
@@ -254,7 +246,7 @@ const Nav = ({ active = 0 }) => {
                   >
                     {item.icon}
                     <p>{item.name}</p>
-                  </Link>
+                  </a>
                 </>
               );
             })}
@@ -266,7 +258,7 @@ const Nav = ({ active = 0 }) => {
         <div className="my-5 flex flex-col gap-4">
           {otherNav.map((item, i) => {
             return (
-              <Link
+              <a
                 href={item.link}
                 key={i}
                 className="flex items-center gap-3"
@@ -276,11 +268,11 @@ const Nav = ({ active = 0 }) => {
               >
                 {item.icon}
                 <p>{item.name}</p>
-              </Link>
+              </a>
             );
           })}
 
-          <Link
+          <a
             href={"/login"}
             onClick={() => {
               localStorage.clear();
@@ -289,7 +281,7 @@ const Nav = ({ active = 0 }) => {
           >
             <RiLogoutBoxFill />
             <p>Log Out</p>
-          </Link>
+          </a>
         </div>
       </div>
     </div>
