@@ -2,7 +2,7 @@ import Card from "@/AtomicComponents/Card";
 import DynamicBanner from "@/AtomicComponents/DynamicBanner";
 import Footer from "@/AtomicComponents/Footer";
 import Nav from "@/AtomicComponents/Nav";
-import { getAllListings } from "@/services/request";
+import { getAllListings, sendQuery } from "@/services/request";
 import React, { useEffect, useState } from "react";
 import { RiEqualizerFill, RiSearch2Line } from "react-icons/ri";
 
@@ -15,9 +15,15 @@ const RealEstate = () => {
     setListings(data);
   };
 
+  const submit = ()=>[
+    sendQuery("a house in landon with a yearly price of nothing more than $50,000,000")
+  ]
+
   useEffect(() => {
     fetchData();
+    submit()
   }, []);
+  
   return (
     <>
       <Nav active={1} />
