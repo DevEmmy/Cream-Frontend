@@ -140,7 +140,9 @@ const Profile = () => {
 
         <div className="saved my-10">
           <div>
-            <h3 className="text-[1.5em] s:text-[1.2em] font-[600]">3 of 20 Saved Listings</h3>
+            <h3 className="text-[1.5em] s:text-[1.2em] font-[600]">
+              3 of 20 Saved Listings
+            </h3>
             {/* <p className='text-red-500 text-[0.8em]'>Note: You cannot save more than 20 Listings</p> */}
           </div>
 

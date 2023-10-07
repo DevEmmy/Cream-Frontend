@@ -83,7 +83,7 @@ const EachProperty = () => {
                     }
                 </div>
     
-                <div className="grid grid-cols-2 gap-6 my-10 items-start justify-start">
+                <div className="grid grid-cols-2 gap-6 my-10 items-start justify-start sm:grid-cols-1">
                     <div className='items-start flex flex-col'>
                         <p className='font-[700] text-[1.2em]'>Description</p>
                         <p className='flex flex-col items-start'>
@@ -100,7 +100,7 @@ const EachProperty = () => {
                     <div className='flex items-start flex-col text-start'>
                         <p className='font-[700] text-[1.2em]'>Contact Seller</p>
     
-                        <div className='bg-primary1 grid grid-cols-2 gap-5 p-10 items-center rounded-xl'>
+                        <div className='bg-primary1 grid grid-cols-2 sm:flex sm:flex-col-reverse gap-5 p-10 items-center rounded-xl'>
                             <div className='flex items-start flex-col text-start text-white gap-2'>
                                 <p className='font-[600]'>{listing.postedBy.firstName + " "+ listing.postedBy.lastName}</p>
                                 <p className='text-[0.8em]'>

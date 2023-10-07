@@ -7,16 +7,21 @@ import React from "react";
 import { RiArrowRightFill } from "react-icons/ri";
 
 const About = () => {
+  const images = ["/i1.jpg", "pic10.jpg", "/i2.jpg", "i3.jpg"];
   return (
     <>
       <Nav active={3} />
-      <DynamicBanner>
+      <DynamicBanner images={images}>
         <h1 className="text-white text-[4em] sm:text-[40px] font-[700]">
           ABOUT <span className="text-primary1">CREAM!</span>
         </h1>
         <p className="text-white font-[600] w-full text-center">
           Discover a world of unrivaled luxury where every offer and purchase is
           an experience to savor.
+        </p>
+        <p className="text-primary1 font-[800] w-full text-center">
+          Step into a realm where your desires are fulfilled in minutes, not
+          hours
         </p>
         <button className="bg-primary1 text-black px-12 py-3 mt-3 rounded-md">
           Explore
@@ -27,21 +32,37 @@ const About = () => {
         <div className="w-full cflexms gap-3">
           <h5>About CREAM Platform</h5>
           <h1 className="text-[2em] sm:text-[1.5em] font-[700]">
-            A Luxury Market And Networking Platform For All
+            THE FUTURE OF PROPERTY AND AUTOMOBILE SEARCH
           </h1>
           <p className="text-gray-500">
-            The King David Elites marketplace is where you find only the most
-            exclusive and highest quality real estate, automobiles, luxury
-            services, and collectibles. Our mission is to provide an
-            unparalleled shopping experience for discerning customers seeking
-            the very best in life. Our curated selection of offerings is
-            carefully chosen by our team of experts, ensuring that only the most
-            luxurious and desirable items are made available to our valued
-            customers. From stunning properties and rare collectibles, to lavish
-            experiences and the finest automobiles, we have something for every
-            discerning taste. Thank you for choosing us as your go-to
-            destination for all things luxury.
+            Welcome to CREAM – a groundbreaking marketplace where technology
+            meets desire. We're not just a platform; we're an innovation-driven
+            solution that utilizes the incredible potential of artificial
+            intelligence to redefine the way you explore real estate,
+            automobiles, and resources.
           </p>
+          <p className="text-gray-500">
+            At CREAM, envision describing your dream property or automobile in
+            plain text, and in moments, our AI reveals the best-matched options.
+            This isn't magic; it's the power of technology making your search
+            seamless, precise, and thrilling. We make your dreams come true in
+            minutes, not hours, setting us apart from traditional marketplaces.
+          </p>
+          <p className="text-gray-500">
+            Beyond borders, CREAM connects you to a realm of possibilities,
+            whether it's a cozy home, a luxury estate in a different continent,
+            a sleek car, or unique resources like a property manager for your
+            vacation property. Our AI-powered approach accelerates your journey
+            to find what you desire.
+          </p>
+          <p className="text-gray-500">
+            As a community of seekers, CREAM's curated selection guarantees
+            quality and relevance, elevating your experience. Join us in shaping
+            the future of searching – where AI-driven discovery sparks new
+            opportunities and redefines your journey. Explore, discover, and
+            revolutionize your search with CREAM today."
+          </p>
+
           <button className="flex gap-3 items-center px-10 py-3 mt-5 bg-primary1 rounded-md">
             Get Started <RiArrowRightFill />
           </button>
@@ -62,13 +83,23 @@ const About = () => {
             Reasons For Our Establishment
           </h1>
           <p className="text-gray-500">
-            We established our luxury multivendor online marketplace with the
-            belief that life's most precious moments deserve only the very best.
-            Whether it's finding the perfect home to create lasting memories,
-            indulging in the finer things in life, or treating yourself to a
-            once-in-a-lifetime experience, we are dedicated to helping you
-            elevate your every day. Thank you for entrusting us with your luxury
-            needs and allowing us to be a part of your journey.
+            At CREAM, we noticed the problems people face when looking for homes
+            and cars online. Endless scrolling, confusing options, and
+            uncertainty led us to rethink things. Our goal: change how you find
+            and buy properties and automobiles.
+          </p>
+          <p className="text-gray-500">
+            Imagine this: you tell us what you want, and our smart tech finds
+            the perfect matches instantly. No more endless searches – we use
+            clever AI to make your dreams real in minutes, not hours. But we're
+            not just a marketplace; we're here to give you a whole new way of
+            finding and buying.
+          </p>
+          <p className="text-gray-500">
+            Welcome to CREAM, where your dream property or car is easy to find.
+            We're all about making your wishes come true quickly and reliably.
+            Join us and discover a simpler, better way to explore and succeed in
+            the world of properties and automobiles.
           </p>
           <button className="flex gap-3 items-center px-10 py-3 mt-5 bg-black text-white rounded-md">
             Read More <RiArrowRightFill />
@@ -80,13 +111,15 @@ const About = () => {
         <p>
           HAVE ANY <span className="text-primary1">QUESTIONS</span>?
         </p>
-        <p className="text-center">PLEASE REACH OUT TO US SO WE CAN HELP YOU BETTER.</p>
-        <Link
+        <p className="text-center">
+          PLEASE REACH OUT TO US SO WE CAN HELP YOU BETTER.
+        </p>
+        <a
           href={"/contact-us"}
           className="bg-primary1 px-5 py-2 rounded-md mt-3 sm:mt-5"
         >
           Contact Us
-        </Link>
+        </a>
       </div>
 
       <PreFooter />

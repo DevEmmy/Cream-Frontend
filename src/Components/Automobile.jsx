@@ -8,6 +8,7 @@ import { RiEqualizerFill, RiSearch2Line } from "react-icons/ri";
 
 const Automobile = () => {
   const [listings, setListings] = useState(null);
+  const images = ["/pic7.jpg", "/pic5.jpg", "pic13.jpg", "pic15.jpg", "pic17.jpg", "pic6.jpg", "pic11.jpg"];
 
   const fetchData = async () => {
     let data = await getAllListings("cars");
@@ -22,7 +23,7 @@ const Automobile = () => {
     <>
       <Nav active={2} />
 
-      <DynamicBanner>
+      <DynamicBanner images={images}>
         <h1 className="text-white text-[4em]  sm:text-[40px] font-[700]">
           AUTOMOBILE <span className="text-primary1">.</span>
         </h1>

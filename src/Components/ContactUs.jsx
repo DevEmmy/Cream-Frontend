@@ -4,15 +4,16 @@ import Nav from "@/AtomicComponents/Nav";
 import React from "react";
 
 const ContactUs = () => {
+  const images = ["/help.jpg", "/pic8.jpg", "pic16.jpg"];
   return (
     <div>
-      <Nav active={5} />
-      <DynamicBanner>
+      <Nav active={4} />
+      <DynamicBanner images={images}>
         <h1 className="text-white text-[4em] sm:text-[40px] font-[700]">
           CONTACT <span className="text-primary1">US</span>
         </h1>
         <p className="text-white font-[600] text-center">
-          All you need to know about King David Elite.
+          All you need to know about CREAM.
         </p>
       </DynamicBanner>
 

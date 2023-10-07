@@ -23,11 +23,11 @@ const Login = () => {
 
   return (
     <div className='bg-slate-700 w-full h-[100vh] flex flex-col gap-3 items-center justify-center'>
-        <div className="bg-white w-[40%] h-[70vh] p-10 text-center">
+        <div className="bg-white cflexsm sm:gap-5 w-[40%] sm:w-[90%] h-[70vh] sm:rounded-xl sm:h-[80vh] p-10 sm:p-5 text-center">
             <h2 className='text-[2em] font-[700]'>CREAM</h2>
             <p>Welcome Back, We missed you!</p>
 
-            <form action="" className='flex gap-5 flex-col'>
+            <form action="" className='flex w-full gap-5 flex-col'>
                 <input type="text" placeholder='johndoe@gmail.com' className='w-full text-[0.8em] p-3' name="email" value={details["email"]} onChange={handleChange}/>
                 <input type="password" placeholder='**** ' className='w-full text-[0.8em] p-3' name="password" value={details["password"]} onChange={handleChange}/>
                 
