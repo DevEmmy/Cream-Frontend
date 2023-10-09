@@ -1,6 +1,18 @@
-import toast from "react-hot-toast";
-import { error, loading, success } from "./toaster";
-import { useRouter } from "next/router";
+import toast from "react-hot-toast"
+import { error, loading, success } from "./toaster"
+import { useRouter } from "next/router"
+// import { client } from "@gradio/client";
+
+// const app = await client("https://binaryy-cream-prototype.hf.space/");
+
+
+// export const sendQuery = async (text)=> {
+//     const result = await app.predict("/predict", [    
+//         text
+//     ]);
+
+//     console.log(result.data);
+// }
 
 const { default: axiosRequest } = require("./axiosConfig");
 

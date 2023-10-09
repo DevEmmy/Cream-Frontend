@@ -3,6 +3,7 @@ import DynamicBanner from "@/AtomicComponents/DynamicBanner";
 import Footer from "@/AtomicComponents/Footer";
 import Nav from "@/AtomicComponents/Nav";
 import { getListingsPerPage } from "@/services/request";
+// import {sendQuery} from "@/services/request"
 import React, { useEffect, useState } from "react";
 import PaginationButtons from "@/AtomicComponents/PaginationButtons";
 import { SpinnerCircular } from "spinners-react";
@@ -34,9 +35,15 @@ const RealEstate = () => {
     setLoading(false);
   };
 
+  const submit = ()=>[
+    sendQuery("a house in landon with a yearly price of nothing more than $50,000,000")
+  ]
+
   useEffect(() => {
     fetchData();
+    // submit()
   }, [page]);
+  
   return (
     <>
       <Nav active={1} />
@@ -93,7 +100,7 @@ const RealEstate = () => {
           <div className="w-full flexmm mt-10">
             <PaginationButtons
               range={[1, 2, 3]}
-              pagination={12}
+              pagination={30}
               page={page}
               setPage={setPage}
               loading={loading}
