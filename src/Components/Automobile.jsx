@@ -2,23 +2,40 @@ import Card from "@/AtomicComponents/Card";
 import DynamicBanner from "@/AtomicComponents/DynamicBanner";
 import Footer from "@/AtomicComponents/Footer";
 import Nav from "@/AtomicComponents/Nav";
-import { getAllListings } from "@/services/request";
+import { getListingsPerPage } from "@/services/request";
 import React, { useEffect, useState } from "react";
+import { SpinnerCircular } from "spinners-react";
+import PaginationButtons from "@/AtomicComponents/PaginationButtons";
 import { RiEqualizerFill, RiSearch2Line } from "react-icons/ri";
 
 const Automobile = () => {
-  const [listings, setListings] = useState(null);
-  const images = ["/pic7.jpg", "/pic5.jpg", "pic13.jpg", "pic15.jpg", "pic17.jpg", "pic6.jpg", "pic11.jpg"];
+  const [listings, setListings] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [totalData, setTotalData] = useState(0);
+  const images = [
+    "/pic7.jpg",
+    "/pic5.jpg",
+    "pic13.jpg",
+    "pic15.jpg",
+    "pic17.jpg",
+    "pic6.jpg",
+    "pic11.jpg",
+  ];
 
   const fetchData = async () => {
-    let data = await getAllListings("cars");
+    setLoading(true);
+    let data = await getListingsPerPage(page, "cars");
     console.log(data);
-    setListings(data);
+    setListings(data.list);
+    setTotalData(data.number);
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [page]);
+
   return (
     <>
       <Nav active={2} />
@@ -52,11 +69,41 @@ const Automobile = () => {
           Explore Luxury Automobiles
         </h3>
 
-        <div className="grid grid-cols-3 sm:grid-cols-1 gap-10">
-          {listings?.map((item, i) => {
-            return <Card key={i} listing={item} />;
-          })}
+        <div className="grid grid-cols-3 w-full sm:grid-cols-1 gap-10">
+          {loading ? (
+            <>
+              <div>
+                <SpinnerCircular
+                  color="white"
+                  className="flex justify-center"
+                  secondaryColor={"#F2BE5C"}
+                  size={50}
+                  thickness={150}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              {listings?.map((item, i) => {
+                return <Card key={i} listing={item} />;
+              })}
+            </>
+          )}
         </div>
+        {!loading && (
+          <div className="w-full flexmm mt-10">
+            <PaginationButtons
+              range={[1, 2, 3]}
+              pagination={12}
+              page={page}
+              setPage={setPage}
+              loading={loading}
+              setLoading={setLoading}
+              totalData={totalData}
+              background={"#F2BE5C"}
+            />
+          </div>
+        )}
       </div>
 
       <Footer />
