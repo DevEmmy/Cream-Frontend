@@ -30,10 +30,13 @@ const Categories = () => {
     },
   ];
   return (
-    <div className="mx-xPadding my-28 sm:my-20">
+    <div className="mx-xPadding my-28 sm:my-20 scroll-mt-44" id="category">
       <h2 className="text-[1.2em] font-[700]">Categories</h2>
 
-      <div className="grid grid-cols-4 sm:grid-cols-1 my-2 gap-10">
+      <div
+        className="grid grid-cols-4 sm:grid-cols-1 my-2 gap-10"
+        id="category"
+      >
         {categories.map((cat, i) => {
           return (
             <div>

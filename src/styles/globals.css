@@ -98,9 +98,14 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   scroll-behavior: smooth;
   scroll-snap-type: proximity;
+  font-family: 'Raleway';
 }
 
 img,

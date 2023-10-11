@@ -2,9 +2,10 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import BlackOverlay from "./BlackOverlay";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-const DynamicBanner = ({ children, images }) => {  
-
+const DynamicBanner = ({ children, images }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -21,8 +22,13 @@ const DynamicBanner = ({ children, images }) => {
     },
   };
 
+  // const router = useRouter();
+  // const handleScrollClick = () => {
+  //   router.push("/", { scroll: true });
+  // };
+
   return (
-    <div className="relative">
+    <div className="relative ">
       <Carousel
         responsive={responsive}
         className="w-[100%] object-cover"
@@ -47,15 +53,16 @@ const DynamicBanner = ({ children, images }) => {
               CREAM <span className="text-primary1">.</span>
             </h1>
             <p className="text-white font-[600] sm:w-full w-[50%] text-center sm:leading-[30px]">
-              The Intelligent Market Place. Describe your desired property,
-              automobile or resource in plain words and watch our AI do its
-              magic.
+              The Intelligent Market Place.
             </p>
 
             <div className="flex gap-5 mt-5 sm:mt-[50px]">
-              <button className="bg-primary1 text-black px-12 py-3 rounded-md">
-                Explore
-              </button>
+              <Link href="#category" className="scroll-smooth">
+                <button className="bg-primary1 text-black px-12 py-3 rounded-md">
+                  Explore
+                </button>
+              </Link>
+
               <button className="bg-transparent border-2 border-primary1 text-primary1 px-5 py-3 rounded-md">
                 Download App
               </button>

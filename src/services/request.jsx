@@ -1,21 +1,18 @@
 import toast from "react-hot-toast"
 import { error, loading, success } from "./toaster"
 import { useRouter } from "next/router"
-import axios from "axios";
 // import { client } from "@gradio/client";
 
 // const app = await client("https://binaryy-cream-prototype.hf.space/");
 
 
-export const sendQuery = async (text)=> {
-    const result = await axios.post("https://binaryy-cream-prototype.hf.space/run/predict", {
-        data: [
-            text
-        ]
-    });
+// export const sendQuery = async (text)=> {
+//     const result = await app.predict("/predict", [    
+//         text
+//     ]);
 
-    return result.data.data[0];
-}
+//     console.log(result.data);
+// }
 
 const { default: axiosRequest } = require("./axiosConfig");
 
