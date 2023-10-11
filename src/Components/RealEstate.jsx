@@ -2,7 +2,7 @@ import Card from "@/AtomicComponents/Card";
 import DynamicBanner from "@/AtomicComponents/DynamicBanner";
 import Footer from "@/AtomicComponents/Footer";
 import Nav from "@/AtomicComponents/Nav";
-import { getListingsPerPage } from "@/services/request";
+import { getListingsPerPage, sendQuery } from "@/services/request";
 // import {sendQuery} from "@/services/request"
 import React, { useEffect, useState } from "react";
 import PaginationButtons from "@/AtomicComponents/PaginationButtons";
@@ -35,9 +35,17 @@ const RealEstate = () => {
     setLoading(false);
   };
 
-  const submit = ()=>[
-    sendQuery("a house in landon with a yearly price of nothing more than $50,000,000")
-  ]
+  const [text, setText] = useState("")
+  const handleSearch = (e)=>{
+    setText(e.target.value)
+  }
+  const submit = async ()=>{
+    setLoading(true);
+    let data = await sendQuery(text)
+    setListings(data)
+    setTotalData(data.number);
+    setLoading(false);
+  }
 
   useEffect(() => {
     fetchData();
@@ -61,10 +69,12 @@ const RealEstate = () => {
               type="text"
               className="focus:outline-0 w-full"
               placeholder="Describe your desired property, automobile or resource in plain words and watch our AI do its magic."
+              value={text}
+              onChange={handleSearch}
             />
           </div>
 
-          <button className="bg-primary1 text-black px-6 py-3  gap-2 flex items-center rounded-md">
+          <button className="bg-primary1 text-black px-6 py-3  gap-2 flex items-center rounded-md" onClick={submit}>
             Search <RiSearch2Line />{" "}
           </button>
         </div>

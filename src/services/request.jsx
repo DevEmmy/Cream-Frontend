@@ -14,7 +14,7 @@ export const sendQuery = async (text)=> {
         ]
     });
 
-    console.log(result.data);
+    return result.data.data[0];
 }
 
 const { default: axiosRequest } = require("./axiosConfig");
