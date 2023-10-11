@@ -13,7 +13,7 @@ const RealEstate = () => {
   const fetchData = async () => {
     let data = await getAllListings("real-estate");
     console.log(data);
-    setListings(data);
+    // setListings(data);
   };
 
   const submit = ()=>[
