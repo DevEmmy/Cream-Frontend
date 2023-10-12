@@ -6,9 +6,17 @@ import React from "react";
 import Categories from "./Categories";
 
 const LandingPage = () => {
-  const images = ["/pic9.jpg", "/pic1.jpg", "pic5.jpg", "pic3.jpg", "pic8.jpg", "pic7.jpg", "pic14.jpg"];
+  const images = [
+    "/pic9.jpg",
+    "/pic1.jpg",
+    "pic5.jpg",
+    "pic3.jpg",
+    "pic8.jpg",
+    "pic7.jpg",
+    "pic14.jpg",
+  ];
   return (
-    <div>
+    <div className="scroll-smooth">
       <Nav />
       <DynamicBanner images={images} />
       <Categories />

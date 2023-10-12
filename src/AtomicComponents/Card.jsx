@@ -10,12 +10,12 @@ const Card = ({ listing }) => {
       <div className="border cflexms border-gray-300 p-3 gap-[10px] rounded-lg">
         <div className="flex gap-2 w-full items-center">
           <img
-            src={listing.postedBy?.profilePicture}
+            src={listing.postedBy.profilePicture}
             alt=""
             className="w-14 h-14 rounded-[50%]"
           />
           <p className="font-[600]">
-            {listing.postedBy?.firstName + " " + listing.postedBy?.lastName}
+            {listing.postedBy.firstName + " " + listing.postedBy.lastName}
           </p>
         </div>
         <div className="relative w-full">
@@ -38,13 +38,18 @@ const Card = ({ listing }) => {
         </div>
 
         <p>{listing.title}</p>
-        <p className="text-[0.8em]">₦{listing.price}</p>
+        <p className="text-[0.8em]">
+          {new Intl.NumberFormat("en-NG", {
+            style: "currency",
+            currency: "NGN",
+          }).format(listing.price)}
+        </p>
         <p className="text-[0.8em] flex items-center">
           <HiLocationMarker /> {listing.location}
         </p>
 
-        <Link href={"/"} className="w-full">
-          <button className="bg-primary1 py-3 px-10 rounded-md font-[600] mt-3 text-[0.8em] w-full">
+        <Link href={`/real-estate/${listing._id}`} scroll={false}>
+          <button className="bg-primary1 py-3 px-10 rounded-md font-[600] mt-3 text-[0.8em]">
             Enquire Now
           </button>
         </Link>

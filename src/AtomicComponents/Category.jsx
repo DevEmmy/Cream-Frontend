@@ -9,7 +9,9 @@ const Category = ({ image, title, available }) => {
 
       <div className="absolute bottom-5 left-5 text-[1.2em] text-white font-[600] leading-none">
         <p>{title}</p>
-        {!available && <p className="text-[0.6em] font-[400] mt-2">Coming Soon</p>}
+        {!available && (
+          <p className="text-[0.6em] font-[400] mt-2">Coming Soon</p>
+        )}
       </div>
     </div>
   );

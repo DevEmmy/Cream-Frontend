@@ -2,7 +2,7 @@ import Card from "@/AtomicComponents/Card";
 import DynamicBanner from "@/AtomicComponents/DynamicBanner";
 import Footer from "@/AtomicComponents/Footer";
 import Nav from "@/AtomicComponents/Nav";
-import { getListingsPerPage, sendQuery } from "@/services/request";
+import { getListingsPerPage } from "@/services/request";
 // import {sendQuery} from "@/services/request"
 import React, { useEffect, useState } from "react";
 import PaginationButtons from "@/AtomicComponents/PaginationButtons";
@@ -35,23 +35,17 @@ const RealEstate = () => {
     setLoading(false);
   };
 
-  const [text, setText] = useState("")
-  const handleSearch = (e)=>{
-    setText(e.target.value)
-  }
-  const submit = async ()=>{
-    setLoading(true);
-    let data = await sendQuery(text)
-    setListings(data)
-    setTotalData(data.number);
-    setLoading(false);
-  }
+  const submit = () => [
+    sendQuery(
+      "a house in landon with a yearly price of nothing more than $50,000,000"
+    ),
+  ];
 
   useEffect(() => {
     fetchData();
     // submit()
   }, [page]);
-  
+
   return (
     <>
       <Nav active={1} />
@@ -69,12 +63,10 @@ const RealEstate = () => {
               type="text"
               className="focus:outline-0 w-full"
               placeholder="Describe your desired property, automobile or resource in plain words and watch our AI do its magic."
-              value={text}
-              onChange={handleSearch}
             />
           </div>
 
-          <button className="bg-primary1 text-black px-6 py-3  gap-2 flex items-center rounded-md" onClick={submit}>
+          <button className="bg-primary1 text-black px-6 py-3  gap-2 flex items-center rounded-md">
             Search <RiSearch2Line />{" "}
           </button>
         </div>
@@ -82,7 +74,7 @@ const RealEstate = () => {
 
       <div className="list-container my-20 sm:my-14 mx-xPadding">
         <h3 className="text-center my-10 text[1.5em] font-[600]">
-          Luxury Properties For Sale
+          Properties For Sale
         </h3>
 
         <div className="grid grid-cols-3 w-full sm:grid-cols-1 gap-10">

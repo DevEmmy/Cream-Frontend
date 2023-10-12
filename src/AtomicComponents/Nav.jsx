@@ -15,6 +15,7 @@ import {
 import { HiUserGroup, HiX } from "react-icons/hi";
 import Line from "./Line";
 import { validateLoggedIn } from "@/services/request";
+import Image from "next/image";
 
 const Nav = ({ active = 0 }) => {
   const [showSideNav, setShowSideNav] = useState(false);
@@ -106,7 +107,18 @@ const Nav = ({ active = 0 }) => {
   return (
     <div className="bg-black text-white w-full flex justify-between py-3 px-xPadding items-center fixed top-0 left-0 right-0 z-40">
       <a href="/">
-        <img src="./logo.png" className="w-[30%]" alt="" />
+        <Image
+          src="/logo.png"
+          layout="fixed"
+          width={100}
+          height={100}
+          //sizes="20vw"
+          // style={{
+          //   width: "100%",
+          //   height: "auto",
+          // }}
+          alt=""
+        />
       </a>
 
       <div className="block flexss font-[700] gap-5 md:hidden">
