@@ -7,7 +7,7 @@ import axios from "axios";
 export const sendQuery = async (text)=> {
     const result = await axios.post("https://binaryy-cream-prototype-tobi.hf.space/run/predict",{
       "data": [
-          "I need a house at ogun state"
+          text
         ]
     });
 

@@ -43,8 +43,18 @@ const RealEstate = () => {
     setLoading(true);
     let data = await sendQuery(text)
     console.log(data)
+    let data1 = data.map(item => {
+      item.postedBy = {
+        firstName: item["postedBy.firstName"],
+        lastName: item["postedBy.lastName"],
+        profilePicture: item["postedBy.profilePicture"],
+
+      }
+      return item
+    })
+    console.log(data1)
     setListings(data)
-    setTotalData(data.number);
+    // setTotalData(data.number);
     setLoading(false);
   }
   useEffect(() => {
