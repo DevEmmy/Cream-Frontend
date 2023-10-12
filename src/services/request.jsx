@@ -1,18 +1,19 @@
 import toast from "react-hot-toast"
 import { error, loading, success } from "./toaster"
 import { useRouter } from "next/router"
-// import { client } from "@gradio/client";
-
-// const app = await client("https://binaryy-cream-prototype.hf.space/");
+import axios from "axios";
 
 
-// export const sendQuery = async (text)=> {
-//     const result = await app.predict("/predict", [    
-//         text
-//     ]);
+export const sendQuery = async (text)=> {
+    const result = await axios.post("https://binaryy-cream-prototype-tobi.hf.space/run/predict",{
+      "data": [
+          "I need a house at ogun state"
+        ]
+    });
 
-//     console.log(result.data);
-// }
+    console.log(result.data.data[0])
+    return result.data.data[0];
+}
 
 const { default: axiosRequest } = require("./axiosConfig");
 
