@@ -2,7 +2,7 @@ import Card from "@/AtomicComponents/Card";
 import DynamicBanner from "@/AtomicComponents/DynamicBanner";
 import Footer from "@/AtomicComponents/Footer";
 import Nav from "@/AtomicComponents/Nav";
-import { getListingsPerPage } from "@/services/request";
+import { getListingsPerPage, sendQuery } from "@/services/request";
 import React, { useEffect, useState } from "react";
 import { SpinnerCircular } from "spinners-react";
 import PaginationButtons from "@/AtomicComponents/PaginationButtons";
