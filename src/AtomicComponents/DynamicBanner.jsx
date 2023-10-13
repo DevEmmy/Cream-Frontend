@@ -63,9 +63,11 @@ const DynamicBanner = ({ children, images }) => {
                 </button>
               </Link>
 
+              <a href="/CREAM.zip" download={"Cream"}>
               <button className="bg-transparent border-2 border-primary1 text-primary1 px-5 py-3 rounded-md">
                 Download App
               </button>
+              </a>
             </div>
           </>
         )}
