@@ -3,7 +3,7 @@ import DynamicBanner from "@/AtomicComponents/DynamicBanner";
 import Footer from "@/AtomicComponents/Footer";
 import Nav from "@/AtomicComponents/Nav";
 import { getListingsPerPage } from "@/services/request";
-import {sendQuery} from "@/services/request"
+import { sendQuery } from "@/services/request";
 import React, { useEffect, useState } from "react";
 import PaginationButtons from "@/AtomicComponents/PaginationButtons";
 import { SpinnerCircular } from "spinners-react";
@@ -30,33 +30,33 @@ const RealEstate = () => {
     setLoading(true);
     let data = await getListingsPerPage(page, "real-estate");
     console.log(data);
+    console.log("total: ", data.number);
     setListings(data.list);
     setTotalData(data.number);
     setLoading(false);
   };
 
-  const [text, setText] = useState("")
-  const handleSearch = (e)=>{
-    setText(e.target.value)
-  }
-  const submit = async ()=>{
+  const [text, setText] = useState("");
+  const handleSearch = (e) => {
+    setText(e.target.value);
+  };
+  const submit = async () => {
     setLoading(true);
-    let data = await sendQuery(text)
-    console.log(data)
-    let data1 = data.map(item => {
+    let data = await sendQuery(text);
+    console.log(data);
+    let data1 = data.map((item) => {
       item.postedBy = {
         firstName: item["postedBy.firstName"],
         lastName: item["postedBy.lastName"],
         profilePicture: item["postedBy.profilePicture"],
-
-      }
-      return item
-    })
-    console.log(data1)
-    setListings(data)
+      };
+      return item;
+    });
+    console.log(data1);
+    setListings(data);
     // setTotalData(data.number);
     setLoading(false);
-  }
+  };
   useEffect(() => {
     fetchData();
     // submit()
@@ -84,7 +84,10 @@ const RealEstate = () => {
             />
           </div>
 
-          <button className="bg-primary1 text-black px-6 py-3  gap-2 flex items-center rounded-md" onClick={submit}>
+          <button
+            className="bg-primary1 text-black px-6 py-3  gap-2 flex items-center rounded-md"
+            onClick={submit}
+          >
             Search <RiSearch2Line />{" "}
           </button>
         </div>
@@ -120,7 +123,7 @@ const RealEstate = () => {
           <div className="w-full flexmm mt-10">
             <PaginationButtons
               range={[1, 2, 3]}
-              pagination={30}
+              pagination={24}
               page={page}
               setPage={setPage}
               loading={loading}
