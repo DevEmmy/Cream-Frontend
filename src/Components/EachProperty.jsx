@@ -6,8 +6,22 @@ import { LocationMarker } from "heroicons-react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import TimeAgo from "react-timeago";
+import PictureModal from "./PictureModal";
 
 const EachProperty = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImages, setModalImages] = useState([]); // Images for the modal
+
+  // Function to open the modal
+  const openModal = (images) => {
+    setModalImages(images);
+    setIsModalOpen(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const features = ["Balcony", "Air Conditioning", "Jacuzzi"];
 
   const router = useRouter();
@@ -53,44 +67,60 @@ const EachProperty = () => {
           </div>
 
           <div className="mt-10 gap-3 grid">
-            <img
-              src={listing.images[0]}
-              alt=""
-              className="h-[400px] rounded-lg"
-            />
-
-            <div className="grid grid-cols-3 gap-3">
-              <img
-                src={listing.images[1]}
-                alt=""
-                className="h-[200px] rounded-lg"
-              />
-              <img
-                src={listing.images[2]}
-                alt=""
-                className="h-[200px] rounded-lg"
-              />
-              <div className="relative cursor-pointer">
+            {!isModalOpen && (
+              <>
                 <img
-                  src={listing.images[3]}
+                  src={listing.images[0]}
                   alt=""
-                  className="h-[200px] rounded-lg"
+                  className="h-[400px] rounded-lg"
                 />
-                <BlackOverlay height="200px" r="rounded-lg" />
-                <p className="absolute h-[200px] top-0 flex justify-center text-[3.7em] items-center text-white font-[500] text-center w-[100%]">
-                  +{listing.images.length - 4}
-                </p>
-              </div>
-            </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                  <img
+                    src={listing.images[1]}
+                    alt=""
+                    className="h-[200px] rounded-lg"
+                  />
+                  <img
+                    src={listing.images[2]}
+                    alt=""
+                    className="h-[200px] rounded-lg"
+                  />
+                  <div className="relative cursor-pointer">
+                    <img
+                      src={listing.images[3]}
+                      alt=""
+                      className="h-[200px] rounded-lg"
+                    />
+                    <BlackOverlay height="200px" r="rounded-lg" />
+                    <p className="absolute h-[200px] top-0 flex justify-center text-[3.7em] items-center text-white font-[500] text-center w-[100%]">
+                      +{listing.images.length - 4}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
 
             <div>
               <p>
                 List <TimeAgo date={listing.createdAt} />
               </p>
 
-              <button className="bg-primary1 text-black px-12 py-3 text-[0.8em] font-[600] rounded-md">
-                View Media
-              </button>
+              <a href="#modal-content" className="block">
+                <button
+                  className="bg-primary1 text-black px-12 py-3 text-[0.8em] font-[600] rounded-md"
+                  onClick={() => openModal([...listing.images])}
+                >
+                  View Media
+                </button>
+              </a>
+              {isModalOpen && (
+                <PictureModal
+                  isOpen={isModalOpen}
+                  onRequestClose={closeModal}
+                  images={modalImages}
+                />
+              )}
             </div>
           </div>
 
