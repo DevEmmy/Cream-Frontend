@@ -86,7 +86,14 @@ const EachProperty = () => {
                     alt=""
                     className="h-[200px] rounded-lg"
                   />
-                  <div className="relative cursor-pointer">
+                  <a
+                    href={
+                      listing.category.slug === "real-estate"
+                        ? `/real-estate/${id}/media`
+                        : `/automobile/${id}/media`
+                    }
+                    className="relative cursor-pointer"
+                  >
                     <img
                       src={listing.images[3]}
                       alt=""
@@ -96,7 +103,7 @@ const EachProperty = () => {
                     <p className="absolute h-[200px] top-0 flex justify-center text-[3.7em] items-center text-white font-[500] text-center w-[100%]">
                       +{listing.images.length - 4}
                     </p>
-                  </div>
+                  </a>
                 </div>
               </>
             )}
@@ -132,9 +139,9 @@ const EachProperty = () => {
           </div>
 
           <div className="details flex flex-col items-start my-10">
-            <p className="font-[700] text-[1.2em]">Amenties</p>
+            <p className="font-[700] text-[1.2em]">Amenities</p>
             {listing.features.map((item, i) => {
-              return <p className="text-gray-700">{item}</p>;
+              return <p className="text-gray-700 text-justify">{item}</p>;
             })}
           </div>
 

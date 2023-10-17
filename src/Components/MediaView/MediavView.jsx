@@ -13,8 +13,7 @@ import theme from "@/application/utils/Theme";
 import { SpinnerCircular } from "spinners-react";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
-const MediaView = ({ id }) => {
-  // console.log(id)
+const MediaView = ({ id }) => {  
   const router = useRouter();
   const top = useRef(null);
   const [property, setProperty] = useState("");
@@ -28,8 +27,7 @@ const MediaView = ({ id }) => {
       await axios
         .get(`${globalApi}/listings/each/${id}`)
         .then((resp) => {
-          setProperty(resp.data);
-          console.log(resp.data);
+          setProperty(resp.data);          
           setLoading(false);
         })
         .catch((err) => console.error(err));
@@ -55,7 +53,7 @@ const MediaView = ({ id }) => {
           <div
             className="upperContent"
             style={{ cursor: "pointer" }}
-            onClick={() => router.back}
+            onClick={() => router.back()}
           >
             <ArrowLeft width="20px" />
             <p>Back</p>
