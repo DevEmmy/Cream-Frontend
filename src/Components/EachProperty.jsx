@@ -134,7 +134,7 @@ const EachProperty = () => {
           <div className="grid grid-cols-2 gap-6 my-10 items-start justify-start sm:grid-cols-1">
             <div className="items-start flex flex-col">
               <p className="font-[700] text-[1.2em]">Description</p>
-              <p className="flex flex-col items-start">
+              <p className="flex flex-col items-start text-justify">
                 {formatDesc(listing.description).map((item, i) => {
                   return <p className="text-gray-700">{item}</p>;
                 })}
