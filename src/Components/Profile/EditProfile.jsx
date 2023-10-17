@@ -195,7 +195,7 @@ const EditProfile = () => {
     var countryObject = mainData.countryData.find(
       (country) => country.name === name
     );
-    setStateData([]);
+    setStatemainData([]);
     setCityData([]);
     setIsos({ ...isos, countryIso: countryObject["iso2"] });
     getStates(countryObject["iso2"], setStateData);
