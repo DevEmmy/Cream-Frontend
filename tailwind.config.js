@@ -17,8 +17,9 @@ module.exports = {
           200: "rgba(181, 65, 162, 0.93) 100%",
         }       
       },
-      fontFamily: {
-        sans: ["Poppins", "sans-serif"],
+     fontFamily: {
+        body: ['"Raleway"', "sans"],
+        marker: ['"Permanent Marker"', "cursive"],
       },
 
       screens: {
