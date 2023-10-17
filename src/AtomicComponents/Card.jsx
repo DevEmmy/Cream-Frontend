@@ -4,9 +4,15 @@ import { HiLocationMarker } from "react-icons/hi";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
 
 const Card = ({ listing }) => {
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(false);  
   return (
-    <a href={`/real-estate/${listing._id}`}>
+    <a
+      href={
+        listing.category.slug === "real-estate"
+          ? `/real-estate/${listing._id}`
+          : `/automobile/${listing._id}`
+      }
+    >
       <div className="border cflexms border-gray-300 p-3 gap-[10px] rounded-lg">
         <div className="flex gap-2 w-full items-center">
           <img
@@ -48,7 +54,11 @@ const Card = ({ listing }) => {
           <HiLocationMarker /> {listing.location}
         </p>
 
-        <Link href={`/real-estate/${listing._id}`} className="w-full" scroll={false}>
+        <Link
+          href={`/real-estate/${listing._id}`}
+          className="w-full"
+          scroll={false}
+        >
           <button className="bg-primary1 py-3 px-10 rounded-md font-[600] mt-3 text-[0.8em]">
             Enquire Now
           </button>

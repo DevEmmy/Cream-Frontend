@@ -24,6 +24,7 @@
     "react-icons": "^4.10.1",
     "react-multi-carousel": "^2.8.4",
     "react-query": "^3.39.3",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.15.0",
     "react-timeago": "^7.2.0",
     "react-toastify": "^9.1.3",

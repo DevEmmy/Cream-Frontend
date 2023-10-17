@@ -103,10 +103,17 @@ const EachProperty = () => {
 
             <div>
               <p>
-                List <TimeAgo date={listing.createdAt} />
+                Listed <TimeAgo date={listing.createdAt} />
               </p>
 
-              <a href="#modal-content" className="block">
+              <a
+                href={
+                  listing.category.slug === "real-estate"
+                    ? `/real-estate/${id}/media`
+                    : `/automobile/${id}/media`
+                }
+                className="block"
+              >
                 <button
                   className="bg-primary1 text-black px-12 py-3 text-[0.8em] font-[600] rounded-md"
                   onClick={() => openModal([...listing.images])}
