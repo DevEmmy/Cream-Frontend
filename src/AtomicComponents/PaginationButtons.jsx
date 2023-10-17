@@ -12,7 +12,6 @@ const PaginationButtons = ({
   pagination,
   page,
   setPage,
-  setLoading,
   totalData,
   width,
   height,
@@ -99,33 +98,27 @@ const PaginationButtons = ({
     if (totalPage === 0) {
       setTotalPage(pageValue);
     }
-    if (page > 1 && page < buttonRange.length) {
+    if (page > 1 && page <= buttonRange.length) {
       setNext(true);
       setEnd(true);
       setPrevious(true);
       setStart(true);
     } else if (page === 1) {
-      setNext(true);
       setPrevious(false);
       setStart(false);
+    } else if (page > buttonRange.length && page <= totalPage) {
+      setStart(true);
+      setPrevious(true);
+    }
+    if (totalPage > buttonRange.length) {
+      setNext(true);
       setEnd(true);
-    } else if (page > buttonRange.length && page < totalPage) {
-      setStart(true);
-      setPrevious(true);
     }
-    if (totalPage >= buttonRange.length && page >= totalPage) {
+    if (page === totalPage) {
       setNext(false);
       setEnd(false);
-      setPrevious(true);
-      setStart(true);
     }
-    if (page === totalPage + 1) {
-      setNext(false);
-      setEnd(false);
-      setPrevious(true);
-      setStart(true);
-    }
-  }, [page, totalPage, flipRight, flipLeft]);
+  }, [page, totalPage]);
 
   // STYLED COMPONENT
   const Pagination = styled.div`

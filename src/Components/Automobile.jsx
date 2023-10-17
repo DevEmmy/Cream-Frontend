@@ -122,8 +122,7 @@ const Automobile = () => {
               pagination={30}
               page={page}
               setPage={setPage}
-              loading={loading}
-              setLoading={setLoading}
+              loading={loading}              
               totalData={totalData}
               background={"#F2BE5C"}
             />

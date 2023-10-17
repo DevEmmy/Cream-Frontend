@@ -123,11 +123,10 @@ const RealEstate = () => {
           <div className="w-full flexmm mt-10">
             <PaginationButtons
               range={[1, 2, 3]}
-              pagination={24}
+              pagination={30}
               page={page}
               setPage={setPage}
-              loading={loading}
-              setLoading={setLoading}
+              loading={loading}              
               totalData={totalData}
               background={"#F2BE5C"}
             />
