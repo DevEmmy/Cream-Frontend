@@ -4,11 +4,13 @@ import Nav from "@/AtomicComponents/Nav";
 import { getAListing } from "@/services/request";
 import { LocationMarker } from "heroicons-react";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import TimeAgo from "react-timeago";
 import PictureModal from "./PictureModal";
 
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 const EachProperty = () => {
+  const top = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImages, setModalImages] = useState([]); // Images for the modal
 
@@ -39,6 +41,7 @@ const EachProperty = () => {
     if (id) {
       fetchData(id);
     }
+    scrollToRef(top);
   }, [id]);
 
   const formatDesc = (text) => {
@@ -49,7 +52,7 @@ const EachProperty = () => {
   return (
     <>
       <Nav />
-
+      <div className="h-0 w-0" ref={top}></div>
       {listing && (
         <div className="mt-32 mx-xPadding text-center">
           <div className="mt-32 mx-xPadding">
