@@ -58,10 +58,10 @@ const PaginationButtons = ({
   };
 
   const resetButtonRange = (buttonRange, totalPage) => {
-    if (buttonRange) {
-      // If a range is provided, use it
-      return buttonRange;
-    }
+    // if (buttonRange) {
+    //   // If a range is provided, use it
+    //   return buttonRange;
+    // }
 
     let mockButtonRange = buttonRange;
     if (totalPage > buttonRange.length && (flipRight || flipLeft)) {
