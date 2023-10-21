@@ -9,11 +9,14 @@ import { RiPencilFill } from "react-icons/ri";
 import TimeAgo from "react-timeago";
 import styled from "styled-components";
 import ProfileList from "./Profile/ProfileList";
+import ProfileImage from "./Profile/ProfileImage";
 
 const Profile = () => {
   let [user, setUser] = useState();
   const [active, setActive] = useState();
   const [btn, setBtn] = useState("Stats");
+  const [showImage, setShowImage] = useState(false);
+  const [showCover, setShowCover] = useState(false);
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("user"));
@@ -45,13 +48,39 @@ const Profile = () => {
       {user && (
         <div>
           <Nav active={10} />
-          <div className="cover h-[40vh]">
+          {showImage && (
+            <ProfileImage
+              data={user}
+              id={user._id}
+              type="profile"
+              setShowImage={setShowImage}
+            />
+          )}
+          {showCover && (
+            <ProfileImage
+              data={user}
+              id={user._id}
+              type="cover"
+              setShowCover={setShowCover}
+            />
+          )}
+          <div
+            className="cover h-[40vh]"
+            onClick={() => {
+              setShowCover(true);
+            }}
+          >
             <img src={user.cover} alt="" />
           </div>
 
           <div className="mx-xPadding my-10">
             <div className="profile flex sm:flex-col gap-6 items-center">
-              <div className="sm:w-full flexsm sm:flex-wrap gap-[2em]">
+              <div
+                className="sm:w-full flexsm sm:flex-wrap gap-[2em]"
+                onClick={() => {
+                  setShowImage(true);
+                }}
+              >
                 <img
                   src={user.profilePicture}
                   alt=""
