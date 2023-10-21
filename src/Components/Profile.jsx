@@ -65,7 +65,7 @@ const Profile = () => {
             />
           )}
           <div
-            className="cover h-[40vh]"
+            className="cover h-[40vh] cursor-pointer"
             onClick={() => {
               setShowCover(true);
             }}
@@ -84,7 +84,7 @@ const Profile = () => {
                 <img
                   src={user.profilePicture}
                   alt=""
-                  className="avatar w-24 h-24 sm:w-16 sm:h-16"
+                  className="avatar w-24 h-24 sm:w-16 sm:h-16 cursor-pointer"
                 />
 
                 <div className="flex flex-col">
