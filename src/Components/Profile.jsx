@@ -22,7 +22,7 @@ const Profile = () => {
     let data = JSON.parse(localStorage.getItem("user"));
     setUser(data);
     setActive(<ProfileList user={data} />);
-  }, []);
+  }, [showImage, showCover]);
 
   const options = [
     // {
