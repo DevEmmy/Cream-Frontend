@@ -8,7 +8,7 @@ const Card = ({ listing }) => {
   return (
     <a
       href={
-        listing.category.slug === "real-estate"
+        listing["category.slug"] === "real-estate"
           ? `/real-estate/${listing._id}`
           : `/automobile/${listing._id}`
       }
