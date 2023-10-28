@@ -75,15 +75,13 @@ const Profile = () => {
 
           <div className="mx-xPadding my-10">
             <div className="profile flex sm:flex-col gap-6 items-center">
-              <div
-                className="sm:w-full flexsm sm:flex-wrap gap-[2em]"
-                onClick={() => {
-                  setShowImage(true);
-                }}
-              >
+              <div className="sm:w-full flexsm sm:flex-wrap gap-[2em]">
                 <img
                   src={user.profilePicture}
                   alt=""
+                  onClick={() => {
+                    setShowImage(true);
+                  }}
                   className="avatar w-24 h-24 sm:w-16 sm:h-16 cursor-pointer"
                 />
 
