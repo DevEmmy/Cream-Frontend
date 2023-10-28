@@ -15,15 +15,15 @@ const EachProperty = () => {
   const [modalImages, setModalImages] = useState([]); // Images for the modal
 
   // Function to open the modal
-  const openModal = (images) => {
-    setModalImages(images);
-    setIsModalOpen(true);
-  };
+  // const openModal = (images) => {
+  //   setModalImages(images);
+  //   setIsModalOpen(true);
+  // };
 
-  // Function to close the modal
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  // // Function to close the modal
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
   const features = ["Balcony", "Air Conditioning", "Jacuzzi"];
 
   const router = useRouter();
@@ -116,7 +116,7 @@ const EachProperty = () => {
                 Listed <TimeAgo date={listing.createdAt} />
               </p>
 
-              <a
+              <div
                 href={
                   listing.category.slug === "real-estate"
                     ? `/real-estate/${id}/media`
@@ -126,11 +126,11 @@ const EachProperty = () => {
               >
                 <button
                   className="bg-primary1 text-black px-12 py-3 text-[0.8em] font-[600] rounded-md"
-                  onClick={() => openModal([...listing.images])}
+                  // onClick={() => openModal([...listing.images])}
                 >
                   View Media
                 </button>
-              </a>
+              </div>
               {isModalOpen && (
                 <PictureModal
                   isOpen={isModalOpen}
