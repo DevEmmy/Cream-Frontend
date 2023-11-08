@@ -1,9 +1,14 @@
 import BlackOverlay from "@/AtomicComponents/BlackOverlay";
 import Footer from "@/AtomicComponents/Footer";
 import Nav from "@/AtomicComponents/Nav";
+import globalApi from "./api";
+import { setConfig } from "@/infrastructure/api/user/userRequest";
 import { getAListing } from "@/services/request";
+import { Trash } from "heroicons-react";
+import Swal from "sweetalert2";
 import { LocationMarker } from "heroicons-react";
 import { useRouter } from "next/router";
+import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import TimeAgo from "react-timeago";
 import PictureModal from "./PictureModal";
@@ -11,6 +16,7 @@ import PictureModal from "./PictureModal";
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 const EachProperty = () => {
   const top = useRef(null);
+  const [data, setData] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImages, setModalImages] = useState([]); // Images for the modal
 
@@ -29,7 +35,7 @@ const EachProperty = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const [listing, setListing] = useState();
+  const [listing, setListing] = useState("");
 
   const fetchData = async (id) => {
     let data = await getAListing(id);
@@ -41,6 +47,9 @@ const EachProperty = () => {
     if (id) {
       fetchData(id);
     }
+    setData(JSON.parse(localStorage.getItem("user")));
+    // console.log(UseGetUserDetails())
+    // console.log(data)
     scrollToRef(top);
   }, [id]);
 
@@ -48,10 +57,41 @@ const EachProperty = () => {
     const itemsArray = text.split("- [ ] ");
     return itemsArray;
   };
+
+  const deleteListings = () => {
+    axios
+      .delete(`${globalApi}/listings/delete/${id}`, setConfig())
+      .then((resp) => {
+        console.log(resp.data);
+        router.back();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const confirmDelete = () => {
+    Swal.fire({
+      title: "Are you sure you want to delete this Property?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        deleteListings();
+        Swal.fire("Deleted!", "", "success");
+      } else if (result.isDenied) {
+        //   Swal.fire('Changes are not saved', '', 'info')
+      }
+    });
+  };
+
   //
   return (
     <>
-      <Nav />
+      {listing && (
+        <Nav active={listing?.category.slug === "real-estate" ? 1 : 2} />
+      )}
       <div className="h-0 w-0" ref={top}></div>
       {listing && (
         <div className="mt-32 mx-xPadding text-center">
@@ -116,7 +156,7 @@ const EachProperty = () => {
                 Listed <TimeAgo date={listing.createdAt} />
               </p>
 
-              <div
+              <a
                 href={
                   listing.category.slug === "real-estate"
                     ? `/real-estate/${id}/media`
@@ -130,7 +170,7 @@ const EachProperty = () => {
                 >
                   View Media
                 </button>
-              </div>
+              </a>
               {isModalOpen && (
                 <PictureModal
                   isOpen={isModalOpen}
@@ -158,43 +198,62 @@ const EachProperty = () => {
               </p>
             </div>
 
-            <div className="flex items-start flex-col text-start">
-              <p className="font-[700] text-[1.2em]">Contact Seller</p>
+            {listing.postedBy?._id !== data._id ? (
+              <>
+                <div className="flex items-start flex-col text-start">
+                  <p className="font-[700] text-[1.2em]">Contact Seller</p>
 
-              <div className="bg-primary1 w-[90%] md:w-full grid grid-cols-2 sm:flex sm:flex-col-reverse gap-5 p-10 items-center rounded-xl">
-                <div className="flex items-start flex-col text-start text-white gap-2">
-                  <p className="font-[600]">
-                    {listing.postedBy.firstName +
-                      " " +
-                      listing.postedBy.lastName}
-                  </p>
-                  <p className="text-[0.8em]">{listing.postedBy.address}</p>
-                  <p>Joined 2023</p>
+                  <div className="bg-primary1 w-[90%] md:w-full grid grid-cols-2 sm:flex sm:flex-col-reverse gap-5 p-10 items-center rounded-xl">
+                    <div className="flex items-start flex-col text-start text-white gap-2">
+                      <p className="font-[600]">
+                        {listing.postedBy.firstName +
+                          " " +
+                          listing.postedBy.lastName}
+                      </p>
+                      <p className="text-[0.8em]">{listing.postedBy.address}</p>
+                      <p>Joined 2023</p>
 
-                  <div className="flex flex-wrap gap-3 w-full text-[0.8em]">
-                    <a
-                      href={`https://wa.me/${
-                        "+234" + listing.postedBy.phoneNumber1
-                      }?text=Hi%20${listing.postedBy.firstName}`}
-                    >
-                      <button className="py-2 px-3 bg-black rounded-md">
-                        Send Message
-                      </button>
-                    </a>
+                      <div className="flex flex-wrap gap-3 w-full text-[0.8em]">
+                        <a
+                          href={`https://wa.me/${
+                            "+234" + listing.postedBy.phoneNumber1
+                          }?text=Hi%20${listing.postedBy.firstName}`}
+                        >
+                          <button className="py-2 px-3 bg-black rounded-md">
+                            Send Message
+                          </button>
+                        </a>
 
-                    <button className="py-2 px-3 bg-black rounded-md">
-                      View
-                    </button>
+                        <button className="py-2 px-3 bg-black rounded-md">
+                          View
+                        </button>
+                      </div>
+                    </div>
+
+                    <img
+                      src={listing.postedBy.profilePicture}
+                      alt={listing.postedBy.firstName}
+                      className="h-[160px] rounded-tl-3xl rounded-br-3xl border-2 border-white"
+                    />
                   </div>
                 </div>
-
-                <img
-                  src={listing.postedBy.profilePicture}
-                  alt=""
-                  className="h-[160px] rounded-tl-3xl rounded-br-3xl border-2 border-white"
-                />
-              </div>
-            </div>
+              </>
+            ) : (
+              <>
+                <div className="cflexsm gap-[10px]">
+                  <h3>Delete Listing</h3>
+                  <p className="text-[#646464]">
+                    Once you delete a listing, it cannot be reversed
+                  </p>
+                  <div
+                    className="bg-[#c80a0a] rounded-[10px] flexmm gap-[3px] w-full p-[10px] text-[14px] cursor-pointer"
+                    onClick={confirmDelete}
+                  >
+                    <Trash color="white" /> Delete Listing
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
