@@ -28,7 +28,7 @@ const DynamicBanner = ({ children, images }) => {
   // };
 
   return (
-    <div className="relative ">
+    <div className="relative h-[100vh]">
       <Carousel
         responsive={responsive}
         className="w-[100%] object-cover"
