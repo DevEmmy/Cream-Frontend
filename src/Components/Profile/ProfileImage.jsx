@@ -5,15 +5,19 @@ import { X } from "heroicons-react";
 import { DisplayImage } from "./Styled";
 import FileBase64 from "react-file-base64";
 import Loader from "@/AtomicComponents/Loader/Loader";
-import services from "../../ioc/services"; 
+import services from "../../ioc/services";
 
 const ProfileImage = ({ data, id, type, setShowImage, setShowCover }) => {
-  const user = useGetUserDetails();
+  // const user = useGetUserDetails();
+  const [user, setUser] = useState({});
   const [loader, setLoader] = useState(false);
   const [imagep, setImageP] = useState(data.profilePicture);
   const [imagec, setImageC] = useState(data.cover);
 
   console.log(data);
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
 
   const upload = (image, type) => {
     setLoader(true);
