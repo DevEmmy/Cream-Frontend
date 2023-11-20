@@ -186,10 +186,10 @@ const Nav = ({ active = 0 }) => {
         <Line />
         <div className="block my-5 cflexss gap-4 md:hidden">
           {loggedIn ? (
-            <a href={"/create-listing"} className="flex items-center gap-3">
+            <Link href={"/create-listing"} className="flex items-center gap-3">
               <HiUserGroup />
               <p>Sell</p>
-            </a>
+            </Link>
           ) : (
             <a href={"/login"} className="flex items-center gap-3">
               <RiLoginBoxFill />

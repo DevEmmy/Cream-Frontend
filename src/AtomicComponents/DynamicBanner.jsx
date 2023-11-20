@@ -28,7 +28,7 @@ const DynamicBanner = ({ children, images }) => {
   // };
 
   return (
-    <div className="relative ">
+    <div className="relative h-[100vh]">
       <Carousel
         responsive={responsive}
         className="w-[100%] object-cover"
@@ -56,7 +56,7 @@ const DynamicBanner = ({ children, images }) => {
               The Intelligent Market Place.
             </p>
 
-            <div className="flex gap-5 mt-5 sm:mt-[50px]">
+            <div className="w-full flexmm gap-5 mt-5 sm:mt-[50px] flex-wrap">
               <Link href="#category" className="scroll-smooth">
                 <button className="bg-primary1 text-black px-12 py-3 rounded-md">
                   Explore
@@ -64,9 +64,9 @@ const DynamicBanner = ({ children, images }) => {
               </Link>
 
               <a href="/CREAM.zip" download={"Cream"}>
-              <button className="bg-transparent border-2 border-primary1 text-primary1 px-5 py-3 rounded-md">
-                Download App
-              </button>
+                <button className="bg-transparent border-2 border-primary1 text-primary1 px-5 py-3 rounded-md">
+                  Download App
+                </button>
               </a>
             </div>
           </>

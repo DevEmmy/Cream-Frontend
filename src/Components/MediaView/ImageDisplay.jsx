@@ -29,7 +29,7 @@ const ImageDisplay = ({ property, setDisplayImg, currentIndex }) => {
             return (
               <>
                 <div key={i} className="h-[80vh] flexmm mb-[2em]">
-                  <img src={image} alt="display-image" />
+                  <img src={image} style={{objectFit: "contain"}} alt="display-image" />
                 </div>
               </>
             );
