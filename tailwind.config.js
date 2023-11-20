@@ -10,31 +10,32 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary1: "#F2BE5C",
-        primary2: "#000",      
+        primary1: "#ffd42e",
+        primary2: "#000",
         secondary1: {
           100: "rgba(255, 255, 255, 0.50)",
           200: "rgba(181, 65, 162, 0.93) 100%",
-        }       
+        },
       },
-     fontFamily: {
+
+      fontFamily: {
         body: ['"Raleway"', "sans"],
         marker: ['"Permanent Marker"', "cursive"],
       },
 
       screens: {
-        'lt': { 'max' : '500px'},
-        'sm': { 'max': '600px' },
-        'sm1': { 'max': "840px" },
-        'md': { 'max': "1100px" },
-        'md1': { 'max': "850px"},
-        'lg': { 'min': "2300px" },
-        'xl': { 'max': "1280px" },
-        "2xl": { 'max': "1536px" },
+        lt: { max: "500px" },
+        sm: { max: "600px" },
+        sm1: { max: "840px" },
+        md: { max: "1100px" },
+        md1: { max: "850px" },
+        lg: { min: "2300px" },
+        xl: { max: "1280px" },
+        "2xl": { max: "1536px" },
       },
       spacing: {
-        xPadding: "5%"
-      }
+        xPadding: "5%",
+      },
     },
   },
 };

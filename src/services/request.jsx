@@ -1,19 +1,19 @@
-import toast from "react-hot-toast"
-import { error, loading, success } from "./toaster"
-import { useRouter } from "next/router"
+import toast from "react-hot-toast";
+import { error, loading, success } from "./toaster";
+import { useRouter } from "next/router";
 import axios from "axios";
 
+export const sendQuery = async (text) => {
+  const result = await axios.post(
+    "https://binaryy-cream-prototype-tobi.hf.space/run/predict",
+    {
+      data: [text],
+    }
+  );
 
-export const sendQuery = async (text)=> {
-    const result = await axios.post("https://binaryy-cream-prototype-tobi.hf.space/run/predict",{
-      "data": [
-          text
-        ]
-    });
-
-    console.log(result.data.data[0])
-    return result.data.data[0];
-}
+  console.log(result.data.data[0]);
+  return result.data.data[0];
+};
 
 const { default: axiosRequest } = require("./axiosConfig");
 
@@ -131,8 +131,33 @@ export const getListingsPerPage = async (page, category) => {
   await axiosRequest
     .get(`/listings/all?page=${page}&category=${category}`)
     .then((resp) => {
-      response = { list: resp.data.listings, number: resp.data.noOfListings };      
+      response = { list: resp.data.listings, number: resp.data.noOfListings };
     })
     .catch((err) => console.error(err));
   return response;
+};
+export const postPropertyRequest = async (name, email, description) => {
+  const details = { name: name, email: email, request: description };
+  const toastId = loading("Submitted...");
+  await axiosRequest
+    .post("/api/v2/property-request", details)
+    .then((response) => {
+      toast.dismiss(toastId);
+      if (response) {
+        success(response.data.message);
+      } else {
+        error(response.data.message);
+      }
+      console.log(response);
+    })
+    .catch((err) => {
+      toast.dismiss(toastId);
+      if (err.response) {
+        error(err.response.data.message);
+      } else {
+        error("An Error Occured");
+      }
+
+      console.log(err);
+    });
 };

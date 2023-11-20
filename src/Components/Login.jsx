@@ -20,28 +20,43 @@ const Login = () => {
     await login(details.email, details.password, router);
   };
 
+  //const img = "../Assets/ver1.png";
+  const img =
+    "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
   return (
-    <div className="bg-slate-700 w-full h-[100vh] flex flex-col gap-3 items-center justify-center">
-      <div className="bg-white cflexsm sm:gap-5 w-[40%] sm:w-[90%] h-[70vh] sm:rounded-xl sm:h-[80vh] p-10 sm:p-5 text-center">
+    <div
+      className=" w-full h-[100vh] flex flex-col gap-3 items-center justify-center"
+      style={{
+        backgroundImage: `url("/pic2.jpg")`,
+
+        objectFit: "cover",
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="bg-white cflexsm sm:gap-5 w-[30%] sm:w-[90%] h-[90vh] sm:rounded-xl sm:h-[80vh] p-10 sm:p-5 text-center rounded-lg">
         <h2 className="text-[2em] font-[700]">CREAM</h2>
         <p>Welcome Back, We missed you!</p>
 
         <form action="" className="flex w-full gap-5 flex-col">
           <input
             type="text"
-            placeholder="johndoe@gmail.com"
+            placeholder="Enter your name here"
             className="w-full text-[0.8em] p-3"
             name="email"
             value={details["email"]}
             onChange={handleChange}
+            className=" border-gray-500 w-full border-[1px] focus:border-primary1 focus:border-[2px]"
+            //style={{ borderWidth: 1, borderColor: "#000" }}
           />
           <input
             type="password"
-            placeholder="**** "
+            placeholder="Password"
             className="w-full text-[0.8em] p-3"
             name="password"
             value={details["password"]}
             onChange={handleChange}
+            className=" border-gray-500 w-full border-[1px] focus:border-primary1 focus:border-[2px]"
           />
 
           <p className="text-start">
