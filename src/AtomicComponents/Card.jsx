@@ -4,11 +4,11 @@ import { HiLocationMarker } from "react-icons/hi";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
 
 const Card = ({ listing }) => {
-  const [like, setLike] = useState(false);  
+  const [like, setLike] = useState(false);
   return (
     <a
       href={
-        listing.category.slug === "real-estate"
+        listing["category.slug"] === "real-estate"
           ? `/real-estate/${listing._id}`
           : `/automobile/${listing._id}`
       }

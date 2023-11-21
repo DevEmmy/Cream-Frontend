@@ -47,7 +47,7 @@ export const login = async (email, password, router) => {
 };
 
 export const register = async (details, router) => {
-  const toastId = loading("Registered...");
+  const toastId = loading("Signing up...");
   await axiosRequest
     .post("/users/sign-up", details)
     .then((response) => {
@@ -138,12 +138,13 @@ export const getListingsPerPage = async (page, category) => {
 };
 export const postPropertyRequest = async (name, email, description) => {
   const details = { name: name, email: email, request: description };
-  const toastId = loading("Submitted...");
-  await axiosRequest
-    .post("/api/v2/property-request", details)
+  const toastId = loading("Submitting...");
+  await axios
+    .post("https://cream-v2.onrender.com/api/v2/property-request", details)
     .then((response) => {
       toast.dismiss(toastId);
       if (response) {
+        toast.dismiss(loading("Submitted"));
         success(response.data.message);
       } else {
         error(response.data.message);
