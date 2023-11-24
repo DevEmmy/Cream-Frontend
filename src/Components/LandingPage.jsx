@@ -4,6 +4,7 @@ import Nav from "@/AtomicComponents/Nav";
 import PreFooter from "@/AtomicComponents/PreFooter";
 import React from "react";
 import Categories from "./Categories";
+import PropertyRequest from "./PropertyRequest";
 
 const LandingPage = () => {
   const images = [
@@ -20,6 +21,7 @@ const LandingPage = () => {
       <Nav />
       <DynamicBanner images={images} />
       <Categories />
+      <PropertyRequest />
 
       {/* <PreFooter /> */}
       <Footer />

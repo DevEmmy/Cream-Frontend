@@ -23,8 +23,16 @@ const Register = () => {
     await register(details, router);
   };
   return (
-    <div className="bg-slate-700 w-full h-[100vh] flex flex-col items-center justify-center">
-      <div className=" bg-white w-[40%] h-[auto] sm:w-[90%] p-10 sm:p-5 text-center">
+    <div
+      className="bg-slate-700 w-full h-[100vh] flex flex-col items-center justify-center"
+      style={{
+        backgroundImage: `url("/pic2.jpg")`,
+
+        objectFit: "cover",
+        backgroundSize: "cover",
+      }}
+    >
+      <div className=" bg-white w-[35%] h-[auto] sm:w-[90%] p-10 sm:p-5 text-center rounded-lg">
         <h2 className="text-[2em] font-[700]">CREAM</h2>
         <p>Welcome to CREAM!</p>
 
@@ -32,42 +40,42 @@ const Register = () => {
           <input
             type="text"
             placeholder="Your first name e.g John"
-            className="w-full text-[0.8em] p-3"
             name="firstName"
             onChange={handleChange}
             value={details["firstName"]}
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
           />
           <input
             type="text"
             placeholder="Your last name e.g Doe"
-            className="w-full text-[0.8em] p-3"
             name="lastName"
             onChange={handleChange}
             value={details.lastName}
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
           />
           <input
             type="email"
             placeholder="Your email e.g johndoe@gmail.com"
-            className="w-full text-[0.8em] p-3"
             name="email"
             onChange={handleChange}
             value={details.email}
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
           />
           <input
             type="tel"
-            placeholder="090xxx"
-            className="w-full text-[0.8em] p-3"
+            placeholder="Phone Number"
             name="phoneNumber"
             onChange={handleChange}
             value={details.phoneNumber}
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
           />
           <input
             type="text"
-            placeholder="**** "
-            className="w-full text-[0.8em] p-3"
+            placeholder="Password"
             name="password"
             onChange={handleChange}
             value={details.password}
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
           />
         </form>
 

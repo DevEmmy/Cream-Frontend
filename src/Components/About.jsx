@@ -5,9 +5,24 @@ import PreFooter from "@/AtomicComponents/PreFooter";
 import Link from "next/link";
 import React from "react";
 import { RiArrowRightFill } from "react-icons/ri";
+import { useState } from "react";
+import PropertyRequest from "./PropertyRequestForm";
 
 const About = () => {
   const images = ["/i1.jpg", "pic10.jpg", "/i2.jpg", "i3.jpg"];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  //const [modalImages, setModalImages] = useState([]); // Images for the modal
+
+  // Function to open the modal
+  const openModal = () => {
+    //setModalImages();
+    setIsModalOpen(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <Nav active={3} />
@@ -122,7 +137,6 @@ const About = () => {
         </a>
       </div>
 
-      <PreFooter />
       <Footer />
     </>
   );
