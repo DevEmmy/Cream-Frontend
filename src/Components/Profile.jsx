@@ -9,17 +9,20 @@ import { RiPencilFill } from "react-icons/ri";
 import TimeAgo from "react-timeago";
 import styled from "styled-components";
 import ProfileList from "./Profile/ProfileList";
+import ProfileImage from "./Profile/ProfileImage";
 
 const Profile = () => {
   let [user, setUser] = useState();
   const [active, setActive] = useState();
   const [btn, setBtn] = useState("Stats");
+  const [showImage, setShowImage] = useState(false);
+  const [showCover, setShowCover] = useState(false);
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("user"));
     setUser(data);
     setActive(<ProfileList user={data} />);
-  }, []);
+  }, [showImage, showCover]);
 
   const options = [
     // {
@@ -45,7 +48,28 @@ const Profile = () => {
       {user && (
         <div>
           <Nav active={10} />
-          <div className="cover h-[40vh]">
+          {showImage && (
+            <ProfileImage
+              data={user}
+              id={user._id}
+              type="profile"
+              setShowImage={setShowImage}
+            />
+          )}
+          {showCover && (
+            <ProfileImage
+              data={user}
+              id={user._id}
+              type="cover"
+              setShowCover={setShowCover}
+            />
+          )}
+          <div
+            className="cover h-[40vh] cursor-pointer"
+            onClick={() => {
+              setShowCover(true);
+            }}
+          >
             <img src={user.cover} alt="" />
           </div>
 
@@ -55,7 +79,10 @@ const Profile = () => {
                 <img
                   src={user.profilePicture}
                   alt=""
-                  className="avatar w-24 h-24 sm:w-16 sm:h-16"
+                  onClick={() => {
+                    setShowImage(true);
+                  }}
+                  className="avatar w-24 h-24 sm:w-16 sm:h-16 cursor-pointer"
                 />
 
                 <div className="flex flex-col">
