@@ -11,6 +11,7 @@ import {
   RiMessage2Fill,
   RiUser2Fill,
   RiWallet2Fill,
+  RiBuilding2Fill,
 } from "react-icons/ri";
 import { HiUserGroup, HiX } from "react-icons/hi";
 import Line from "./Line";
@@ -46,6 +47,11 @@ const Nav = ({ active = 0 }) => {
       link: "/contact-us",
       icon: null,
     },
+    {
+      name: "REQUESTS",
+      link: "/propertyRequests",
+      icon: null,
+    },
   ];
 
   const sideNav = [
@@ -58,6 +64,11 @@ const Nav = ({ active = 0 }) => {
       name: "Automobile",
       icon: <RiUser2Fill />,
       link: "/automobile",
+    },
+    {
+      name: "Requests",
+      link: "/propertyRequests",
+      icon: <RiBuilding2Fill />,
     },
     // {
     //   name: "Profile",

@@ -40,47 +40,42 @@ const Register = () => {
           <input
             type="text"
             placeholder="Your first name e.g John"
-            className="w-full text-[0.8em] p-3"
             name="firstName"
             onChange={handleChange}
             value={details["firstName"]}
-            className=" border-gray-500 w-full border-[1px] focus:border-primary1 focus:border-[2px]"
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
           />
           <input
             type="text"
             placeholder="Your last name e.g Doe"
-            className="w-full text-[0.8em] p-3"
             name="lastName"
             onChange={handleChange}
             value={details.lastName}
-            className=" border-gray-500 w-full border-[1px] focus:border-primary1 focus:border-[2px]"
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
           />
           <input
             type="email"
             placeholder="Your email e.g johndoe@gmail.com"
-            className="w-full text-[0.8em] p-3"
             name="email"
             onChange={handleChange}
             value={details.email}
-            className=" border-gray-500 w-full border-[1px] focus:border-primary1 focus:border-[2px]"
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
           />
           <input
             type="tel"
             placeholder="Phone Number"
-            className="w-full text-[0.8em] p-3"
             name="phoneNumber"
             onChange={handleChange}
             value={details.phoneNumber}
-            className=" border-gray-500 w-full border-[1px] focus:border-primary1 focus:border-[2px]"
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
           />
           <input
             type="text"
             placeholder="Password"
-            className="w-full text-[0.8em] p-3"
             name="password"
             onChange={handleChange}
             value={details.password}
-            className=" border-gray-500 w-full border-[1px] focus:border-primary1 focus:border-[2px]"
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
           />
         </form>
 

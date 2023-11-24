@@ -42,21 +42,19 @@ const Login = () => {
           <input
             type="text"
             placeholder="Enter your name here"
-            className="w-full text-[0.8em] p-3"
             name="email"
             value={details["email"]}
             onChange={handleChange}
-            className=" border-gray-500 w-full border-[1px] focus:border-primary1 focus:border-[2px]"
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
             //style={{ borderWidth: 1, borderColor: "#000" }}
           />
           <input
             type="password"
             placeholder="Password"
-            className="w-full text-[0.8em] p-3"
             name="password"
             value={details["password"]}
             onChange={handleChange}
-            className=" border-gray-500 w-full border-[1px] focus:border-primary1 focus:border-[2px]"
+            className=" border-gray-500 w-full text-[0.8em] p-3 border-[1px] focus:border-primary1 focus:border-[2px]"
           />
 
           <p className="text-start">

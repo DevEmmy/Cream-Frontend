@@ -5,9 +5,6 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Component {...pageProps} />
-      <div id="modal-root"></div>
-      {/* <div id="property-request"></div> */}
-
       <Toaster />
     </>
   );

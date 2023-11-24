@@ -61,10 +61,10 @@ const PropertyRequestForm = () => {
 
             <div class="mb-4">
               <label
-                for="contact"
+                for="email"
                 class="block text-sm font-medium text-gray-700"
               >
-                Contact Details
+                Email
               </label>
               <input
                 type="text"
@@ -87,7 +87,9 @@ const PropertyRequestForm = () => {
                 id="description"
                 name="description"
                 onChange={handleChange}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-primary1 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                //style={{ borderColor: "pink", borderWidth: 2,  }}
+
+                className="mt-1 block w-full  border-gray-300 rounded-md shadow-sm focus:border-primary1 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 rows="4"
                 required
               ></textarea>

@@ -162,3 +162,25 @@ export const postPropertyRequest = async (name, email, description) => {
       console.log(err);
     });
 };
+
+export const getAllPropertyRequests = async () => {
+  let response;
+  await axios
+    .get(`https://cream-v2.onrender.com/api/v2/property-request`)
+    .then((resp) => {
+      response = { list: resp.data };
+    })
+    .catch((err) => console.error(err));
+  return response;
+};
+
+export const getUserPropertyRequests = async (id) => {
+  let response;
+  await axios
+    .get(`https://cream-v2.onrender.com/api/v2/property-request/{id}`)
+    .then((resp) => {
+      response = { list: resp.data };
+    })
+    .catch((err) => console.error(err));
+  return response;
+};
