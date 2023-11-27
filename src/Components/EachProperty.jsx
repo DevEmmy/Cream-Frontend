@@ -90,7 +90,7 @@ const EachProperty = () => {
   //
   return (
     <>
-        <Nav active={listing?.category.slug === "real-estate" ? 1 : 2} />
+        <Nav active={listing?.category?.slug === "real-estate" ? 1 : 2} />
       
       <div className="h-0 w-0" ref={top}></div>
       {listing ? (
