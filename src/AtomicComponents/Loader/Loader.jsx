@@ -1,7 +1,7 @@
 import React from "react";
-import { ripples } from 'ldrs'
+// import { ripples } from 'ldrs'
 
-ripples.register()
+// ripples.register()
 
 // Default values shown
 
@@ -9,17 +9,17 @@ const Loader = () => {
  
   return (
     <div className="container">
-{/*       <div className="lds-ellipsis">
+      <div className="lds-ellipsis">
         <div></div>
         <div></div>
         <div></div>
         <div></div>
-      </div> */}
-     <l-ripples
+      </div>
+{/*      <l-ripples
   size="45"
   speed="2" 
   color="#FFD42E" 
-></l-ripples>
+></l-ripples> */}
     </div>
   );
 }
