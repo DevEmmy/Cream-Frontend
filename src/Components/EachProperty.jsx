@@ -12,6 +12,7 @@ import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import TimeAgo from "react-timeago";
 import PictureModal from "./PictureModal";
+import { SpinnerCircular } from "spinners-react";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 const EachProperty = () => {
@@ -92,7 +93,7 @@ const EachProperty = () => {
         <Nav active={listing?.category.slug === "real-estate" ? 1 : 2} />
       
       <div className="h-0 w-0" ref={top}></div>
-      {listing && (
+      {listing ? (
         <div className="mt-32 mx-xPadding text-center">
           <div className="mt-32 mx-xPadding">
             <h2 className="font-[600] text-[1.5em]">{listing?.title}</h2>
@@ -255,7 +256,19 @@ const EachProperty = () => {
             )}
           </div>
         </div>
-      )}
+      )
+      :
+
+        <div className="flex items-center justify-center py-10">
+              <SpinnerCircular
+                  color="white"
+                  className="flex justify-center"
+                  secondaryColor={"#F2BE5C"}
+                  size={50}
+                  thickness={150}
+                />
+              </div>
+      }
       <Footer />
     </>
   );
