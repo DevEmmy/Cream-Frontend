@@ -217,7 +217,7 @@ const EachProperty = () => {
                         <a
                           href={`https://wa.me/${
                             "+234" + listing.postedBy.phoneNumber1
-                          }?text=Hi%20${listing.postedBy.firstName}`}
+                          }?text=Hi%20${listing.postedBy.firstName}%2C%20i%20am%20messaging%20you%20to%20request%20for%20this%20property%20-%20https%3A%2F%2Fcream.business%2Freal-estate%2F${listing._id}`}
                         >
                           <button className="py-2 px-3 bg-black rounded-md">
                             Send Message
