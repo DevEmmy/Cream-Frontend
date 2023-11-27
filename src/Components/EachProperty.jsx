@@ -89,9 +89,9 @@ const EachProperty = () => {
   //
   return (
     <>
-{/*       {listing && ( */}
+      {listing && (
         <Nav active={listing?.category.slug === "real-estate" ? 1 : 2} />
-      // )}
+      )}
       <div className="h-0 w-0" ref={top}></div>
       {listing && (
         <div className="mt-32 mx-xPadding text-center">
