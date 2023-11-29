@@ -103,7 +103,7 @@ const Nav = ({ active = 0 }) => {
 
   useEffect(() => {
     setLoggedIn(validateLoggedIn);
-  });
+  },[]);
   return (
     <div className="bg-black text-white w-full flex justify-between py-3 px-xPadding items-center fixed top-0 left-0 right-0 z-40">
       <a href="/">
