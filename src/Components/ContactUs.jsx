@@ -25,25 +25,25 @@ const ContactUs = () => {
         <form className="flex flex-col gap-3">
           <p>Send A Message</p>
 
-          <div className="flex gap-2 items-center sm:flex-col sm:w-full">
-            <div className="sm:w-full">
+          <div className="flex gap-2 items-center sm:flex-col sm:w-full ">
+            <div className="sm:w-full w-1/2">
               <p className="text-[0.8em]">Name</p>
               <input type="text" />
             </div>
 
-            <div className="sm:w-full">
+            <div className="sm:w-full w-1/2">
               <p className="text-[0.8em]">Email</p>
               <input type="email" />
             </div>
           </div>
 
           <div className="flex gap-2 items-center sm:flex-col sm:w-full">
-            <div className="sm:w-full">
+            <div className="sm:w-full w-1/2">
               <p className="text-[0.8em]">Your Website</p>
               <input type="text" />
             </div>
 
-            <div className="sm:w-full">
+            <div className="sm:w-full w-1/2">
               <p className="text-[0.8em]">Phone Number</p>
               <input type="tel" />
             </div>

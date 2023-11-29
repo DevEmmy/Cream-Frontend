@@ -29,8 +29,8 @@ const RealEstate = () => {
   const fetchData = async () => {
     setLoading(true);
     let data = await getListingsPerPage(page, "real-estate");
-    console.log(data);
-    console.log("total: ", data.number);
+    console.log("data: ", data);
+    //console.log("total: ", data.number);
     setListings(data.list);
     setTotalData(data.number);
     setLoading(false);
@@ -126,7 +126,7 @@ const RealEstate = () => {
               pagination={30}
               page={page}
               setPage={setPage}
-              loading={loading}              
+              loading={loading}
               totalData={totalData}
               background={"#F2BE5C"}
             />
