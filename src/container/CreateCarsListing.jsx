@@ -38,7 +38,7 @@ const CreateCarListing = () => {
     carCondition: "New",
     engineType: "",
     colour: "",
-    features: [],
+    features: "",
     model: "",
   });
 
@@ -60,11 +60,12 @@ const CreateCarListing = () => {
     if (
       userListings["title"] &&
       userListings["description"] &&
-      userListings["model"] &&
+      userListings["features"] &&
+      // userListings["model"] &&
       userListings["price"] &&
-      userListings["carCondition"] &&
-      userListings["engineType"] &&
-      userListings["colour"] &&
+      // userListings["carCondition"] &&
+      // userListings["engineType"] &&
+      // userListings["colour"] &&
       userListings["images"].length >= 4 &&
       userListings["location"]
     ) {
@@ -184,10 +185,10 @@ const CreateCarListing = () => {
           <p>Brand Name</p>
           <input type="text" name="title" required onChange={handleChange} />
         </div>
-        <div className="section">
+        {/* <div className="section">
           <p>Car Model</p>
           <input type="text" name="model" required onChange={handleChange} />
-        </div>
+        </div> */}
         <div className="section">
           <p>About the Car</p>
           <textarea
@@ -200,7 +201,7 @@ const CreateCarListing = () => {
         <div className="section">
           <hr />
         </div>
-        <p>Car Condition</p>
+        {/* <p>Car Condition</p>
         <div className="NumbB">
           <div className="sec">
             <select name="carCondition" required onChange={handleChange}>
@@ -225,7 +226,7 @@ const CreateCarListing = () => {
           <div className="sec">
             <input type="text" name="colour" required onChange={handleChange} />
           </div>
-        </div>
+        </div> */}
         <p>Other Features</p>
         <div className="NumbB">
           <div className="sec">

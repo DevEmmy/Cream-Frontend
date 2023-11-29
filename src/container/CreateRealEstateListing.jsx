@@ -69,6 +69,7 @@ const CreateRealEstateListing = () => {
     userListings["features"] = features;
     if (
       userListings["title"] &&
+      userListings["location"] &&
       userListings["description"] &&
       userListings["features"].length !== 0 &&
       userListings["price"] &&
@@ -183,6 +184,10 @@ const CreateRealEstateListing = () => {
         </>
       )}
       <div className="form_Content">
+        <div className="section">
+          <p>Location</p>
+          <input type="text" name="location" required onChange={handleChange} />
+        </div>
         <div className="section">
           <p>Title/Name</p>
           <input type="text" name="title" required onChange={handleChange} />
