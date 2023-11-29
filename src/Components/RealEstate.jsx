@@ -7,7 +7,8 @@ import { sendQuery } from "@/services/request";
 import React, { useEffect, useState } from "react";
 import PaginationButtons from "@/AtomicComponents/PaginationButtons";
 import { SpinnerCircular } from "spinners-react";
-import { RiEqualizerFill, RiSearch2Line } from "react-icons/ri";
+import { X } from "heroicons-react";
+import { RiSearch2Line } from "react-icons/ri";
 
 const RealEstate = () => {
   const [listings, setListings] = useState([]);
@@ -72,15 +73,20 @@ const RealEstate = () => {
         </h1>
         <p className="text-white font-[600]">One search is all it takes.</p>
 
-        <div className="flex gap-3 items-center sm:flex-col sm:justify-center sm:items-center">
+        <div className="flex gap-3 items-center sm:flex-col sm:justify-center sm:w-full sm:items-center">
           <div className="flex gap-3 py-3 px-5 rounded-lg w-[40VW] sm:w-full items-center my-3 bg-white text-black">
             <RiSearch2Line />
             <input
               type="text"
               className="focus:outline-0 w-full"
-              placeholder="Describe your desired property, automobile or resource in plain words and watch our AI do its magic."
+              placeholder="Describe your desired house"
               value={text}
               onChange={handleSearch}
+            />
+            <X
+              className="cursor-pointer"
+              size="20px"
+              onClick={() => setText("")}
             />
           </div>
 
