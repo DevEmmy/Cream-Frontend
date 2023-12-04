@@ -21,16 +21,6 @@ const EachProperty = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImages, setModalImages] = useState([]); // Images for the modal
 
-  // Function to open the modal
-  // const openModal = (images) => {
-  //   setModalImages(images);
-  //   setIsModalOpen(true);
-  // };
-
-  // // Function to close the modal
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
   const features = ["Balcony", "Air Conditioning", "Jacuzzi"];
 
   const router = useRouter();
@@ -170,14 +160,7 @@ const EachProperty = () => {
                 >
                   View Media
                 </button>
-              </a>
-              {isModalOpen && (
-                <PictureModal
-                  isOpen={isModalOpen}
-                  onRequestClose={closeModal}
-                  images={modalImages}
-                />
-              )}
+              </a>             
             </div>
           </div>
 

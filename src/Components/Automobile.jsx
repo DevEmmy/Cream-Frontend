@@ -6,7 +6,8 @@ import { getListingsPerPage, sendQuery } from "@/services/request";
 import React, { useEffect, useState } from "react";
 import { SpinnerCircular } from "spinners-react";
 import PaginationButtons from "@/AtomicComponents/PaginationButtons";
-import { RiEqualizerFill, RiSearch2Line } from "react-icons/ri";
+import { X } from "heroicons-react";
+import { RiSearch2Line } from "react-icons/ri";
 
 const Automobile = () => {
   const [listings, setListings] = useState([]);
@@ -26,34 +27,30 @@ const Automobile = () => {
   const fetchData = async () => {
     setLoading(true);
     let data = await getListingsPerPage(page, "cars");
-    console.log(data);
     setListings(data.list);
     setTotalData(data.number);
     setLoading(false);
   };
 
-  const [text, setText] = useState("")
-  const handleSearch = (e)=>{
-    setText(e.target.value)
-  }
-  const submit = async ()=>{
+  const [text, setText] = useState("");
+  const handleSearch = (e) => {
+    setText(e.target.value);
+  };
+  const submit = async () => {
     setLoading(true);
-    let data = await sendQuery(text)
-    console.log(data)
-    let data1 = data.map(item => {
+    let data = await sendQuery(text);
+    let data1 = data.map((item) => {
       item.postedBy = {
         firstName: item["postedBy.firstName"],
         lastName: item["postedBy.lastName"],
         profilePicture: item["postedBy.profilePicture"],
-
-      }
-      return item
-    })
-    console.log(data1)
-    setListings(data)
+      };
+      return item;
+    });
+    setListings(data);
     // setTotalData(data.number);
     setLoading(false);
-  }
+  };
 
   useEffect(() => {
     fetchData();
@@ -71,19 +68,27 @@ const Automobile = () => {
           find new and preowned cars for sale
         </p>
 
-        <div className="flex gap-3 items-center sm:flex-col sm:justify-center sm:items-center">
+        <div className="flex gap-3 items-center sm:flex-col sm:justify-center sm:w-full sm:items-center">
           <div className="flex gap-3 py-3 px-5 rounded-lg w-[40VW] sm:w-full items-center my-3 bg-white text-black">
             <RiSearch2Line />
             <input
               type="text"
               className="focus:outline-0 w-full"
-              placeholder="Describe your desired property, automobile or resource in plain words and watch our AI do its magic."
+              placeholder="Describe your desired car"
               value={text}
               onChange={handleSearch}
             />
+            <X
+              className="cursor-pointer"
+              size="20px"
+              onClick={() => setText("")}
+            />
           </div>
 
-          <button className="bg-primary1 text-black px-6 py-3  gap-2 flex items-center rounded-md" onClick={submit}>
+          <button
+            className="bg-primary1 text-black px-6 py-3  gap-2 flex items-center rounded-md"
+            onClick={submit}
+          >
             Search <RiSearch2Line />{" "}
           </button>
         </div>
@@ -91,7 +96,7 @@ const Automobile = () => {
 
       <div className="list-container my-20 sm:my-14 mx-xPadding">
         <h3 className="text-center my-10 text[1.5em] font-[600]">
-          Explore Luxury Automobiles
+          Explore Automobiles
         </h3>
 
         <div className="grid grid-cols-3 w-full sm:grid-cols-1 gap-10">
@@ -122,7 +127,7 @@ const Automobile = () => {
               pagination={30}
               page={page}
               setPage={setPage}
-              loading={loading}              
+              loading={loading}
               totalData={totalData}
               background={"#F2BE5C"}
             />

@@ -16,11 +16,11 @@ const Footer = () => {
         },
         {
           name: "Blogs",
-          link: "/blogs",
+          link: "",
         },
         {
           name: "Terms & Condition",
-          link: "terms-and-condition",
+          link: "",
         },
       ],
     },
@@ -46,7 +46,7 @@ const Footer = () => {
         },
         {
           name: "List with us",
-          link: "/sign-up",
+          link: "/register",
         },
       ],
     },

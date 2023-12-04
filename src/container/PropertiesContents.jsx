@@ -6,13 +6,16 @@ export const OutProp = [
         property:"Garden"
     },
     {
+        property:"Rooftop terrace"
+    },
+    {
         property:"Porch"
     },
     {
         property:"Patio"
     },
     {
-        property:"Terrace"
+        property:"Rooftop Terrace"
     },
     {
         property:"Veranda"
@@ -40,7 +43,7 @@ export const InProp = [
         property:"Air Conditioning"
     },
     {
-        property:"Gymnasium"
+        property:"Gym"
     },
     {
         property:"Fireplace"
@@ -52,11 +55,23 @@ export const InProp = [
         property:"Terrace"
     },
     {
-        property:"Veranda"
+        property:"Inbuilt Speaker"
     },
     {
-        property:"Tennis Court"
+        property:"Family Lounge"
     },
+    {
+        property:"BQ"
+    },
+    {
+        property:"Walk-In Showers"
+    },
+    {
+        property:"Sportlights"
+    },
+    {
+        property:"Funished"
+    },       
     {
         property:"Balcony"
     }

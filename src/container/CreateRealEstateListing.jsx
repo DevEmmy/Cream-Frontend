@@ -69,12 +69,11 @@ const CreateRealEstateListing = () => {
     userListings["features"] = features;
     if (
       userListings["title"] &&
-      userListings["description"] &&
       userListings["location"] &&
+      userListings["description"] &&
       userListings["features"].length !== 0 &&
       userListings["price"] &&
-      userListings["images"].length >= 4 &&
-      userListings["location"]
+      userListings["images"].length >= 4
     ) {
       setValid(true);
       setError(false);
@@ -121,11 +120,23 @@ const CreateRealEstateListing = () => {
     return config;
   };
 
+  const formatedPrice = (price) => {
+    if (price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  };
+
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-    setUserListings({ ...userListings, [name]: value });
-    setChanging(!changing);
+    if (name === "price") {
+      let price = parseInt(value.replace(/,/g, ""));
+      setUserListings({ ...userListings, [name]: formatedPrice(price) });
+      setChanging(!changing);
+    } else {
+      setUserListings({ ...userListings, [name]: value });
+      setChanging(!changing);
+    }
   };
 
   const postUserListings = async (userListings) => {
@@ -154,7 +165,7 @@ const CreateRealEstateListing = () => {
         <>
           <div
             className="fixed w-full z-50 h-[100%] top-0 left-0 flex justify-center items-center"
-            style={{background:"rgba(0,0,0,0.5"}}
+            style={{ background: "rgba(0,0,0,0.5" }}
             onClick={() => {
               setPopUp(false);
             }}
@@ -162,7 +173,10 @@ const CreateRealEstateListing = () => {
             <div className="md:w-1/3 md:h-1/3 w-2/3 h-1/4 bg-[white] flex justify-center rounded-xl items-center">
               <div className="flex flex-col justify-center items-center p-5">
                 <p className="text-xl text-center font-bold">
-                  Seems there is a connection error. <span className="text-[#F2BE5C] block">please try again!</span>
+                  Seems there is a connection error.{" "}
+                  <span className="text-[#F2BE5C] block">
+                    please try again!
+                  </span>
                 </p>
               </div>
             </div>
@@ -517,7 +531,12 @@ const CreateRealEstateListing = () => {
               </p>
             )}
             <div className="price">
-              <input name="price" onChange={handleChange} type="number" />
+              <input
+                name="price"
+                onChange={handleChange}
+                value={userListings["price"]}
+                type="text"
+              />
               <select>
                 <option>NGN</option>
               </select>
