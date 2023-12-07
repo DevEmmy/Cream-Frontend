@@ -120,9 +120,7 @@ const CreateCarListing = () => {
   };
 
   const acceptNumbersOnly = (name, value) => {
-    var numeric = /^[0-9,]+$/;
-    console.log(value);
-    console.log(numeric.test(value));    
+    var numeric = /^[0-9,]+$/;    
     if (numeric.test(value)  && value >= 0) {     
       console.log("yea")
       setUserListings({ ...userListings, [name]: formatedPrice(value) });

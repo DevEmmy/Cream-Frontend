@@ -126,13 +126,21 @@ const CreateRealEstateListing = () => {
     }
   };
 
+  const acceptNumbersOnly = (name, value) => {
+    var numeric = /^[0-9,]+$/;  
+    if (numeric.test(value)  && value >= 0) {     
+      console.log("yea")
+      setUserListings({ ...userListings, [name]: formatedPrice(value) });
+      setChanging(!changing);
+    }
+  };
+
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-    if (name === "price") {
-      let price = parseInt(value.replace(/,/g, ""));
-      setUserListings({ ...userListings, [name]: formatedPrice(price) });
-      setChanging(!changing);
+    if (name === "price") {    
+       let price = parseInt(value.replace(/,/g, "")) || 0;  
+      acceptNumbersOnly(name, price);
     } else {
       setUserListings({ ...userListings, [name]: value });
       setChanging(!changing);
