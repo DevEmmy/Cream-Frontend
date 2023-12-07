@@ -13,12 +13,12 @@ export const OutProp = [
     },
     {
         property:"Patio"
-    },
-    {
-        property:"Rooftop Terrace"
-    },
+    },    
     {
         property:"Veranda"
+    },
+    {
+        property:"Green Area"
     },
     {
         property:"Deck"
@@ -55,6 +55,12 @@ export const InProp = [
         property:"Terrace"
     },
     {
+        property:"Cinema"
+    },
+    {
+        property:"Penthouse"
+    },
+    {
         property:"Inbuilt Speaker"
     },
     {
@@ -64,17 +70,20 @@ export const InProp = [
         property:"BQ"
     },
     {
-        property:"Walk-In Showers"
+        property:"Walk-In Shower"
     },
     {
-        property:"Sportlights"
+        property:"Spotlights"
     },
     {
-        property:"Funished"
+        property:"Furnished"
     },       
     {
         property:"Balcony"
-    }
+    },
+    {
+        property:"Private Study"
+    },
 ]
 
 export const Views = [
