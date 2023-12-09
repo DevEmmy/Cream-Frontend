@@ -124,6 +124,10 @@ const CreateRealEstateListing = () => {
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+
+    if(name == "price"){
+        value = parseInt(value.replace(/,/g, ''));
+    }
     setUserListings({ ...userListings, [name]: value });
     setChanging(!changing);
   };
