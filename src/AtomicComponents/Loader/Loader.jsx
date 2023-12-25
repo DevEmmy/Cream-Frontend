@@ -1,4 +1,10 @@
 import React from "react";
+// import { ripples } from 'ldrs'
+
+// ripples.register()
+
+// Default values shown
+
 const Loader = () => {
  
   return (
@@ -9,6 +15,11 @@ const Loader = () => {
         <div></div>
         <div></div>
       </div>
+{/*      <l-ripples
+  size="45"
+  speed="2" 
+  color="#FFD42E" 
+></l-ripples> */}
     </div>
   );
 }

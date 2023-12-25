@@ -29,11 +29,7 @@ const About = () => {
       <DynamicBanner images={images}>
         <h1 className="text-white text-[4em] sm:text-[40px] font-[700]">
           ABOUT <span className="text-primary1">CREAM!</span>
-        </h1>
-        <p className="text-white font-[600] w-full text-center">
-          Discover a world of unrivaled luxury where every offer and purchase is
-          an experience to savor.
-        </p>
+        </h1>        
         <p className="text-primary1 font-[800] w-full text-center">
           Step into a realm where your desires are fulfilled in minutes, not
           hours

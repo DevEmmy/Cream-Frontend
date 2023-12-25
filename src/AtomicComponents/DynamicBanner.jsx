@@ -53,7 +53,7 @@ const DynamicBanner = ({ children, images }) => {
               CREAM <span className="text-primary1">.</span>
             </h1>
             <p className="text-white font-[600] sm:w-full w-[50%] text-center sm:leading-[30px]">
-              The Intelligent Market Place.
+              The Intelligent Marketplace.
             </p>
 
             <div className="w-full flexmm gap-5 mt-5 sm:mt-[50px] flex-wrap">

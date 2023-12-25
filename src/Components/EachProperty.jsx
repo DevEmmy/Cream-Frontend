@@ -12,6 +12,7 @@ import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import TimeAgo from "react-timeago";
 import PictureModal from "./PictureModal";
+import { SpinnerCircular } from "spinners-react";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 const EachProperty = () => {
@@ -20,16 +21,6 @@ const EachProperty = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImages, setModalImages] = useState([]); // Images for the modal
 
-  // Function to open the modal
-  // const openModal = (images) => {
-  //   setModalImages(images);
-  //   setIsModalOpen(true);
-  // };
-
-  // // Function to close the modal
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
   const features = ["Balcony", "Air Conditioning", "Jacuzzi"];
 
   const router = useRouter();
@@ -89,23 +80,22 @@ const EachProperty = () => {
   //
   return (
     <>
-      {listing && (
-        <Nav active={listing?.category.slug === "real-estate" ? 1 : 2} />
-      )}
+        <Nav active={listing?.category?.slug === "real-estate" ? 1 : 2} />
+      
       <div className="h-0 w-0" ref={top}></div>
-      {listing && (
+      {listing ? (
         <div className="mt-32 mx-xPadding text-center">
           <div className="mt-32 mx-xPadding">
-            <h2 className="font-[600] text-[1.5em]">{listing.title}</h2>
+            <h2 className="font-[600] text-[1.5em]">{listing?.title}</h2>
             <p className="font-[600]">
               {new Intl.NumberFormat("en-NG", {
                 style: "currency",
                 currency: "NGN",
-              }).format(listing.price)}
+              }).format(listing?.price)}
             </p>
             <p className="flex text-center justify-center">
               <LocationMarker />
-              {listing.location && listing.location.replace(/#/g, ", ")}.
+              {listing?.location && listing?.location.replace(/#/g, ", ")}.
             </p>
           </div>
 
@@ -113,38 +103,38 @@ const EachProperty = () => {
             {!isModalOpen && (
               <>
                 <img
-                  src={listing.images[0]}
+                  src={listing?.images[0]}
                   alt=""
                   className="h-[400px] rounded-lg"
                 />
 
                 <div className="grid grid-cols-3 gap-3">
                   <img
-                    src={listing.images[1]}
+                    src={listing?.images[1]}
                     alt=""
                     className="h-[200px] rounded-lg"
                   />
                   <img
-                    src={listing.images[2]}
+                    src={listing?.images[2]}
                     alt=""
                     className="h-[200px] rounded-lg"
                   />
                   <a
                     href={
-                      listing.category.slug === "real-estate"
+                      listing?.category.slug === "real-estate"
                         ? `/real-estate/${id}/media`
                         : `/automobile/${id}/media`
                     }
                     className="relative cursor-pointer"
                   >
                     <img
-                      src={listing.images[3]}
+                      src={listing?.images[3]}
                       alt=""
                       className="h-[200px] rounded-lg"
                     />
                     <BlackOverlay height="200px" r="rounded-lg" />
                     <p className="absolute h-[200px] top-0 flex justify-center text-[3.7em] items-center text-white font-[500] text-center w-[100%]">
-                      +{listing.images.length - 4}
+                      +{listing?.images.length - 4}
                     </p>
                   </a>
                 </div>
@@ -153,12 +143,12 @@ const EachProperty = () => {
 
             <div>
               <p>
-                Listed <TimeAgo date={listing.createdAt} />
+                Listed <TimeAgo date={listing?.createdAt} />
               </p>
 
               <a
                 href={
-                  listing.category.slug === "real-estate"
+                  listing?.category.slug === "real-estate"
                     ? `/real-estate/${id}/media`
                     : `/automobile/${id}/media`
                 }
@@ -170,20 +160,13 @@ const EachProperty = () => {
                 >
                   View Media
                 </button>
-              </a>
-              {isModalOpen && (
-                <PictureModal
-                  isOpen={isModalOpen}
-                  onRequestClose={closeModal}
-                  images={modalImages}
-                />
-              )}
+              </a>             
             </div>
           </div>
 
           <div className="details flex flex-col items-start my-10">
             <p className="font-[700] text-[1.2em]">Amenities</p>
-            {listing.features.map((item, i) => {
+            {listing?.features.map((item, i) => {
               return <p className="text-gray-700 text-justify">{item}</p>;
             })}
           </div>
@@ -192,13 +175,13 @@ const EachProperty = () => {
             <div className="items-start flex flex-col">
               <p className="font-[700] text-[1.2em]">Description</p>
               <p className="flex flex-col items-start text-justify">
-                {formatDesc(listing.description).map((item, i) => {
+                {formatDesc(listing?.description).map((item, i) => {
                   return <p className="text-gray-700">{item}</p>;
                 })}
               </p>
             </div>
 
-            {listing.postedBy?._id !== data._id ? (
+            {listing?.postedBy?._id !== data?._id ? (
               <>
                 <div className="flex items-start flex-col text-start">
                   <p className="font-[700] text-[1.2em]">Contact Seller</p>
@@ -206,18 +189,18 @@ const EachProperty = () => {
                   <div className="bg-primary1 w-[90%] md:w-full grid grid-cols-2 sm:flex sm:flex-col-reverse gap-5 p-10 items-center rounded-xl">
                     <div className="flex items-start flex-col text-start text-white gap-2">
                       <p className="font-[600]">
-                        {listing.postedBy.firstName +
+                        {listing?.postedBy.firstName +
                           " " +
-                          listing.postedBy.lastName}
+                          listing?.postedBy.lastName}
                       </p>
-                      <p className="text-[0.8em]">{listing.postedBy.address}</p>
+                      <p className="text-[0.8em]">{listing?.postedBy.address}</p>
                       <p>Joined 2023</p>
 
                       <div className="flex flex-wrap gap-3 w-full text-[0.8em]">
                         <a
                           href={`https://wa.me/${
-                            "+234" + listing.postedBy.phoneNumber1
-                          }?text=Hi%20${listing.postedBy.firstName}`}
+                            "+234" + listing?.postedBy.phoneNumber1
+                          }?text=Hi%20${listing?.postedBy.firstName}%2C%20i%20am%20messaging%20you%20to%20request%20for%20this%20property%20-%20https%3A%2F%2Fcream.business%2Freal-estate%2F${listing?._id}`}
                         >
                           <button className="py-2 px-3 bg-black rounded-md">
                             Send Message
@@ -231,8 +214,8 @@ const EachProperty = () => {
                     </div>
 
                     <img
-                      src={listing.postedBy.profilePicture}
-                      alt={listing.postedBy.firstName}
+                      src={listing?.postedBy.profilePicture}
+                      alt={listing?.postedBy.firstName}
                       className="h-[160px] rounded-tl-3xl rounded-br-3xl border-2 border-white"
                     />
                   </div>
@@ -256,7 +239,19 @@ const EachProperty = () => {
             )}
           </div>
         </div>
-      )}
+      )
+      :
+
+        <div className="flex items-center justify-center py-32">
+              <SpinnerCircular
+                  color="white"
+                  className="flex justify-center"
+                  secondaryColor={"#F2BE5C"}
+                  size={50}
+                  thickness={150}
+                />
+              </div>
+      }
       <Footer />
     </>
   );
