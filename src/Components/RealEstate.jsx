@@ -30,7 +30,7 @@ const RealEstate = () => {
     setLoading(true);
     let data = await getListingsPerPage(page, "real-estate");
     console.log("data: ", data);
-    //console.log("total: ", data.number);
+    console.log("total: ", data.number);
     setListings(data.list);
     setTotalData(data.number);
     setLoading(false);
