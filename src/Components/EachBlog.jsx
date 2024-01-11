@@ -82,7 +82,7 @@ function EachBlog() {
               {article.title}
             </div>
             <p className="text-primary1 font-[800] w-full text-center">
-              posted on {article.createdAt}
+              posted on {new Date(article.createdAt).toLocaleString()}
             </p>
             <img src={article.cover} className="w-[100%] h-[50%] rounded-md" />
           </div>
