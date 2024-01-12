@@ -13,7 +13,7 @@ import theme from "@/application/utils/Theme";
 import { SpinnerCircular } from "spinners-react";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
-const MediaView = ({ id }) => {  
+const MediaView = ({ id }) => {
   const router = useRouter();
   const top = useRef(null);
   const [property, setProperty] = useState("");
@@ -25,9 +25,9 @@ const MediaView = ({ id }) => {
   const getAList = async () => {
     if (id) {
       await axios
-        .get(`${globalApi}/listings/each/${id}`)
+        .get(`${globalApi}/listing/${id}`)
         .then((resp) => {
-          setProperty(resp.data);          
+          setProperty(resp.data.data);
           setLoading(false);
         })
         .catch((err) => console.error(err));

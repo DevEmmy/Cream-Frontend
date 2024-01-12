@@ -40,11 +40,11 @@ const Blog = () => {
           {/* <div className="text-primary1">
             Want to write a blog on real estate or automobile?{" "}
           </div> */}
-          <Link href="/blog-form">
+          {/* <Link href="/blog-form">
             <button className="bg-primary1 hover:bg-[#f2be56] text-black px-12 py-3 mt-3 rounded-md">
               Post an article
             </button>
-          </Link>
+          </Link> */}
         </div>
       </DynamicBanner>
 
@@ -65,14 +65,16 @@ const Blog = () => {
           articles?.data.map((article) => (
             <div key={article._id} className="w-full gap-8 flex flex-row">
               <div className=" w-[50%]">
-                <h1 className="text-[2em] sm:text-[1.5em] font-[700]">
+                <h1 className="text-[2em] sm:text-[1em] font-[700]">
                   {article.title}
                 </h1>
-                <p className="text-gray-500">
+                {/* <p className="text-gray-500">
                   posted on {new Date(article.createdAt).toLocaleString()}
-                </p>
+                </p> */}
                 <div className="overflow-hidden h-[12vw]">
-                  <p className="text-ellipsis">{article.body}</p>
+                  <p className="text-ellipsis sm:text-[0.8em]">
+                    {article.body}
+                  </p>
                 </div>
                 <Link href={`/blog/${article._id}`}>
                   <button className="flex gap-3 items-center px-10 sm:px-2 py-3 mt-5 bg-primary1 text-black rounded-md">
@@ -84,7 +86,7 @@ const Blog = () => {
               <img
                 src={article.cover}
                 alt={article.title}
-                className="rounded-md w-[50%] h-[50%] "
+                className="rounded-md w-[50vw] h-[20vw] sm:h-[40vw] "
               />
             </div>
           ))

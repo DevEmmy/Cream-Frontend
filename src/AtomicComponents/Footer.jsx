@@ -55,19 +55,23 @@ const Footer = () => {
       subItems: [
         {
           name: "Instagram",
-          link: "/",
+          link: "https://www.instagram.com/cream_discovery?utm_source=qr&igsh=MzNlNGNkZWQ4Mg%3D%3D",
         },
         {
           name: "Facebook",
-          link: "/",
+          link: "https://www.facebook.com/cream.business?mibextid=ZbWKwL",
         },
         {
           name: "Twitter",
-          link: "/",
+          link: "https://twitter.com/Cream_Discover?t=IgRn2TIE6BbQqBwZKrOmNg&s=09",
         },
         {
           name: "LinkedIn",
           link: "/",
+        },
+        {
+          name: "Youtube",
+          link: "https://youtube.com/@Cream.business?si=pwRQRM8ti5Co3WkK",
         },
       ],
     },

@@ -3,6 +3,8 @@ import Nav from "@/AtomicComponents/Nav";
 import { postArticle } from "@/services/request";
 import React, { useEffect, useState } from "react";
 import RealEstate from "./RealEstate";
+import { useRouter } from "next/navigation";
+import { error } from "@/services/toaster";
 
 const BlogForm = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +13,8 @@ const BlogForm = () => {
     category: "640e4a12975b9d627cbc5e4f",
     cover: { base64: "" },
   });
+
+  const router = useRouter();
 
   const category_id = {
     "Real Estate": "640e4a12975b9d627cbc5e4f",
@@ -22,7 +26,8 @@ const BlogForm = () => {
   useEffect(() => {
     const loggedIn = localStorage.getItem("user");
     if (loggedIn == null) {
-      alert("You have to be logged in to post an article");
+      //alert("You have to be logged in to post an article");
+      error("You have to be logged in to post an article");
     } else {
       setIsLoggedIn(true);
     }
@@ -66,12 +71,12 @@ const BlogForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isLoggedIn) {
-      alert("You are not logged in, log in to post an article");
-      return;
-    }
+    // if (!isLoggedIn) {
+    //   alert("You are not logged in, log in to post an article");
+    //   return;
+    // }
     // Send the formData to your API endpoint
-    const response = await postArticle(formData);
+    const response = await postArticle(formData, router);
     console.log(formData);
     // Reset the form after submission
     if (response == true) {
@@ -94,7 +99,7 @@ const BlogForm = () => {
         >
           <h2 className="text-2xl font-bold mb-6">Create a New Blog Post</h2>
 
-          <div className=" grid grid-cols-2 gap-6 ">
+          <div className=" grid grid-cols-2 sm:grid-rows-2 gap-6 ">
             <div>
               <label
                 htmlFor="title"

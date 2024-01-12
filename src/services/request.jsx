@@ -183,7 +183,7 @@ export const postPropertyRequest = async (name, email, description) => {
     .then((response) => {
       toast.dismiss(toastId);
       if (response) {
-        toast.dismiss(loading("Submitted"));
+        toast.dismiss();
         success(response.data.message);
       } else {
         error(response.data.message);
@@ -191,7 +191,7 @@ export const postPropertyRequest = async (name, email, description) => {
       //console.log(response);
     })
     .catch((err) => {
-      toast.dismiss(toastId);
+      toast.dismiss();
       if (err.response) {
         error(err.response.data.message);
       } else {
@@ -234,7 +234,7 @@ export const getUserPropertyRequests = async (id) => {
   return response;
 };
 
-export const postArticle = async (formData) => {
+export const postArticle = async (formData, router) => {
   const token = localStorage.getItem("token");
   //console.log("token:", token);
   const headers = {
@@ -248,21 +248,33 @@ export const postArticle = async (formData) => {
     .post("/article", formData, { headers: headers })
     .then((response) => {
       toast.dismiss(toastId);
+      console.log(response);
       if (response.status == 200 || response.status == 201) {
         success(response.data.message);
         return true;
+      } else if (response.status == 403) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        router.push("/");
       } else {
         error("An error occured, please try again");
+        console.log(response);
       }
-      //console.log(response);
+      console.log(response);
       return false;
     })
     .catch((err) => {
       toast.dismiss(toastId);
+      if (err.response.status == 403) {
+        error("You have to be logged in to post an article");
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        router.push("/login");
+      } else {
+        error("An error occured, please try again");
+      }
 
-      error("An error occured, please try again");
-
-      //console.log(err);
+      console.log(err);
       return false;
     });
 };
@@ -322,4 +334,34 @@ export const getArticleById = async (articleId) => {
     toast.error("An error occurred while fetching article");
     //console.error(error);
   }
+};
+
+export const suscribeToNewsLetter = async (email) => {
+  const details = { email: email };
+  const toastId = loading("Subscribing...");
+  await axiosRequest
+    .post("/newsletter/subscription", details)
+    .then((response) => {
+      console.log(response);
+      toast.dismiss(toastId);
+      if (response) {
+        toast.dismiss();
+        success(response.data.message);
+      } else {
+        error(response.data.message);
+      }
+      //console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      //console.log(response);
+      toast.dismiss();
+      if (err.response) {
+        error(err.response.data.error);
+      } else {
+        error("An Error Occured");
+      }
+
+      //console.log(err);
+    });
 };
