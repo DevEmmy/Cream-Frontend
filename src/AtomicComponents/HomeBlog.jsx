@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getArticles } from "@/services/request";
 import Link from "next/link";
 import { RiArrowRightFill, RiArrowRightUpFill } from "react-icons/ri";
@@ -22,62 +22,81 @@ function HomeBlog() {
     fetchArticles();
   }, []);
 
+  const containerRef = useRef(null);
+
   const handleNextPage = () => {
+    const container = containerRef.current;
+    if (container) {
+      container.scrollTo({
+        left: container.scrollLeft + container.offsetWidth,
+        behavior: "smooth",
+      });
+    }
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
   const handlePrevPage = () => {
+    const container = containerRef.current;
+    if (container) {
+      container.scrollTo({
+        left: container.scrollLeft - container.offsetWidth,
+        behavior: "smooth",
+      });
+    }
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
-
-  const startIdx = (currentPage - 1) * articlesPerPage;
-  const endIdx = startIdx + articlesPerPage;
-
-  const displayedArticles = articles?.data.slice(startIdx, endIdx) || [];
-  const totalArticles = articles?.data.length || 0;
-  const hasPreviousPage = currentPage > 1;
-  const hasNextPage = endIdx < totalArticles;
 
   return (
     <div className="mx-xPadding">
       <div className=" w-full text-center my-4 justify-center text-[1.5em] sm:[1em] font-bold">
         Latest Blogs
       </div>
-      <div className="flex justify-end mt-4">
-        {hasPreviousPage && (
-          <button onClick={handlePrevPage} className="text-sm py-2 px-4 ">
-            Previous
-          </button>
-        )}
-        {hasNextPage && (
-          <button onClick={handleNextPage} className="text-sm py-2 px-4 ">
-            Next
-          </button>
-        )}
+      <div className="w-full flex flex-row-reverse gap-2 sm:hidden mb-2">
+        <button onClick={handleNextPage} className="font-semibold">
+          Next
+        </button>
+        <button onClick={handlePrevPage} className="font-semibold">
+          Prev
+        </button>
       </div>
-      <div className="flex-row flex">
-        {displayedArticles?.map((article) => (
-          <div key={article._id} className="w-full gap-8 flex flex-row">
-            <div className="flex flex-col w-[100%] ">
+      <ul
+        className="flex overflow-x-auto w-[100%] no-scrollbar gap-4"
+        ref={containerRef}
+      >
+        {articles?.data.map((article) => (
+          <li key={article._id} className="w-full  flex flex-row">
+            <div className="flex flex-col w-[42vw] sm:w-[80vw]">
               <img
                 src={article.cover}
                 alt={article.title}
-                className="rounded-md w-[20vw] h-[10vw] "
+                className="rounded-md  object-cover w-[100%] h-[20vw] sm:h-[40vw] "
               />
-              <div className="text-[1em] sm:text-[0.5em] font-[700] sm:font[300] w-[20vw] h-[10%]">
+
+              <div className="text-[1em] sm:text-[0.8em] font-[700] sm:font[300] w-[42vw] sm:w-[80vw] h-[25%] overflow-hidden">
                 {article.title}
               </div>
 
-              <Link href={`/blog/${article._id}`}>
-                <div className="flex gap-3 items-center justify-start sm:px-2 py-3 sm:text-[0.5em] mt-5  text-black rounded-md">
-                  Learn more
-                  <RiArrowRightUpFill />
-                </div>
+              <Link
+                href={`/blog/${article._id}`}
+                className=" w-[20%] sm:w-[30%] gap-2 flex-row flex items-center mt-2 hover:bg-inherit focus:bg-inherit active:bg-inherit"
+              >
+                <button className="sm:text-[0.8em]">Learn more</button>
+                <RiArrowRightUpFill />
               </Link>
+
+              {/* <div className="  py-3  mt-5 bg-blue-500  text-black rounded-md"> */}
+              {/* <Link
+                href={`/blog/${article._id}`}
+                className="bg-red-500 flex flex-row items-center sm:text-[0.5em] sm:px-2 mt-4 "
+              >
+                <button>Learn more</button>
+                <RiArrowRightUpFill />
+              </Link> */}
+              {/* </div> */}
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
