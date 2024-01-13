@@ -63,7 +63,10 @@ const Blog = () => {
           </>
         ) : (
           articles?.data.map((article) => (
-            <div key={article._id} className="w-full gap-8 flex flex-row">
+            <div
+              key={article._id}
+              className="w-full gap-8 sm:gap-2 flex flex-row"
+            >
               <div className=" w-[50%]">
                 <h1 className="text-[2em] sm:text-[1em] font-[700]">
                   {article.title}
@@ -77,7 +80,7 @@ const Blog = () => {
                   </p>
                 </div>
                 <Link href={`/blog/${article._id}`}>
-                  <button className="flex gap-3 items-center px-10 sm:px-2 py-3 mt-5 bg-primary1 text-black rounded-md">
+                  <button className="flex gap-2 items-center px-10 sm:px-6 py-3 mt-5 bg-primary1 text-black rounded-md sm:text-[0.8em]">
                     Read more
                     <RiArrowRightFill />
                   </button>

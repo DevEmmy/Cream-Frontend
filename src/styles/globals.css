@@ -147,6 +147,10 @@ form input, textarea{
   align-items: center;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 input:focus{
   outline: none;
 }
