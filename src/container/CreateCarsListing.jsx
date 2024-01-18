@@ -7,7 +7,8 @@ import FileBase64 from "react-file-base64";
 import axiosRequest from "@/services/axiosConfig";
 import Loader from "@/AtomicComponents/Loader/Loader";
 import { useRouter } from "next/router";
-import { success } from "@/services/toaster";
+import { success, error as showError } from "@/services/toaster";
+import { createAxiosInstance } from "@/services/axiosConfig";
 
 const CreateCarListing = () => {
   const [valid, setValid] = useState(false);
@@ -151,8 +152,10 @@ const CreateCarListing = () => {
     Automobile: "640e4a13975b9d627cbc5e51",
   };
 
+  const router = useRouter();
   const postUserListings = async (userListings) => {
-    await axiosRequest
+    const axiosInstanceWithRouter = createAxiosInstance(router);
+    await axiosInstanceWithRouter
       .post(
         `/listing`,
         {
@@ -170,6 +173,17 @@ const CreateCarListing = () => {
       .catch((err) => {
         setLoader(false);
         setPopUp(true);
+        if (err.response && err.response.status === 403) {
+          // Handle 403 status code
+          showError("You have to be logged in to list a property");
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          router.push("/login");
+        } else {
+          // Handle other errors
+          console.log(err.response);
+          showError("An error occurred, please try again");
+        }
         console.log(err);
       });
   };

@@ -3,6 +3,8 @@ import { error, loading, success } from "./toaster";
 import { useRouter } from "next/router";
 import axios from "axios";
 
+const axiosInstanceWithRouter = createAxiosInstance(router);
+
 export const sendQuery = async (text) => {
   const result = await axios.post(
     "https://binaryy-cream-prototype-tobi.hf.space/run/predict",
@@ -15,7 +17,7 @@ export const sendQuery = async (text) => {
   return result.data.data[0];
 };
 
-const { default: axiosRequest } = require("./axiosConfig");
+const { default: axiosRequest, createAxiosInstance } = require("./axiosConfig");
 
 export const login = async (email, password, router) => {
   toast.dismiss();
@@ -178,28 +180,29 @@ export const getListingsPerPage = async (page, category) => {
 export const postPropertyRequest = async (name, email, description) => {
   const details = { name: name, email: email, request: description };
   const toastId = loading("Submitting...");
-  await axios
-    .post("https://cream-v2.onrender.com/api/v2/property-request", details)
-    .then((response) => {
-      toast.dismiss(toastId);
-      if (response) {
-        toast.dismiss();
-        success(response.data.message);
-      } else {
-        error(response.data.message);
-      }
-      //console.log(response);
-    })
-    .catch((err) => {
-      toast.dismiss();
-      if (err.response) {
-        error(err.response.data.message);
-      } else {
-        error("An Error Occured");
-      }
 
-      //console.log(err);
-    });
+  try {
+    const response = await axiosInstanceWithRouter.post(
+      "/api/v2/property-request",
+      details
+    );
+
+    toast.dismiss(toastId);
+
+    if (response) {
+      success(response.data.message);
+    } else {
+      error(response.data.message);
+    }
+  } catch (err) {
+    toast.dismiss(toastId);
+
+    if (err.response) {
+      error(err.response.data.error);
+    } else {
+      error("An Error Occurred");
+    }
+  }
 };
 
 export const getAllPropertyRequests = async () => {
@@ -244,19 +247,15 @@ export const postArticle = async (formData, router) => {
   toast.dismiss();
   const toastId = loading("posting article...");
 
-  await axiosRequest
+  await axiosInstanceWithRouter
     .post("/article", formData, { headers: headers })
     .then((response) => {
-      toast.dismiss(toastId);
       console.log(response);
       if (response.status == 200 || response.status == 201) {
         success(response.data.message);
         return true;
-      } else if (response.status == 403) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        router.push("/");
       } else {
+        toast.dismiss();
         error("An error occured, please try again");
         console.log(response);
       }
@@ -264,18 +263,18 @@ export const postArticle = async (formData, router) => {
       return false;
     })
     .catch((err) => {
-      toast.dismiss(toastId);
-      if (err.response.status == 403) {
+      toast.dismiss();
+      if (err.response && err.response.status === 403) {
+        // Handle 403 status code
         error("You have to be logged in to post an article");
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         router.push("/login");
       } else {
-        error("An error occured, please try again");
+        // Handle other errors
+        console.log(err.response);
+        error("An error occurred, please try again");
       }
-
-      console.log(err);
-      return false;
     });
 };
 
