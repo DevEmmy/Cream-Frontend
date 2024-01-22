@@ -3,7 +3,7 @@ import { error, loading, success } from "./toaster";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const axiosInstanceWithRouter = createAxiosInstance(router);
+const { default: axiosRequest, createAxiosInstance } = require("./axiosConfig");
 
 export const sendQuery = async (text) => {
   const result = await axios.post(
@@ -16,8 +16,6 @@ export const sendQuery = async (text) => {
   console.log(result.data.data[0]);
   return result.data.data[0];
 };
-
-const { default: axiosRequest, createAxiosInstance } = require("./axiosConfig");
 
 export const login = async (email, password, router) => {
   toast.dismiss();
@@ -177,9 +175,10 @@ export const getListingsPerPage = async (page, category) => {
     .catch((err) => console.error(err));
   return response;
 };
-export const postPropertyRequest = async (name, email, description) => {
+export const postPropertyRequest = async (name, email, description, router) => {
   const details = { name: name, email: email, request: description };
   const toastId = loading("Submitting...");
+  const axiosInstanceWithRouter = createAxiosInstance(router);
 
   try {
     const response = await axiosInstanceWithRouter.post(
@@ -238,6 +237,7 @@ export const getUserPropertyRequests = async (id) => {
 };
 
 export const postArticle = async (formData, router) => {
+  const axiosInstanceWithRouter = createAxiosInstance(router);
   const token = localStorage.getItem("token");
   //console.log("token:", token);
   const headers = {

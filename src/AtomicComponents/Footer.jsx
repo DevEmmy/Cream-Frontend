@@ -46,7 +46,7 @@ const Footer = () => {
         },
         {
           name: "List with us",
-          link: "/register",
+          link: "/create-listing",
         },
       ],
     },

@@ -152,12 +152,17 @@ const CreateRealEstateListing = () => {
   };
 
   const priceAsInteger = (price) => parseInt(price, 10);
+  const priceToInteger = (price) => {
+    const numericStr = price.replace(/[^0-9]/g, "");
+    const priceInteger = parseInt(numericStr, 10);
+    return priceInteger;
+  };
   const postUserListings = async (userListings, error) => {
     const axiosInstanceWithRouter = createAxiosInstance(router);
     await axiosInstanceWithRouter
       .post(
         `/listing`,
-        { ...userListings, price: priceAsInteger(userListings.price) },
+        { ...userListings, price: priceToInteger(userListings.price) },
         setConfig()
       )
       .then((resp) => {
@@ -189,9 +194,12 @@ const CreateRealEstateListing = () => {
     postUserListings(userListings);
   };
 
-  useEffect(() => {
-    console.log("listing form:", userListings);
-  }, [userListings.forRent]);
+  // useEffect(() => {
+  //   console.log("listing form:", userListings);
+  //   console.log(priceAsInteger(userListings.price));
+  //   console.log(formatedPrice(userListings.price));
+  //   console.log(priceToInteger(userListings.price));
+  // }, [userListings.price]);
 
   return (
     <>
