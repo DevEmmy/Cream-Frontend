@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Nav from "@/AtomicComponents/Nav";
 import { postPropertyRequest } from "@/services/request";
+import { useRouter } from "next/router";
 
 const PropertyRequestForm = () => {
   const [formData, setFormData] = useState({
@@ -19,13 +20,16 @@ const PropertyRequestForm = () => {
     });
   };
 
+  const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Call the postPropertyRequest function with the form data
     await postPropertyRequest(
       formData.name,
       formData.email,
-      formData.description
+      formData.description,
+      router
     );
   };
 

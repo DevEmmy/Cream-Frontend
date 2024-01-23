@@ -7,7 +7,8 @@ import FileBase64 from "react-file-base64";
 import axiosRequest from "@/services/axiosConfig";
 import Loader from "@/AtomicComponents/Loader/Loader";
 import { useRouter } from "next/router";
-import { success } from "@/services/toaster";
+import { success, error as showError } from "@/services/toaster";
+import { createAxiosInstance } from "@/services/axiosConfig";
 
 const CreateCarListing = () => {
   const [valid, setValid] = useState(false);
@@ -134,6 +135,13 @@ const CreateCarListing = () => {
     }
   };
 
+  // useEffect(() => {
+  //   console.log("listing form:", userListings);
+  //   console.log(priceAsInteger(userListings.price));
+  //   console.log(formatedPrice(userListings.price));
+  //   console.log(priceToInteger(userListings.price));
+  // }, [userListings.price]);
+
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -146,18 +154,25 @@ const CreateCarListing = () => {
     }
   };
   const priceAsInteger = (price) => parseInt(price, 10); // 10 is the radix (base) for the conversion
+  const priceToInteger = (price) => {
+    const numericStr = price.replace(/[^0-9]/g, "");
+    const priceInteger = parseInt(numericStr, 10);
+    return priceInteger;
+  };
   const category_id = {
     "Real Estate": "640e4a12975b9d627cbc5e4f",
     Automobile: "640e4a13975b9d627cbc5e51",
   };
 
+  const router = useRouter();
   const postUserListings = async (userListings) => {
-    await axiosRequest
+    const axiosInstanceWithRouter = createAxiosInstance(router);
+    await axiosInstanceWithRouter
       .post(
         `/listing`,
         {
           ...userListings,
-          price: priceAsInteger(userListings.price),
+          price: priceToInteger(userListings.price),
           features: [userListings.features],
         },
         setConfig()
@@ -170,6 +185,17 @@ const CreateCarListing = () => {
       .catch((err) => {
         setLoader(false);
         setPopUp(true);
+        if (err.response && err.response.status === 403) {
+          // Handle 403 status code
+          showError("You have to be logged in to list a property");
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          router.push("/login");
+        } else {
+          // Handle other errors
+          console.log(err.response);
+          showError("An error occurred, please try again");
+        }
         console.log(err);
       });
   };

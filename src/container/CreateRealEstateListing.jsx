@@ -5,10 +5,10 @@ import { OutProp, InProp, Views } from "./PropertiesContents";
 import axios from "axios";
 import { useEffect } from "react";
 import FileBase64 from "react-file-base64";
-import axiosRequest from "@/services/axiosConfig";
+import axiosRequest, { createAxiosInstance } from "@/services/axiosConfig";
 import Loader from "@/AtomicComponents/Loader/Loader";
 import { useRouter } from "next/router";
-import { success } from "@/services/toaster";
+import { success, error as showError } from "@/services/toaster";
 
 const CreateRealEstateListing = () => {
   const [outDoorProp, setOutDoorProp] = useState([]);
@@ -137,6 +137,8 @@ const CreateRealEstateListing = () => {
     }
   };
 
+  const router = useRouter();
+
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -150,11 +152,17 @@ const CreateRealEstateListing = () => {
   };
 
   const priceAsInteger = (price) => parseInt(price, 10);
-  const postUserListings = async (userListings) => {
-    await axiosRequest
+  const priceToInteger = (price) => {
+    const numericStr = price.replace(/[^0-9]/g, "");
+    const priceInteger = parseInt(numericStr, 10);
+    return priceInteger;
+  };
+  const postUserListings = async (userListings, error) => {
+    const axiosInstanceWithRouter = createAxiosInstance(router);
+    await axiosInstanceWithRouter
       .post(
         `/listing`,
-        { ...userListings, price: priceAsInteger(userListings.price) },
+        { ...userListings, price: priceToInteger(userListings.price) },
         setConfig()
       )
       .then((resp) => {
@@ -166,6 +174,17 @@ const CreateRealEstateListing = () => {
       .catch((err) => {
         setLoader(false);
         setPopUp(true);
+        if (err.response && err.response.status === 403) {
+          // Handle 403 status code
+          showError("You have to be logged in to list a property");
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          router.push("/login");
+        } else {
+          // Handle other errors
+          console.log(err.response);
+          showError("An error occurred, please try again");
+        }
         console.log(err);
       });
   };
@@ -175,9 +194,12 @@ const CreateRealEstateListing = () => {
     postUserListings(userListings);
   };
 
-  useEffect(() => {
-    console.log("listing form:", userListings);
-  }, [userListings.forRent]);
+  // useEffect(() => {
+  //   console.log("listing form:", userListings);
+  //   console.log(priceAsInteger(userListings.price));
+  //   console.log(formatedPrice(userListings.price));
+  //   console.log(priceToInteger(userListings.price));
+  // }, [userListings.price]);
 
   return (
     <>

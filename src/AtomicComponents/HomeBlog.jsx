@@ -76,13 +76,13 @@ function HomeBlog() {
                 {article.title}
               </div>
 
-              <Link
+              <div
                 href={`/blog/${article._id}`}
                 className=" w-[20%] sm:w-[30%] gap-2 flex-row flex items-center mt-2 hover:bg-inherit focus:bg-inherit active:bg-inherit"
               >
                 <button className="sm:text-[0.8em]">Learn more</button>
                 <RiArrowRightUpFill />
-              </Link>
+              </div>
 
               {/* <div className="  py-3  mt-5 bg-blue-500  text-black rounded-md"> */}
               {/* <Link

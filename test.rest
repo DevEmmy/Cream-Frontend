@@ -1,0 +1,1 @@
+GET https://cream-v2.onrender.com/api/v2/property-request
