@@ -41,7 +41,7 @@ const CreateCarListing = () => {
     //carCondition: "New",
     //engineType: "",
     //color: "",
-    features: [],
+    features: "",
     model: "",
   });
 
@@ -166,6 +166,11 @@ const CreateCarListing = () => {
 
   const router = useRouter();
   const postUserListings = async (userListings) => {
+    console.log({
+      ...userListings,
+      price: priceToInteger(userListings.price),
+      features: [userListings.features],
+    });
     const axiosInstanceWithRouter = createAxiosInstance(router);
     await axiosInstanceWithRouter
       .post(
@@ -179,7 +184,7 @@ const CreateCarListing = () => {
       )
       .then((resp) => {
         setLoader(false);
-        success("response.data.message");
+        success(resp.data.message);
         navigate.push("/profile");
       })
       .catch((err) => {
@@ -194,7 +199,7 @@ const CreateCarListing = () => {
         } else {
           // Handle other errors
           console.log(err.response);
-          showError("An error occurred, please try again");
+          //showError("An error occurred, please try again");
         }
         console.log(err);
       });

@@ -13,6 +13,7 @@ import React, { useEffect, useState, useRef } from "react";
 import TimeAgo from "react-timeago";
 import PictureModal from "./PictureModal";
 import { SpinnerCircular } from "spinners-react";
+import { createAxiosInstance } from "@/services/axiosConfig";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 const EachProperty = () => {
@@ -49,14 +50,26 @@ const EachProperty = () => {
     return itemsArray;
   };
 
-  const deleteListings = () => {
-    axios
-      .delete(`${globalApi}/listings/delete/${id}`, setConfig())
+  const deleteListings = async () => {
+    const axiosInstanceWithRouter = createAxiosInstance(router);
+    const token = localStorage.getItem("token");
+    //console.log("token:", token);
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+
+    await axiosInstanceWithRouter
+      .delete(`/listing/${id}`, setConfig())
       .then((resp) => {
         console.log(resp.data);
+        Swal.fire("Deleted!", "", resp.data.message);
         router.back();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        Swal.fire("Error!", "", err.response.data.error);
+      });
   };
 
   const confirmDelete = () => {

@@ -158,6 +158,7 @@ const CreateRealEstateListing = () => {
     return priceInteger;
   };
   const postUserListings = async (userListings, error) => {
+    console.log({ ...userListings, price: priceToInteger(userListings.price) });
     const axiosInstanceWithRouter = createAxiosInstance(router);
     await axiosInstanceWithRouter
       .post(
@@ -167,7 +168,8 @@ const CreateRealEstateListing = () => {
       )
       .then((resp) => {
         setLoader(false);
-        success("response.data.message");
+        success(resp.data.message);
+        console.log(resp);
         console.log("response", resp.data);
         navigate.push("/profile");
       })
@@ -182,8 +184,9 @@ const CreateRealEstateListing = () => {
           router.push("/login");
         } else {
           // Handle other errors
+          console.log(err);
           console.log(err.response);
-          showError("An error occurred, please try again");
+          //showError("An error occurred, please try again");
         }
         console.log(err);
       });
