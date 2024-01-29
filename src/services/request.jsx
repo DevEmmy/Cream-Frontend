@@ -121,7 +121,7 @@ export const validateLoggedIn = () => {
 export const getAllListings = async (cat) => {
   let data = [];
   await axiosRequest
-    .get(`/listing`)
+    .get(`/listing/`)
     .then((response) => {
       data = response.data;
     })
@@ -137,10 +137,33 @@ export const getAllListings = async (cat) => {
   return data.listings;
 };
 
-export const getAListing = async (id) => {
+export const getAListing = async (id, router) => {
+  const axiosInstanceWithRouter = createAxiosInstance(router);
+
   let data;
-  await axiosRequest
+  await axiosInstanceWithRouter
     .get(`/listing/${id}`)
+    .then((response) => {
+      data = response.data;
+    })
+    .catch((err) => {
+      if (err.response) {
+        error(err.response.data.message);
+      } else {
+        error("An Error Occured");
+      }
+
+      //console.log(err);
+    });
+  return data;
+};
+
+export const getUserListing = async (id) => {
+  const axiosInstanceWithRouter = createAxiosInstance(router);
+
+  let data;
+  await axiosInstanceWithRouter
+    .get(`/listing/user/${id}`)
     .then((response) => {
       data = response.data;
     })

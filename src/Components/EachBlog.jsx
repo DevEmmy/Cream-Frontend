@@ -7,6 +7,7 @@ import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getArticleById } from "@/services/request";
+import Markdown from "react-markdown";
 
 function EachBlog() {
   const router = useRouter();
@@ -98,7 +99,7 @@ function EachBlog() {
                 </div>
               </Link>
               <div className="prose max-w-full">
-                <div>{article.body}</div>
+                <Markdown>{article.body}</Markdown>
               </div>
             </div>
           </div>
