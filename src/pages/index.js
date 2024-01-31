@@ -8,7 +8,20 @@ import axios from "axios";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+const visit = async ()=>{
+  await axios.get("https://king-david-elites.onrender.com/visit")
+  .then(resp => console.log(resp))
+  .catch(err => console.log(err))
+}
 
+  useEffect(()=>{
+    visit()
+  }, [])
+  
+  useEffect(()=>{
+    visit()
+  }, [])
+  
   return (
     <>
       <MetaTags title={"Cream"} />
