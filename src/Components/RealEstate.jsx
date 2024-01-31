@@ -2,7 +2,7 @@ import Card from "@/AtomicComponents/Card";
 import DynamicBanner from "@/AtomicComponents/DynamicBanner";
 import Footer from "@/AtomicComponents/Footer";
 import Nav from "@/AtomicComponents/Nav";
-import { getListingsPerPage } from "@/services/request";
+import { getAllListings, getListingsPerPage } from "@/services/request";
 import { sendQuery } from "@/services/request";
 import React, { useEffect, useState } from "react";
 import PaginationButtons from "@/AtomicComponents/PaginationButtons";
@@ -59,6 +59,7 @@ const RealEstate = () => {
     setLoading(false);
   };
   useEffect(() => {
+    getAllListings()
     fetchData();
     // submit()
   }, [page]);

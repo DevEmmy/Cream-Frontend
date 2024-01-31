@@ -124,6 +124,7 @@ export const getAllListings = async (cat) => {
     .get(`/listing/`)
     .then((response) => {
       data = response.data;
+      console.log(data)
     })
     .catch((err) => {
       if (err.response) {
