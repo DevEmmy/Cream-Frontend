@@ -59,7 +59,7 @@ const RealEstate = () => {
     setLoading(false);
   };
   useEffect(() => {
-    getAllListings()
+    // getAllListings()
     fetchData();
     // submit()
   }, [page]);
