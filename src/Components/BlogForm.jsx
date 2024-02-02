@@ -1,3 +1,4 @@
+"use client"
 import Footer from "@/AtomicComponents/Footer";
 import Nav from "@/AtomicComponents/Nav";
 import { postArticle } from "@/services/request";
@@ -5,6 +6,10 @@ import React, { useEffect, useState } from "react";
 import RealEstate from "./RealEstate";
 import { useRouter } from "next/navigation";
 import { error } from "@/services/toaster";
+// import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(import('react-quill'), {ssr: false});
 
 const BlogForm = () => {
   const [formData, setFormData] = useState({
@@ -37,7 +42,9 @@ const BlogForm = () => {
   // console.log("token:", token);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    // console.log(e)
+    if(e.target){
+      const { name, value } = e.target;
     if (name === "category") {
       setFormData({
         ...formData,
@@ -48,6 +55,22 @@ const BlogForm = () => {
         ...formData,
         [name]: value,
       });
+    }
+    }
+    else{
+      const name ="body"
+      const value = e
+    if (name === "category") {
+      setFormData({
+        ...formData,
+        [name]: category_id[value],
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
     }
   };
 
@@ -139,21 +162,24 @@ const BlogForm = () => {
             </div>
           </div>
 
+          <div className="h-52">
           <label
             htmlFor="body"
             className="block mb-1 mt-2 text-gray-700 font-bold"
           >
             Body:
           </label>
-          <textarea
+          <ReactQuill theme="snow"
+          
             id="body"
             name="body"
             value={formData.body}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-primary1 resize-none"
-            rows="10"
+            className="w-full px-4 py-2 border  rounded-md focus:outline-none focus:ring-1 focus:ring-primary1"
+            rows="40"
             onChange={handleInputChange}
             required
           />
+          </div>
 
           <label
             htmlFor="coverImage"
