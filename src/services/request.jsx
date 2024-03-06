@@ -120,10 +120,11 @@ export const validateLoggedIn = () => {
 
 export const getAllListings = async (cat) => {
   let data = [];
-  await axiosRequest
-    .get(`/listing/`)
+  await axios
+    .get(`https://king-david-elites.onrender.com/listings/all`)
     .then((response) => {
       data = response.data;
+      console.log(data)
     })
     .catch((err) => {
       if (err.response) {
