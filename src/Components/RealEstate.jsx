@@ -9,6 +9,7 @@ import PaginationButtons from "@/AtomicComponents/PaginationButtons";
 import { SpinnerCircular } from "spinners-react";
 import { X } from "heroicons-react";
 import { RiSearch2Line } from "react-icons/ri";
+import BuyFromCream from "@/AtomicComponents/BuyFromCream";
 
 const RealEstate = () => {
   const [listings, setListings] = useState([]);
@@ -17,14 +18,12 @@ const RealEstate = () => {
   const [totalData, setTotalData] = useState(0);
   const [loader, setLoader] = useState(false);
   const images = [
-    "pic3.jpg",
-    "/pic1.jpg",
-    "pic10.jpg",
-    "pic8.jpg",
+    "pic25.jpg",
+    "/pic27.jpg",
+    "pic33.jpg",
+    "pic34.jpg",
     "pic2.jpg",
-    "pic14.jpg",
-    "pic12.jpg",
-    "pic16.jpg",
+    "pic30.jpg",
   ];
 
   const fetchData = async () => {
@@ -98,6 +97,7 @@ const RealEstate = () => {
           </button>
         </div>
       </DynamicBanner>
+      {/* <BuyFromCream /> */}
 
       <div className="list-container my-20 sm:my-14 mx-xPadding">
         <h3 className="text-center my-10 text[1.5em] font-[600]">

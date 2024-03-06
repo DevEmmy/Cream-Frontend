@@ -12,8 +12,15 @@ export default axiosRequest;
 
 export const createAxiosInstance = (router) => {
   // Create an Axios instance with default configuration
+  const token = localStorage.getItem("token");
+  //console.log("token:", token);
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
   const axiosInstance = axios.create({
     baseURL: "https://cream-v2.onrender.com/api/v2",
+    headers: headers,
     // You can add other default configurations here
   });
 
@@ -50,7 +57,7 @@ export const createAxiosInstance = (router) => {
       } else {
         // For other errors, throw an error to be caught in the catch block
         toast.dismiss();
-        error(err.response.status);
+        error(err.response.data.error);
         throw err;
       }
     }

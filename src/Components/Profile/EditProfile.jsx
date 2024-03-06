@@ -14,15 +14,16 @@ import {
 import { useEffect, useRef, useState } from "react";
 import services from "@/ioc/services";
 import Return from "../Navbar/Return";
-import {
-  getStates,
-  getCities,
-} from "@/infrastructure/api/user/userRequest";
+import { getStates, getCities } from "@/infrastructure/api/user/userRequest";
 import MainButton from "../buttons/MainButton";
 import Loader from "@/AtomicComponents/Loader/Loader";
 import { useRouter } from "next/router";
 import { getDetails } from "@/services/request";
 import useLocalStorage from "use-local-storage";
+import { createAxiosInstance } from "@/services/axiosConfig";
+import { success } from "@/services/toaster";
+import countries_data from "@/json/countries_data.json";
+import Link from "next/link";
 
 const EditProfile = () => {
   const [mainData, setMainData] = useLocalStorage("user", "");
@@ -31,7 +32,7 @@ const EditProfile = () => {
   // const location = useLocation;
 
   const [popUp, setPopUp] = useState(false);
-  const activeOption = 2
+  const activeOption = 2;
 
   const isEdit = activeOption == "edit";
   const [editUserProfile, setEditUserProfile] = useState();
@@ -42,49 +43,28 @@ const EditProfile = () => {
   const [citymainData, setCitymainData] = useState([]);
   const [locationISO, setLocationISO] = useState();
 
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [states, setStates] = useState([]);
+  const [selectedState, setSelectedState] = useState("");
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState("");
+
   const [isos, setIsos] = useState();
 
   useEffect(() => {
-    let mainData = getDetails()
+    let mainData = getDetails();
+    console.log("mainData", mainData);
     setMainData(mainData);
-    setFile(mainData.cover)
-    setLocationISO(mainData.locationISO)
-    setIsos({
-      countryIso:
-        mainData.locationISO?.length > 0
-          ? mainData.locationISO.split("#")[2]
-          : "",
-      stateIso:
-        mainData.locationISO?.length > 0
-          ? mainData.locationISO.split("#")[1]
-          : "",
-      cityId:
-        mainData.locationISO?.length > 0
-          ? mainData.locationISO.split("#")[0]
-          : "",
-    });
-
-    
-    if (mainData.userData?.locationISO?.length > 0) {
-      prepopulateLocation(mainData.userData.locationISO);
-    }
+    setFile(mainData.cover);
   }, []);
-
-  const prepopulateLocation = async (location) => {
-    let text = location.split("#");
-    let countryISO = text[2];
-    let stateISO = text[1];
-    // let cityId = text[0]
-    await getStates(countryISO, setStateData);
-    await getCities(countryISO, stateISO, setCityData);
-  };
 
   const [initialValues, setInitialValues] = useState({
     firstName: mainData.firstName,
     lastName: mainData.lastName,
     email: mainData.email,
-    phoneNumber1:mainData.phoneNumber1,
-    phoneNumber2:mainData.phoneNumber2,
+    phoneNumber1: mainData.phoneNumber1,
+    phoneNumber2: mainData.phoneNumber2,
     about: mainData.about,
     websiteURL: mainData.websiteUrl,
     facebookURL: mainData.facebookUrl,
@@ -94,9 +74,13 @@ const EditProfile = () => {
     country: mainData.country,
     locationISO: mainData.locationISO,
     city: mainData.city,
-    state:mainData.state,
+    state: mainData.state,
     zipCode: mainData.zipCode,
   });
+
+  const isSubscribed = mainData.accountType > 0;
+  //const isSubscribed = true;
+  console.log("account type", isSubscribed);
 
   // const comapanyInitialValues = {
   //   companyName: "",
@@ -138,6 +122,8 @@ const EditProfile = () => {
     return errors;
   };
 
+  const router = useRouter();
+
   const onSubmit = async (values) => {
     values.cover = file;
     values.locationISO = locationISO;
@@ -147,8 +133,8 @@ const EditProfile = () => {
       cover: values.cover?.trim(),
       about: values?.about,
       email: values.email,
-      phoneNumber1:values.phoneNumber1,
-      phoneNumber2:values.phoneNumber2,
+      phoneNumber1: values.phoneNumber1,
+      phoneNumber2: values.phoneNumber2,
       websiteUrl: values.websiteURL?.trim(),
       facebookUrl: values.facebookURL?.trim(),
       instagramUrl: values.instagramURL?.trim(),
@@ -160,67 +146,76 @@ const EditProfile = () => {
       zipCode: values.zipCode,
     };
 
-    console.log(userDetails)
+    console.log(userDetails);
     // if (isEdit) {
-      setLoader(true);
-      await services.api.userRequests
-        .updateUserProfile(userDetails)
-        .then((res) => {
-          localStorage.setItem("user", JSON.stringify(res.data));
-          setEditUserProfile(res.mainData);
-          setLoader(false);          
-          navigate.push("/profile");
-        })
-        .catch((error) => {
-          console.log(error);
-          setLoader(false);
-          setPopUp(true);
-        });
+    setLoader(true);
+    const axiosInstanceWithRouter = createAxiosInstance(router);
+    const token = localStorage.getItem("token");
+    //console.log("token:", token);
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    const id = mainData.id;
+    //toast.dismiss();
+    //const toastId = loading("verifying payment...");
+
+    await axiosInstanceWithRouter
+      .put(`/user/?id=${id}/`, userDetails)
+      .then((res) => {
+        console.log("response", res);
+        success(res.data.message);
+        localStorage.setItem("user", JSON.stringify(res.data.data));
+        setEditUserProfile(res.mainData);
+        setLoader(false);
+        navigate.push("/profile");
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoader(false);
+        setPopUp(true);
+      });
     // }
   };
 
   const handleChanging = (e) => {
     let name = e.target.name;
     formik.handleChange(e);
-    if (name === "country") {
-      getCountryIso(e.target.value);
-    } else if (name === "state") {
-      getStateISO(e.target.value);
-    } else if (name === "city") {
-      getCityId(e.target.value);
-    }
+    getCityId(e.target.value);
   };
 
-  const getCountryIso = (name) => {
-    var countryObject = mainData.countryData.find(
-      (country) => country.name === name
-    );
-    setStatemainData([]);
-    setCityData([]);
-    setIsos({ ...isos, countryIso: countryObject["iso2"] });
-    getStates(countryObject["iso2"], setStateData);
-    setLocationISO(
-      `${isos["cityId"]}#${isos["stateIso"]}#${countryObject["iso2"]}`
-    );
-  };
+  //countryData
 
-  const getStateISO = (name) => {
-    var stateObject = stateData.find((state) => state.name === name);
-    setCityData([]);
-    setIsos({ ...isos, stateIso: stateObject["iso2"] });
-    getCities(isos["countryIso"], stateObject["iso2"], setCityData);
-    setLocationISO(
-      `${isos["cityId"]}#${stateObject["iso2"]}#${isos["countryIso"]}`
-    );
-  };
+  // const getCountryIso = (name) => {
+  //   var countryObject = mainData.countryData.find(
+  //     (country) => country.name === name
+  //   );
+  //   setStatemainData([]);
+  //   setCityData([]);
+  //   setIsos({ ...isos, countryIso: countryObject["iso2"] });
+  //   getStates(countryObject["iso2"], setStateData);
+  //   setLocationISO(
+  //     `${isos["cityId"]}#${isos["stateIso"]}#${countryObject["iso2"]}`
+  //   );
+  // };
 
-  const getCityId = (name) => {
-    var cityObject = cityData.find((city) => city.name === name);
-    setIsos({ ...isos, cityId: cityObject["id"] });
-    setLocationISO(
-      `${cityObject["id"]}#${isos["stateIso"]}#${isos["countryIso"]}`
-    );
-  };
+  // const getStateISO = (name) => {
+  //   var stateObject = stateData.find((state) => state.name === name);
+  //   setCityData([]);
+  //   setIsos({ ...isos, stateIso: stateObject["iso2"] });
+  //   getCities(isos["countryIso"], stateObject["iso2"], setCityData);
+  //   setLocationISO(
+  //     `${isos["cityId"]}#${stateObject["iso2"]}#${isos["countryIso"]}`
+  //   );
+  // };
+
+  // const getCityId = (name) => {
+  //   var cityObject = cityData.find((city) => city.name === name);
+  //   setIsos({ ...isos, cityId: cityObject["id"] });
+  //   setLocationISO(
+  //     `${cityObject["id"]}#${isos["stateIso"]}#${isos["countryIso"]}`
+  //   );
+  // };
 
   const formik = useFormik({
     initialValues,
@@ -233,6 +228,31 @@ const EditProfile = () => {
   //   onCompanySubmit,
   // });
 
+  useEffect(() => {
+    // Assuming the structure of countries_data is an array of objects
+    setCountries(countries_data);
+  }, []);
+
+  // Update states when a country is selected
+  useEffect(() => {
+    if (formik.values.country) {
+      const selectedCountryData = countries?.find(
+        (country) => country.name === formik.values.country
+      );
+      setStates(selectedCountryData?.states);
+    }
+  }, [formik.values.country, countries]);
+
+  // Update cities when a state is selected
+  useEffect(() => {
+    if (formik.values.state) {
+      const selectedStateData = states?.find(
+        (state) => state.name === formik.values.state
+      );
+      setCities(selectedStateData?.cities);
+    }
+  }, [formik.values.state, states]);
+
   return (
     <>
       {loader && <Loader />}
@@ -240,7 +260,7 @@ const EditProfile = () => {
         <>
           <div
             className="fixed w-full z-50 h-[100%] top-0 left-0 flex justify-center items-center"
-            style={{background:"rgba(0,0,0,0.5"}}
+            style={{ background: "rgba(0,0,0,0.5" }}
             onClick={() => {
               setPopUp(false);
             }}
@@ -248,7 +268,10 @@ const EditProfile = () => {
             <div className="md:w-1/3 md:h-1/3 w-2/3 h-1/4 bg-[white] flex justify-center rounded-xl items-center">
               <div className="flex flex-col justify-center items-center p-5">
                 <p className="text-xl text-center font-bold">
-                  Seems there is a connection error. <span className="text-[#F2BE5C] block">please try again!</span>
+                  Seems there is a connection error.{" "}
+                  <span className="text-[#F2BE5C] block">
+                    please try again!
+                  </span>
                 </p>
               </div>
             </div>
@@ -273,6 +296,7 @@ const EditProfile = () => {
               name="firstName"
               value={formik.values.firstName?.trim()}
               onChange={formik.handleChange}
+              required
             />
             {formik.errors.firstName ? (
               <div className=" text-[red] opacity-40">
@@ -289,6 +313,7 @@ const EditProfile = () => {
               name="lastName"
               value={formik.values.lastName}
               onChange={formik.handleChange}
+              required
             />
             {formik.errors.lastName ? (
               <div className="text-[red] opacity-40">
@@ -303,12 +328,13 @@ const EditProfile = () => {
               name="about"
               value={formik.values.about}
               onChange={formik.handleChange}
+              required
             />
             <p className="neutral-text">Brief description for your profile</p>
 
             <div className="lock-div">
               <label htmlFor="websiteURL">Website URL</label>
-              <HiLockClosed size={15} />
+              {!isSubscribed && <HiLockClosed size={15} />}
             </div>
             <input
               type="text"
@@ -317,21 +343,13 @@ const EditProfile = () => {
               placeholder="www.example.com"
               value={formik.values.websiteURL}
               onChange={formik.handleChange}
+              disabled={!isSubscribed}
+              required
             />
-            <div className="btn-flex">
-              <p>website url not available in your account</p>
-              <button
-                className="upg-btn"
-                type="submit"
-                onClick={() => navigate("/profile/upgrade")}
-              >
-                Upgrade
-              </button>
-            </div>
 
             <div className="lock-div">
               <label htmlFor="facebookURL">Facebook URL</label>
-              <HiLockClosed size={15} />
+              {!isSubscribed && <HiLockClosed size={15} />}
             </div>
             <input
               type="text"
@@ -339,11 +357,13 @@ const EditProfile = () => {
               name="facebookURL"
               value={formik.values.facebookURL}
               onChange={formik.handleChange}
+              disabled={!isSubscribed}
+              required
             />
 
             <div className="lock-div">
               <label htmlFor="instagramURL">Instagram URL</label>
-              <HiLockClosed size={15} />
+              {!isSubscribed && <HiLockClosed size={15} />}
             </div>
             <input
               type="text"
@@ -351,7 +371,22 @@ const EditProfile = () => {
               name="instagramURL"
               value={formik.values.instagramURL}
               onChange={formik.handleChange}
+              disabled={!isSubscribed}
+              required
             />
+            {!isSubscribed && (
+              <div className="btn-flex sm:flex ">
+                <p>social media url not available in your account</p>
+                <Link
+                  className="upg-btn"
+                  href={"/payment-option"}
+                  //type="submit"
+                  //onClick={() => router.push("/payment-option")}
+                >
+                  Upgrade
+                </Link>
+              </div>
+            )}
 
             <MainButton
               background="blue"
@@ -359,6 +394,7 @@ const EditProfile = () => {
               marginTop="1em"
               padding="18px 24px"
               type="submit"
+              disabled={!isSubscribed}
             >
               Save
             </MainButton>
@@ -378,6 +414,7 @@ const EditProfile = () => {
                 name="address"
                 value={formik.values.address}
                 onChange={formik.handleChange}
+                required
               />
               {formik.errors.address ? (
                 <div className=" text-[red] opacity-40">
@@ -390,32 +427,21 @@ const EditProfile = () => {
                   <label htmlFor="country">
                     Country <span className=" text-[red]">*</span>
                   </label>
+
                   <select
+                    value={formik.values.country}
                     name="country"
                     onChange={handleChanging}
-                    className="select"
+                    className="outline-none input "
                   >
-                    <option value="Country">None</option>
-                    {mainData.countryData?.map((country) => {
-                      return (
-                        <>
-                          {mainmainData.usermainData.country === country.name ? (
-                            <option
-                              key={country.id}
-                              value={country.name}
-                              selected
-                            >
-                              {country.name}
-                            </option>
-                          ) : (
-                            <option key={country.id} value={country.name}>
-                              {country.name}
-                            </option>
-                          )}
-                        </>
-                      );
-                    })}
+                    <option value="">Select Country</option>
+                    {countries?.map((country) => (
+                      <option key={country.name} value={country.name}>
+                        {country.name}
+                      </option>
+                    ))}
                   </select>
+
                   {formik.errors.country ? (
                     <div className=" text-[red] opacity-40">
                       {formik.errors.country}
@@ -423,93 +449,66 @@ const EditProfile = () => {
                   ) : null}
                 </div>
                 <div className="sub-dropdown space">
-                  {statemainData.length > 0 && (
-                    <>
-                      <label htmlFor="state">
-                        State <span className="text-[red]">*</span>
-                      </label>
-                      <select
-                        name="state"
-                        onChange={handleChanging}
-                        className="select"
-                      >
-                        <option value="State">None</option>
-                        {statemainData?.map((state) => {
-                          return (
-                            <>
-                              {mainmainData.usermainData.state == state.name ? (
-                                <option
-                                  key={state.id}
-                                  value={state.name}
-                                  selected
-                                >
-                                  {state.name}
-                                </option>
-                              ) : (
-                                <option key={state.id} value={state.name}>
-                                  {state.name}
-                                </option>
-                              )}
-                            </>
-                          );
-                        })}
-                      </select>
-                      {formik.errors.state ? (
-                        <div className=" text-[red] opacity-40">
-                          {formik.errors.state}
-                        </div>
-                      ) : null}
-                    </>
-                  )}
+                  <label htmlFor="state">
+                    State <span className="text-[red]">*</span>
+                  </label>
+
+                  <select
+                    value={formik.values.state}
+                    name="state"
+                    onChange={handleChanging}
+                    className="input"
+                    disabled={formik.values.country?.length < 1}
+                  >
+                    <option value="">Select State</option>
+                    {states?.map((state) => (
+                      <option key={state.name} value={state.name}>
+                        {state.name}
+                      </option>
+                    ))}
+                  </select>
+
+                  {formik.errors.state ? (
+                    <div className=" text-[red] opacity-40">
+                      {formik.errors.state}
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
               <div className="dropdown">
                 <div className="sub-dropdown space">
-                  {citymainData.length > 0 && (
-                    <>
-                      <label htmlFor="city">
-                        City <span className=" text-[red]">*</span>
-                      </label>
-                      <select
-                        name="city"
-                        onChange={handleChanging}
-                        className="select"
-                      >
-                        <option value="City">None</option>
-                        {citymainData?.map((city) => {
-                          return (
-                            <>
-                              {mainmainData.usermainData.city === city.name ? (
-                                <option
-                                  key={city.id}
-                                  value={city.name}
-                                  selected
-                                >
-                                  {city.name}
-                                </option>
-                              ) : (
-                                <option key={city.id} value={city.name}>
-                                  {city.name}
-                                </option>
-                              )}
-                            </>
-                          );
-                        })}
-                      </select>
-                      {formik.errors.city ? (
-                        <div className=" text-[red] opacity-40">
-                          {formik.errors.city}
-                        </div>
-                      ) : null}
-                    </>
-                  )}
+                  <label htmlFor="city">
+                    City <span className=" text-[red]">*</span>
+                  </label>
+
+                  <select
+                    value={formik.values.city}
+                    name="city"
+                    onChange={handleChanging}
+                    className="input"
+                    disabled={formik.values.state?.length < 1}
+                  >
+                    <option value="">Select City</option>
+                    {cities?.map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                  </select>
+
+                  {formik.errors.city ? (
+                    <div className=" text-[red] opacity-40">
+                      {formik.errors.city}
+                    </div>
+                  ) : null}
                 </div>
                 <div className="sub-dropdown space">
                   <label htmlFor="postalCode">Zip / Postal Code</label>
                   <input
                     type="number"
                     className="input"
+                    onChange={handleChanging}
                     name="zipCode"
                     id="postalCode"
                     value={formik.values.zipCode}
@@ -543,6 +542,7 @@ const EditProfile = () => {
                 name="email"
                 value={formik.values.email}
                 onChange={handleChanging}
+                required
               />
               {formik.errors.email ? (
                 <div className=" text-[red] opacity-40">
@@ -559,6 +559,7 @@ const EditProfile = () => {
                     name="phoneNumber1"
                     value={formik.values.phoneNumber1}
                     onChange={handleChanging}
+                    required
                   />
                 </div>
                 <div className="sub-dropdown space">
