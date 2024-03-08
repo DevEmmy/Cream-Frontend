@@ -11,7 +11,7 @@ function PaymentOptions() {
           <div className="my-4 font-bold text-lg">Prices</div>
           <div className="w-[55%]   sm:w-[90%]">
             <div className="flex flex-col items-center">
-              by showcasing your exclusive listings to our highly-esteemed users
+              By showcasing your exclusive listings to our highly-esteemed users
             </div>
           </div>
         </div>
@@ -20,25 +20,21 @@ function PaymentOptions() {
             //key={index}
             planName="Free"
             planDetails={paymentOptions[0]["free"]}
-            showButton={true}
           />
           <PriceCard
             //key={index}
             planName="Basic"
             planDetails={paymentOptions[0]["basic"]}
-            showButton={true}
           />
           <PriceCard
             //key={index}
             planName="Plus"
             planDetails={paymentOptions[0]["plus"]}
-            showButton={true}
           />
           <PriceCard
             //key={index}
             planName="Premium"
             planDetails={paymentOptions[0]["premium"]}
-            showButton={true}
           />
         </div>
       </div>
