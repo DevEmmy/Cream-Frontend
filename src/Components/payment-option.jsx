@@ -1,11 +1,15 @@
 export const paymentOptions = [
   {
     free: {
+      id: "free",
+      name: "Free",
       price: null,
       duration: null,
       features: ["2 LISTINGS MAX", "ENJOY WHILE IT LASTS"],
     },
     basic: {
+      id: "basic",
+      name: "Basic",
       price: 10000,
       duration: 1,
       features: [
@@ -15,6 +19,8 @@ export const paymentOptions = [
       ],
     },
     plus: {
+      id: "plus",
+      name: "PLUS",
       price: 50000,
       duration: 6,
       features: [
@@ -25,6 +31,8 @@ export const paymentOptions = [
       ],
     },
     premium: {
+      id: "premium",
+      name: "PREMIUM",
       price: 100000,
       duration: 12,
       features: [

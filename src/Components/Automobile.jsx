@@ -15,13 +15,11 @@ const Automobile = () => {
   const [loading, setLoading] = useState(true);
   const [totalData, setTotalData] = useState(0);
   const images = [
-    "/pic7.jpg",
-    "/pic5.jpg",
-    "pic13.jpg",
-    "pic15.jpg",
-    "pic17.jpg",
-    "pic6.jpg",
-    "pic11.jpg",
+    "/pic26.jpg",
+    "/pic28.jpg",
+    "/pic31.jpg",
+    "/pic32.jpg",
+    "/pic35.jpg",
   ];
 
   const fetchData = async () => {

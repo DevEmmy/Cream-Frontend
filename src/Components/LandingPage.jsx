@@ -10,13 +10,14 @@ import NewsletterSubscription from "@/AtomicComponents/NewsletterSubscription";
 
 const LandingPage = () => {
   const images = [
-    "/pic9.jpg",
-    "/pic1.jpg",
-    "pic5.jpg",
-    "pic3.jpg",
-    "pic8.jpg",
-    "pic7.jpg",
-    "pic14.jpg",
+    "/pic25.jpg",
+    "/pic28.jpg",
+    "/pic26.jpg",
+    "/pic27.jpg",
+    "/pic28.jpg",
+    "/pic29.jpg",
+    "/pic30.jpg",
+    // "pic14.jpg",
   ];
   return (
     <div className="scroll-smooth">

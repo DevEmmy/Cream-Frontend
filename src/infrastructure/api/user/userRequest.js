@@ -8,7 +8,7 @@ const BASEURL = "https://cream-v2.onrender.com/api/v2";
 
 export const login = async (userDetails) => {
   try {
-    const res = await axios.post(`${BASEURL}/users/sign-in`, userDetails);    
+    const res = await axios.post(`${BASEURL}/users/sign-in`, userDetails);
     // res.data.data.authToken = res.headers.token;
     return res.data;
   } catch (err) {
@@ -39,10 +39,10 @@ export const getUser = async () => {
   await axios
     .get(`${globalApi}/users/me`, setConfig())
     .then((resp) => {
-      localStorage.setItem("user", JSON.stringify(resp.data));      
+      localStorage.setItem("user", JSON.stringify(resp.data));
     })
-    .catch((err) => {      
-      getUser()
+    .catch((err) => {
+      getUser();
       console.error(err);
     });
 };
@@ -80,7 +80,7 @@ export const setConfig = () => {
   return config;
 };
 
-export const getStates = async (countryIso, setStateData) => {  
+export const getStates = async (countryIso, setStateData) => {
   var headers = new Headers();
   headers.append(
     "X-CSCAPI-KEY",
@@ -97,14 +97,17 @@ export const getStates = async (countryIso, setStateData) => {
     `https://api.countrystatecity.in/v1/countries/${countryIso}/states`,
     requestOptions
   )
-    .then((response) => response.text())
+    .then((response) => {
+      response.text();
+      console.log(response);
+    })
     .then((result) => {
-      setStateData(JSON.parse(result));      
+      setStateData(JSON.parse(result));
     })
     .catch((error) => console.log("error", error));
 };
 
-export const getCities = async (countryIso, stateIso, setCityData) => { 
+export const getCities = async (countryIso, stateIso, setCityData) => {
   var headers = new Headers();
   headers.append(
     "X-CSCAPI-KEY",
@@ -122,8 +125,8 @@ export const getCities = async (countryIso, stateIso, setCityData) => {
     requestOptions
   )
     .then((response) => response.text())
-    .then((result) => {            
-      setCityData(JSON.parse(result));      
+    .then((result) => {
+      setCityData(JSON.parse(result));
     })
     .catch((error) => console.log("error", error));
 };
@@ -153,7 +156,7 @@ export const getCartItems = async () => {
 export const addToCartItems = async (body) => {
   await axios
     .patch(`${globalApi}/carts/add/`, body, setConfig())
-    .then((resp) => {            
+    .then((resp) => {
       localStorage.setItem("cartItems", JSON.stringify(resp.data.collectibles));
     })
     .catch((err) => console.error(err));
@@ -162,7 +165,7 @@ export const addToCartItems = async (body) => {
 export const removeCartItems = async (body) => {
   await axios
     .patch(`${globalApi}/carts/remove/`, body, setConfig())
-    .then((resp) => {            
+    .then((resp) => {
       localStorage.setItem("cartItems", JSON.stringify(resp.data.collectibles));
     })
     .catch((err) => console.error(err));
@@ -171,7 +174,7 @@ export const removeCartItems = async (body) => {
 export const clearCartItems = async () => {
   await axios
     .patch(`${globalApi}/carts/clear`, {}, setConfig())
-    .then((resp) => {            
+    .then((resp) => {
       console.log(resp.data);
     })
     .catch((err) => console.error(err));
@@ -191,7 +194,7 @@ export const requestCartItems = () => {
 export const deleteCartItems = async (body) => {
   await axios
     .patch(`${globalApi}/carts/delete-multiple/`, body, setConfig())
-    .then((resp) => {            
+    .then((resp) => {
       localStorage.setItem("cartItems", JSON.stringify(resp.data.collectibles));
       console.log(resp.data);
     })

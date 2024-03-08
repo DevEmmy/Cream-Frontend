@@ -1,11 +1,13 @@
 import React from "react";
 import Footer from "./Footer";
 import { FaCheck } from "react-icons/fa";
+import { useRouter } from "next/router";
 
-function PriceCard({ planName, planDetails, showButton }) {
+function PriceCard({ planName, planDetails }) {
   // You can directly access properties of planData here
   //const { planName, planDetails } = planData;
   console.log("plan name, plan details", planName, planDetails);
+  const router = useRouter();
   // console.log("plan data", planData);
 
   return (
@@ -45,13 +47,15 @@ function PriceCard({ planName, planDetails, showButton }) {
             </li>
           ))}
         </ul>
-        {showButton && (
-          <div className="w-full flex justify-center">
-            <button className="bg-primary1 rounded-2xl w-full py-2 my-2 text-white">
-              Get started
-            </button>
-          </div>
-        )}
+
+        <div className="w-full flex justify-center">
+          <button
+            className="bg-primary1 rounded-2xl w-full py-2 my-2 text-white"
+            onClick={() => router.push(`payment-option/${planDetails.id}`)}
+          >
+            Get started
+          </button>
+        </div>
       </div>
     </div>
   );
