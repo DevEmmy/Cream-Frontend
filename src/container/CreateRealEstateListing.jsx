@@ -9,6 +9,7 @@ import axiosRequest, { createAxiosInstance } from "@/services/axiosConfig";
 import Loader from "@/AtomicComponents/Loader/Loader";
 import { useRouter } from "next/router";
 import { success, error as showError } from "@/services/toaster";
+import { getSubCategories } from "@/services/request";
 
 const CreateRealEstateListing = () => {
   const [outDoorProp, setOutDoorProp] = useState([]);
@@ -31,11 +32,33 @@ const CreateRealEstateListing = () => {
   const navigate = useRouter();
   const [size, setSize] = useState(0);
 
+  const [subcategories, setSubcategories] = useState([]);
+  const subcategory = "640e4a12975b9d627cbc5e4f";
+  useEffect(() => {
+    const fetchSubcategories = async () => {
+      const response = await getSubCategories({ router, subcategory });
+      setSubcategories(response.data);
+    };
+    fetchSubcategories();
+    console.log("subcategories", subcategories);
+    //console.log("ssd", subcategories);
+  }, []);
+
+  useEffect(() => {
+    console.log("subcategories", subcategories);
+  }, [subcategories]);
+
+  const user = localStorage.getItem("user");
+
+  const email = JSON.parse(user).email;
+  console.log("user email", email);
+
   const [userListings, setUserListings] = useState({
     title: "",
     location: "",
     locationISO: "",
     category: "640e4a12975b9d627cbc5e4f",
+    subcategory: "",
     description: "",
     forRent: false,
     images: images,
@@ -162,7 +185,7 @@ const CreateRealEstateListing = () => {
     const axiosInstanceWithRouter = createAxiosInstance(router);
     await axiosInstanceWithRouter
       .post(
-        `/listing`,
+        `/listing/?subcategory=${userListings.subcategory}`,
         { ...userListings, price: priceToInteger(userListings.price) },
         setConfig()
       )
@@ -230,6 +253,24 @@ const CreateRealEstateListing = () => {
         </>
       )}
       <div className="form_Content">
+        {email === "creamnigeria@gmail.com" && (
+          <div className="section">
+            <p>Subcategory</p>
+            <select
+              value={userListings.subcategory}
+              name="subcategory"
+              onChange={handleChange}
+            >
+              <option value="">Select...</option>
+              {subcategories?.map((option, index) => (
+                <option key={index} value={option._id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
+            {/* <p>You selected: {selectedOption}</p> */}
+          </div>
+        )}
         <div className="section">
           <p>Location</p>
           <input type="text" name="location" required onChange={handleChange} />
