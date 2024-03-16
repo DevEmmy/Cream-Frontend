@@ -9,6 +9,7 @@ import Loader from "@/AtomicComponents/Loader/Loader";
 import { useRouter } from "next/router";
 import { success, error as showError } from "@/services/toaster";
 import { createAxiosInstance } from "@/services/axiosConfig";
+import { getSubCategories } from "@/services/request";
 
 const CreateCarListing = () => {
   const [valid, setValid] = useState(false);
@@ -25,6 +26,27 @@ const CreateCarListing = () => {
   const [popUp, setPopUp] = useState(false);
 
   const navigate = useRouter();
+
+  const [subcategories, setSubcategories] = useState([]);
+  const subcategory = "640e4a13975b9d627cbc5e51";
+
+  useEffect(() => {
+    const fetchSubcategories = async () => {
+      const response = await getSubCategories({ router, subcategory });
+      setSubcategories(response.data);
+    };
+    fetchSubcategories();
+    console.log("subcategories", subcategories);
+    //console.log("ssd", subcategories);
+  }, []);
+
+  useEffect(() => {
+    console.log("subcategories", subcategories);
+  }, [subcategories]);
+
+  const user = localStorage.getItem("user");
+
+  const email = JSON.parse(user).email;
 
   const [userListings, setUserListings] = useState({
     title: "",
@@ -174,7 +196,7 @@ const CreateCarListing = () => {
     const axiosInstanceWithRouter = createAxiosInstance(router);
     await axiosInstanceWithRouter
       .post(
-        `/listing`,
+        `/listing/?subcategory=${userListings.subcategory}`,
         {
           ...userListings,
           price: priceToInteger(userListings.price),
@@ -236,6 +258,24 @@ const CreateCarListing = () => {
         </>
       )}
       <div className="form_Content">
+        {email === "creamnigeria@gmail.com" && (
+          <div className="section">
+            <p>Subcategory</p>
+            <select
+              value={userListings.subcategory}
+              name="subcategory"
+              onChange={handleChange}
+            >
+              <option value="">Select...</option>
+              {subcategories?.map((option, index) => (
+                <option key={index} value={option._id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
+            {/* <p>You selected: {selectedOption}</p> */}
+          </div>
+        )}
         <div className="section">
           <p>Location</p>
           <input type="text" name="location" required onChange={handleChange} />
