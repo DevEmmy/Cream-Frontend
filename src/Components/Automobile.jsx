@@ -8,6 +8,7 @@ import { SpinnerCircular } from "spinners-react";
 import PaginationButtons from "@/AtomicComponents/PaginationButtons";
 import { X } from "heroicons-react";
 import { RiSearch2Line } from "react-icons/ri";
+import BuyFromCream from "@/AtomicComponents/BuyFromCream";
 
 const Automobile = () => {
   const [listings, setListings] = useState([]);
@@ -15,13 +16,11 @@ const Automobile = () => {
   const [loading, setLoading] = useState(true);
   const [totalData, setTotalData] = useState(0);
   const images = [
-    "/pic7.jpg",
-    "/pic5.jpg",
-    "pic13.jpg",
-    "pic15.jpg",
-    "pic17.jpg",
-    "pic6.jpg",
-    "pic11.jpg",
+    "/pic26.jpg",
+    "/pic28.jpg",
+    "/pic31.jpg",
+    "/pic32.jpg",
+    "/pic35.jpg",
   ];
 
   const fetchData = async () => {
@@ -93,6 +92,10 @@ const Automobile = () => {
           </button>
         </div>
       </DynamicBanner>
+      <BuyFromCream
+        subcategory={"640e4a13975b9d627cbc5e51"}
+        route={"cream-automobile"}
+      />
 
       <div className="list-container my-20 sm:my-14 mx-xPadding">
         <h3 className="text-center my-10 text[1.5em] font-[600]">
