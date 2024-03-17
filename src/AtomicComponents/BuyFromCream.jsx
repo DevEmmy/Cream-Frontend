@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getArticles } from "@/services/request";
+import { getArticles, getSubCategories } from "@/services/request";
 import Link from "next/link";
 import { RiArrowRightFill, RiArrowRightUpFill } from "react-icons/ri";
+import { useRouter } from "next/router";
 
-function BuyFromCream() {
+function BuyFromCream({ subcategory, route }) {
   const [articles, setArticles] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,6 +24,9 @@ function BuyFromCream() {
   }, []);
 
   const containerRef = useRef(null);
+
+  // const token = localStorage.getItem("token");
+  // console.log("token", token);
 
   const handleNextPage = () => {
     const container = containerRef.current;
@@ -46,11 +50,25 @@ function BuyFromCream() {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
-  const data = [
-    { id: 1, title: "Properties in Lagos", img: "i1.jpg" },
-    { id: 2, title: "Properties in Lagos", img: "i2.jpg" },
-    { id: 3, title: "Properties in Lagos", img: "i3.jpg" },
-  ];
+  const router = useRouter();
+
+  // const data = [
+  //   { id: 1, title: "Properties in Lagos", img: "i1.jpg" },
+  //   { id: 2, title: "Properties in Lagos", img: "i2.jpg" },
+  //   { id: 3, title: "Properties in Lagos", img: "i3.jpg" },
+  // ];
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const subcategories = async () => {
+      const response = await getSubCategories({ router, subcategory });
+      setData(response.data);
+    };
+    subcategories();
+    console.log("data", data);
+    //console.log("ssd", subcategories);
+  }, []);
 
   return (
     <div className="mx-xPadding">
@@ -69,20 +87,20 @@ function BuyFromCream() {
         className="flex overflow-x-auto w-[100%] no-scrollbar gap-0 sm:space-x-4"
         ref={containerRef}
       >
-        {data.map((item) => (
+        {data?.map((item) => (
           <li key={item._id} className="relative inline-block w-full flex-row">
             <Link
-              href={`/cream-properties/${item.id}`}
+              href={`/${route}/${item.id}/?name=${item.name}`}
               className="flex flex-col w-[25vw] sm:w-[50vw] "
             >
               <img
-                src={item.img}
+                src={item.image}
                 //alt={item.title}
-                className="rounded-md  object-cover w-[100%] h-[60vh] sm:h-[60vw] "
+                className="rounded-md  object-cover w-[100%] h-[60vh] sm:h-[40vh] "
               />
 
-              <div className="text-[1em] sm:text-[0.8em] font-[700] sm:font[300] absolute bottom-4 left-4 text-white p-2 ">
-                {item.title}
+              <div className="text-[1em] sm:text-[0.8em]  font-[900] sm:font[300] absolute bottom-4 left-4 text-gray-900 p-2 ">
+                {item.name}
               </div>
 
               {/* <div className="  py-3  mt-5 bg-blue-500  text-black rounded-md"> */}

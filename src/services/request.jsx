@@ -124,7 +124,7 @@ export const getAllListings = async (cat) => {
     .get(`https://king-david-elites.onrender.com/listings/all`)
     .then((response) => {
       data = response.data;
-      console.log(data)
+      console.log(data);
     })
     .catch((err) => {
       if (err.response) {
@@ -185,10 +185,10 @@ export const getDetails = () => {
   return data;
 };
 
-export const getListingsPerPage = async (page, category) => {
+export const getListingsPerPage = async (page, category, id = "") => {
   let response;
   await axiosRequest
-    .get(`/listing/?page=${page}&category=${category}`)
+    .get(`/listing/?page=${page}&category=${category}&subcategory=${id}`)
     .then((resp) => {
       //console.log('resp: ', resp)
       response = {
@@ -387,4 +387,59 @@ export const suscribeToNewsLetter = async (email) => {
 
       //console.log(err);
     });
+};
+
+export const getSubCategories = async ({ router, subcategory }) => {
+  console.log("id", subcategory);
+  const axiosInstanceWithRouter = createAxiosInstance(router);
+
+  try {
+    const response = await axiosInstanceWithRouter.get(
+      `/subcategory/category/${subcategory}`
+    );
+
+    //toast.dismiss(toastId);
+
+    if (response) {
+      console.log(response.data.message);
+      return response.data;
+    } else {
+      console.log(response.data.message);
+    }
+  } catch (err) {
+    //toast.dismiss(toastId);
+    console.log(err.response);
+    if (err.response) {
+      console.log(err.response.data.error);
+    } else {
+      console.log("An Error Occurred");
+    }
+  }
+};
+
+export const postNewSubCategory = async ({ data, router }) => {
+  //const details = { name: name, email: email, request: description };
+  const toastId = loading("Submitting...");
+  console.log("data gotten", data);
+  const axiosInstanceWithRouter = createAxiosInstance(router);
+
+  try {
+    const response = await axiosInstanceWithRouter.post("/subcategory", data);
+
+    toast.dismiss(toastId);
+
+    if (response) {
+      success(response.data.message);
+    } else {
+      error(response.data.message);
+    }
+  } catch (err) {
+    toast.dismiss(toastId);
+    console.log(err.response);
+    if (err.response) {
+      error(err.response.data.error);
+    } else {
+      error("An Error Occurred");
+    }
+  }
 };

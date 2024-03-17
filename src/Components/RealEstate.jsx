@@ -74,7 +74,7 @@ const RealEstate = () => {
         <p className="text-white font-[600]">One search is all it takes.</p>
 
         <div className="flex gap-3 items-center sm:flex-col sm:justify-center sm:w-full sm:items-center">
-          <div className="flex gap-3 py-3 px-5 rounded-lg w-[40VW] sm:w-full items-center my-3 bg-white text-black">
+          <div className="flex gap-3 py-3 px-5 rounded-lg w-[40VW] sm:w-full items-center my-3 bg-white text-black ">
             <RiSearch2Line />
             <input
               type="text"
@@ -98,7 +98,10 @@ const RealEstate = () => {
           </button>
         </div>
       </DynamicBanner>
-      {/* <BuyFromCream /> */}
+      <BuyFromCream
+        subcategory={"640e4a12975b9d627cbc5e4f"}
+        route={"cream-realestate"}
+      />
 
       <div className="list-container my-20 sm:my-14 mx-xPadding">
         <h3 className="text-center my-10 text[1.5em] font-[600]">
