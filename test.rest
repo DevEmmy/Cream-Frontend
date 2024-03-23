@@ -1,1 +1,91 @@
-GET https://cream-v2.onrender.com/api/v2/property-request
+GET https://cream-v2.onrender.com/api/v2/category
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OTcwMTI4Y2Q1OGVmZTllNzkxM2QxOCIsImlhdCI6MTcwODU5Njk3NCwiZXhwIjoxNzA4NjgzMzc0fQ.t6hVpI0wqSfVMIlUvl9B3BhXcy_wJTxOqU1X21FBgb4
+
+
+
+{
+	"message": "Categories fetched successfully",
+	"data": [
+		{
+			"_id": "640e4a12975b9d627cbc5e4f",
+			"title": "Real Estate",
+			"slug": "real-estate",
+			"createdAt": "2023-03-12T21:54:26.869Z",
+			"updatedAt": "2023-03-12T21:54:26.869Z",
+			"__v": 0
+		},
+		{
+			"_id": "640e4a13975b9d627cbc5e51",  
+			"title": "Cars",
+			"slug": "cars",
+			"createdAt": "2023-03-12T21:54:27.331Z",
+			"updatedAt": "2023-03-12T21:54:27.331Z",
+			"__v": 0
+		},
+		{
+			"_id": "640e4a13975b9d627cbc5e53",
+			"title": "Collectibles",
+			"slug": "collectibles",
+			"createdAt": "2023-03-12T21:54:27.728Z",
+			"updatedAt": "2023-03-12T21:54:27.728Z",
+			"__v": 0
+		},
+		{
+			"_id": "658d1f9dd3e4a53ef2c9dbfc",
+			"title": "Automobiles",
+			"slug": "automobiles",
+			"createdAt": "2023-12-28T07:11:25.904Z",
+			"updatedAt": "2023-12-28T07:11:25.904Z",
+			"__v": 0
+		},
+		{
+			"_id": "658d1f9dd3e4a53ef2c9dbfe",
+			"title": "Automobiles",
+			"slug": "automobiles",
+			"createdAt": "2023-12-28T07:11:25.950Z",
+			"updatedAt": "2023-12-28T07:11:25.950Z",
+			"__v": 0
+		},
+		{
+			"_id": "658d2085d3e4a53ef2c9dc0e",
+			"title": "Automobile",
+			"slug": "automobile",
+			"createdAt": "2023-12-28T07:15:17.884Z",
+			"updatedAt": "2023-12-28T07:15:17.884Z",
+			"__v": 0
+		},
+		{
+			"_id": "658d24d0d3e4a53ef2c9dc2b",
+			"title": "realestate",
+			"slug": "realestate",
+			"createdAt": "2023-12-28T07:33:36.848Z",
+			"updatedAt": "2023-12-28T07:33:36.848Z",
+			"__v": 0
+		},
+		{
+			"_id": "658d2526d3e4a53ef2c9dc36",
+			"title": "{category}",
+			"slug": "category",
+			"createdAt": "2023-12-28T07:35:02.274Z",
+			"updatedAt": "2023-12-28T07:35:02.274Z",
+			"__v": 0
+		},
+		{
+			"_id": "658d25f9d3e4a53ef2c9dc3e",
+			"title": "auto-mobile",
+			"slug": "auto-mobile",
+			"createdAt": "2023-12-28T07:38:33.809Z",
+			"updatedAt": "2023-12-28T07:38:33.809Z",
+			"__v": 0
+		},
+		{
+			"_id": "658d2621d3e4a53ef2c9dc4c",
+			"title": "automobilessss",
+			"slug": "automobilessss",
+			"createdAt": "2023-12-28T07:39:13.237Z",
+			"updatedAt": "2023-12-28T07:39:13.237Z",
+			"__v": 0
+		}
+	]
+}
