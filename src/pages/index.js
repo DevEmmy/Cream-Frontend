@@ -13,10 +13,6 @@ const visit = async ()=>{
   .then(resp => console.log(resp))
   .catch(err => console.log(err))
 }
-
-  useEffect(()=>{
-    visit()
-  }, [])
   
   useEffect(()=>{
     visit()
