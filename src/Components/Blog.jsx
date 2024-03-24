@@ -7,6 +7,7 @@ import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import { getArticles } from "@/services/request";
 import { SpinnerCircular } from "spinners-react";
+import { useRouter } from "next/navigation";
 
 const Blog = () => {
   const [articles, setArticles] = useState(null);
