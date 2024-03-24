@@ -352,7 +352,7 @@ export const getArticleById = async (articleId) => {
       toast.error("Failed to fetch article");
     }
   } catch (error) {
-    toast.dismiss(toastId);
+    toast.dismiss();
     // Handle request error
     toast.error("An error occurred while fetching article");
     //console.error(error);
