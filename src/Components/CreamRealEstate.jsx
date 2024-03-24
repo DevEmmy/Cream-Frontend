@@ -15,9 +15,21 @@ import BuyFromCream from "@/AtomicComponents/BuyFromCream";
 function CreamRealEstate() {
   const router = useRouter();
   const data = router.query;
-  const id = data.id;
+  const idFromRouter = data.id;
   const name = data.name;
-  console.log("data", data.name);
+
+  const [id, setId] = useState(null);
+
+  useEffect(() => {
+    const storedId = localStorage.getItem("creamRealEstateId");
+    if (idFromRouter) {
+      setId(idFromRouter);
+      localStorage.setItem("creamRealEstateId", idFromRouter);
+    } else if (storedId) {
+      setId(storedId);
+    }
+  }, [idFromRouter]);
+
   const [listings, setListings] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -37,7 +49,7 @@ function CreamRealEstate() {
     let data = await getListingsPerPage(page, "real-estate", id);
     console.log("data: ", data);
     //console.log("total: ", data?.number);
-    setListings(data.list);
+    setListings(data?.list);
     setTotalData(data?.number);
     setLoading(false);
   };
@@ -65,9 +77,12 @@ function CreamRealEstate() {
   };
   useEffect(() => {
     // getAllListings()
-    fetchData();
+    if (typeof id != "undefined") {
+      console.log("id", id);
+      fetchData();
+    }
     // submit()
-  }, [page]);
+  }, [page, page]);
 
   return (
     <>
@@ -106,7 +121,7 @@ function CreamRealEstate() {
       </>
 
       <div className="list-container my-20 sm:my-14 mx-xPadding">
-        <h3 className="text-center my-10 text[1.5em] font-[600]">{name}</h3>
+        <h3 className="text-center my-10 text[1.5em] font-[700]">{name}</h3>
 
         <div className="grid grid-cols-3 w-full sm:grid-cols-1 gap-10">
           {loading ? (

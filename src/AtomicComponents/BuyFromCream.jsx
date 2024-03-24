@@ -72,7 +72,7 @@ function BuyFromCream({ subcategory, route }) {
 
   return (
     <div className="mx-xPadding">
-      <div className=" w-full text-center my-4 justify-center text-[1.3em] sm:[1em] font-bold">
+      <div className=" w-full text-center my-4 justify-center text-[1em] sm:[1em] font-bold">
         Buy from CREAM
       </div>
       <div className="w-full flex flex-row-reverse gap-2 sm:hidden mb-2">
@@ -99,7 +99,7 @@ function BuyFromCream({ subcategory, route }) {
                 className="rounded-md  object-cover w-[100%] h-[60vh] sm:h-[40vh] "
               />
 
-              <div className="text-[1em] sm:text-[0.8em]  font-[900] sm:font[300] absolute bottom-4 left-4 text-gray-900 p-2 ">
+              <div className="text-[1em] sm:text-[0.8em]  font-[900] sm:font[300]  text-gray-900  p-2 ">
                 {item.name}
               </div>
 

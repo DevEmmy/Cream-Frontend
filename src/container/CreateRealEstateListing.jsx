@@ -51,7 +51,7 @@ const CreateRealEstateListing = () => {
   const user = localStorage.getItem("user");
 
   const email = JSON.parse(user).email;
-  console.log("user email", email);
+  //console.log("user email", email);
 
   const [userListings, setUserListings] = useState({
     title: "",
