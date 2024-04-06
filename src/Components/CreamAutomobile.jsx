@@ -77,23 +77,26 @@ function CreamAutomobile() {
   };
   useEffect(() => {
     // getAllListings()
-    fetchData();
+    if (typeof id != "undefined" && id !== null) {
+      console.log("id", id);
+      fetchData();
+    }
     // submit()
-  }, [page]);
+  }, [page, id]);
 
   return (
     <>
       <Nav active={10} />
 
       <>
-        <h1 className="text-white text-[4em]  sm:text-[40px] font-[700]">
+        {/* <h1 className="text-white text-[4em]  sm:text-[40px] font-[700]">
           AUTOMOBILE <span className="text-primary1">.</span>
         </h1>
         <p className="text-white font-[600]">
           find new and preowned cars for sale
-        </p>
+        </p> */}
 
-        <div className="flex gap-3 items-center sm:flex-col sm:justify-center sm:w-full sm:items-center justify-center">
+        {/* <div className="flex gap-3 items-center sm:flex-col sm:justify-center sm:w-full sm:items-center justify-center">
           <div className="flex gap-3 py-3 px-5 rounded-lg w-[40VW] sm:w-full items-center my-3 bg-white text-black">
             <RiSearch2Line />
             <input
@@ -116,7 +119,7 @@ function CreamAutomobile() {
           >
             Search <RiSearch2Line />{" "}
           </button>
-        </div>
+        </div> */}
       </>
 
       <div className="list-container my-20 sm:my-14 mx-xPadding">
