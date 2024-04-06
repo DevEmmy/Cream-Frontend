@@ -77,9 +77,12 @@ function CreamAutomobile() {
   };
   useEffect(() => {
     // getAllListings()
-    fetchData();
+    if (typeof id != "undefined" && id !== null) {
+      console.log("id", id);
+      fetchData();
+    }
     // submit()
-  }, [page]);
+  }, [page, id]);
 
   return (
     <>

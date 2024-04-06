@@ -24,8 +24,10 @@ function CreamRealEstate() {
     const storedId = localStorage.getItem("creamRealEstateId");
     if (idFromRouter) {
       setId(idFromRouter);
+      console.log("idfromrouter", idFromRouter);
       localStorage.setItem("creamRealEstateId", idFromRouter);
     } else if (storedId) {
+      console.log("storedod", storedId);
       setId(storedId);
     }
   }, [idFromRouter]);
@@ -77,12 +79,12 @@ function CreamRealEstate() {
   };
   useEffect(() => {
     // getAllListings()
-    if (typeof id != "undefined") {
+    if (typeof id != "undefined" && id !== null) {
       console.log("id", id);
       fetchData();
     }
     // submit()
-  }, [page, page]);
+  }, [page, id]);
 
   return (
     <>
