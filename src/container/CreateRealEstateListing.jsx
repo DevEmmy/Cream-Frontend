@@ -53,8 +53,8 @@ const CreateRealEstateListing = () => {
   const [email, setEmail] = useState()
 
   useEffect(()=>{
-    setEmail(JSON.parse(user).email);
-  }, [user])
+      setEmail(JSON.parse(localStorage.getItem("user")).email);
+  }, [])
 
 
   const [userListings, setUserListings] = useState({
