@@ -123,7 +123,9 @@ function CreamAutomobile() {
       </>
 
       <div className="list-container my-20 sm:my-14 mx-xPadding">
-        <h3 className="text-center my-10 text[1.5em] font-[600]">{name}</h3>
+        <h3 className="text-center mt-10 mb-10 sm:mt-24 sm:mb-10 text[1.5em] font-[600]">
+          {name}
+        </h3>
 
         <div className="grid grid-cols-3 w-full sm:grid-cols-1 gap-10">
           {loading ? (

@@ -18,12 +18,15 @@ const RealEstate = () => {
   const [totalData, setTotalData] = useState(0);
   const [loader, setLoader] = useState(false);
   const images = [
-    "pic25.jpg",
-    "/pic27.jpg",
-    "pic33.jpg",
-    "pic34.jpg",
-    "pic2.jpg",
-    "pic30.jpg",
+    "/cpre1.jpg",
+    "/cpre2.jpg",
+    "/cpre3.jpg",
+    "/cpre4.jpg",
+    "/cpre5.jpg",
+    "/cpre6.jpg",
+    "/cpre7.jpg",
+    "/cpre8.jpg",
+    "/cpre10.jpg",
   ];
 
   const fetchData = async () => {
@@ -99,7 +102,7 @@ const RealEstate = () => {
         </div>
       </DynamicBanner>
       <BuyFromCream
-        subcategory={"640e4a12975b9d627cbc5e4f"}
+        category={"640e4a12975b9d627cbc5e4f"}
         route={"cream-realestate"}
       />
 

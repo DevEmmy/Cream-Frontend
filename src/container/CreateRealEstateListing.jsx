@@ -10,6 +10,7 @@ import Loader from "@/AtomicComponents/Loader/Loader";
 import { useRouter } from "next/router";
 import { success, error as showError } from "@/services/toaster";
 import { getSubCategories } from "@/services/request";
+import useLocalStorage from "use-local-storage";
 
 const CreateRealEstateListing = () => {
   const [outDoorProp, setOutDoorProp] = useState([]);
@@ -48,10 +49,13 @@ const CreateRealEstateListing = () => {
     console.log("subcategories", subcategories);
   }, [subcategories]);
 
-  const user = localStorage.getItem("user");
+  const [user, setUser] = useLocalStorage("user", "");
+  const [email, setEmail] = useState()
 
-  const email = JSON.parse(user).email;
-  //console.log("user email", email);
+  useEffect(()=>{
+    setEmail(JSON.parse(user).email);
+  }, [user])
+
 
   const [userListings, setUserListings] = useState({
     title: "",

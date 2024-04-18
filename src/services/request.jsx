@@ -389,13 +389,13 @@ export const suscribeToNewsLetter = async (email) => {
     });
 };
 
-export const getSubCategories = async ({ router, subcategory }) => {
-  console.log("id", subcategory);
+export const getSubCategories = async ({ router, category }) => {
+  console.log("id", category);
   const axiosInstanceWithRouter = createAxiosInstance(router);
 
   try {
     const response = await axiosInstanceWithRouter.get(
-      `/subcategory/category/${subcategory}`
+      `/subcategory/category/${category}`
     );
 
     //toast.dismiss(toastId);
@@ -425,6 +425,37 @@ export const postNewSubCategory = async ({ data, router }) => {
 
   try {
     const response = await axiosInstanceWithRouter.post("/subcategory", data);
+
+    toast.dismiss(toastId);
+
+    if (response) {
+      success(response.data.message);
+    } else {
+      error(response.data.message);
+    }
+  } catch (err) {
+    toast.dismiss(toastId);
+    console.log(err.response);
+    if (err.response) {
+      error(err.response.data.error);
+    } else {
+      error("An Error Occurred");
+    }
+  }
+};
+
+export const updateSubCategory = async ({ subcategoryId, data, router }) => {
+  const toastId = loading("Updating...");
+  console.log("Updating subcategory with ID:", subcategoryId);
+  console.log("Updated data:", data);
+
+  const axiosInstanceWithRouter = createAxiosInstance(router);
+
+  try {
+    const response = await axiosInstanceWithRouter.put(
+      `/subcategory/${subcategoryId}`,
+      data
+    );
 
     toast.dismiss(toastId);
 
