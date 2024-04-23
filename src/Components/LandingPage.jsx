@@ -10,13 +10,14 @@ import NewsletterSubscription from "@/AtomicComponents/NewsletterSubscription";
 
 const LandingPage = () => {
   const images = [
-    "/pic25.jpg",
-    "/pic28.jpg",
-    "/pic26.jpg",
-    "/pic27.jpg",
-    "/pic28.jpg",
-    "/pic29.jpg",
-    "/pic30.jpg",
+    "/cpre10.jpg",
+    "/cra5.jpeg",
+    "/cpre2.jpg",
+    "/cra6.jpeg",
+    "/cpre3.jpg",
+    "/cpre4.jpg",
+    "/cra7.jpeg",
+    "/cpre1.jpg",
     // "pic14.jpg",
   ];
   return (

@@ -27,7 +27,7 @@ const Blog = () => {
 
   const images = ["/pic18.jpeg", "/pic19.png"];
 
-  return(
+  return (
     <>
       <Nav active={6} />
       <DynamicBanner images={images}>
