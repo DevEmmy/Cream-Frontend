@@ -49,13 +49,12 @@ const CreateRealEstateListing = () => {
     console.log("subcategories", subcategories);
   }, [subcategories]);
 
-  const [user, setUser] = useLocalStorage("user", "");
-  const [email, setEmail] = useState()
+  const user = localStorage.getItem("user");
+  const [email, setEmail] = useState();
 
-  useEffect(()=>{
+  useEffect(() => {
     setEmail(JSON.parse(user).email);
-  }, [user])
-
+  }, [user]);
 
   const [userListings, setUserListings] = useState({
     title: "",
