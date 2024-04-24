@@ -62,7 +62,7 @@ function BuyFromCream({ category, route }) {
 
   useEffect(() => {
     const subcategories = async () => {
-      const response = await getSubCategories({ router, category });
+      const response = await getSubCategories(router, category );
       setData(response.data);
     };
     subcategories();
