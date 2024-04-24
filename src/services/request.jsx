@@ -389,7 +389,7 @@ export const suscribeToNewsLetter = async (email) => {
     });
 };
 
-export const getSubCategories = async ({ router, subcategory }) => {
+export const getSubCategories = async (router, subcategory) => {
   console.log("id", subcategory);
   const axiosInstanceWithRouter = createAxiosInstance(router);
 
