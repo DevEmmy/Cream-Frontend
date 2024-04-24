@@ -8,7 +8,7 @@ import { ListingForm, ListingHead } from "./CreateListing.style";
 import CreateRealEstateListing from "./CreateRealEstateListing";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
-const CreateListing = () => {  
+const CreateListing = () => {
   const [listing, setListing] = useState("Real Estate");
   const top = useRef(null);
   const categories = [
@@ -20,13 +20,13 @@ const CreateListing = () => {
     },
   ];
 
-  useEffect(()=>{
-    scrollToRef(top)
-  },[top])
+  useEffect(() => {
+    scrollToRef(top);
+  }, [top]);
 
   return (
     <>
-    <Return transparent={true}/>
+      <Return transparent={true} />
       <ListingHead ref={top}>
         <div className="heading">
           <h3 className="head1">Earn A Decent Commission</h3>

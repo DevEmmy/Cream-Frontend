@@ -4,7 +4,7 @@ import Link from "next/link";
 import { RiArrowRightFill, RiArrowRightUpFill } from "react-icons/ri";
 import { useRouter } from "next/router";
 
-function BuyFromCream({ subcategory, route }) {
+function BuyFromCream({ category, route }) {
   const [articles, setArticles] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -62,7 +62,7 @@ function BuyFromCream({ subcategory, route }) {
 
   useEffect(() => {
     const subcategories = async () => {
-      const response = await getSubCategories({ router, subcategory });
+      const response = await getSubCategories({ router, category });
       setData(response.data);
     };
     subcategories();
@@ -84,7 +84,7 @@ function BuyFromCream({ subcategory, route }) {
         </button>
       </div>
       <ul
-        className="flex overflow-x-auto w-[100%] no-scrollbar gap-0 sm:space-x-4"
+        className="flex overflow-x-auto w-[100%] no-scrollbar gap-6 sm:space-x-4"
         ref={containerRef}
       >
         {data?.map((item) => (

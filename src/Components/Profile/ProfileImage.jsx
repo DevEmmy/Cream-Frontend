@@ -6,6 +6,9 @@ import { DisplayImage } from "./Styled";
 import FileBase64 from "react-file-base64";
 import Loader from "@/AtomicComponents/Loader/Loader";
 import services from "../../ioc/services";
+import { createAxiosInstance } from "@/services/axiosConfig";
+import { useRouter } from "next/router";
+import { success } from "@/services/toaster";
 
 const ProfileImage = ({ data, id, type, setShowImage, setShowCover }) => {
   // const user = useGetUserDetails();
@@ -13,13 +16,16 @@ const ProfileImage = ({ data, id, type, setShowImage, setShowCover }) => {
   const [loader, setLoader] = useState(false);
   const [imagep, setImageP] = useState(data.profilePicture);
   const [imagec, setImageC] = useState(data.cover);
+  const [popUp, setPopUp] = useState(false);
 
   console.log(data);
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user")));
   }, []);
 
-  const upload = (image, type) => {
+  const router = useRouter();
+
+  const upload = async (image, type) => {
     setLoader(true);
     console.log("updating");
     if (type === "profile") {
@@ -31,28 +37,63 @@ const ProfileImage = ({ data, id, type, setShowImage, setShowCover }) => {
         data.cover = image;
       }
     }
-    const userDetails =
-      type === "profile" ? { profilePicture: image } : { cover: image };
-    services.api.userRequests
-      .updateUserProfile(userDetails)
+
+    const axiosInstanceWithRouter = createAxiosInstance(router);
+    const token = localStorage.getItem("token");
+    //console.log("token:", token);
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    //const id = user.id;
+    //toast.dismiss();
+    //const toastId = loading("verifying payment...");
+
+    const userDetails = type === "profile" ? { dp: image } : { cover: image };
+
+    console.log("lll", userDetails);
+
+    await axiosInstanceWithRouter
+      .put(`/user/profile-picture`, userDetails)
       .then((res) => {
+        console.log("response", res);
+        success(res.data.message);
+        localStorage.setItem("user", JSON.stringify(res.data.data));
+        //setEditUserProfile(res.mainData);
         setLoader(false);
-        if (type == "profile") {
-          setImageP(image);
-        } else if (type === "cover") {
-          setImageC(image);
-        }
-        localStorage.setItem("user", JSON.stringify(res.data));
-        services.toast.success("Uploaded Successfully");
+        router.push("/profile");
       })
       .catch((error) => {
         console.log(error);
-        services.toast.error(error);
+        setLoader(false);
+        setPopUp(true);
       });
   };
 
   return (
     <>
+      {popUp && (
+        <>
+          <div
+            className="fixed w-full z-50 h-[100%] top-0 left-0 flex justify-center items-center"
+            style={{ background: "rgba(0,0,0,0.5" }}
+            onClick={() => {
+              setPopUp(false);
+            }}
+          >
+            <div className="md:w-1/3 md:h-1/3 w-2/3 h-1/4 bg-[white] flex justify-center rounded-xl items-center">
+              <div className="flex flex-col justify-center items-center p-5">
+                <p className="text-xl text-center font-bold">
+                  Seems there is a connection error.{" "}
+                  <span className="text-[#F2BE5C] block">
+                    please try again!
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
       <DisplayImage>
         {loader && <Loader />}
         <div className="background">

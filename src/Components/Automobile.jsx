@@ -15,13 +15,7 @@ const Automobile = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [totalData, setTotalData] = useState(0);
-  const images = [
-    "/pic26.jpg",
-    "/pic28.jpg",
-    "/pic31.jpg",
-    "/pic32.jpg",
-    "/pic35.jpg",
-  ];
+  const images = ["/cra5.jpeg", "/cra6.jpeg", "/cra7.jpeg"];
 
   const fetchData = async () => {
     setLoading(true);
@@ -93,7 +87,7 @@ const Automobile = () => {
         </div>
       </DynamicBanner>
       <BuyFromCream
-        subcategory={"640e4a13975b9d627cbc5e51"}
+        category={"640e4a13975b9d627cbc5e51"}
         route={"cream-automobile"}
       />
 

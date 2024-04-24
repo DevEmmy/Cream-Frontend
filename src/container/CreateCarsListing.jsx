@@ -40,13 +40,15 @@ const CreateCarListing = () => {
     //console.log("ssd", subcategories);
   }, []);
 
+  const [email, setEmail] = useState();
+
   useEffect(() => {
-    console.log("subcategories", subcategories);
-  }, [subcategories]);
-
-  const user = localStorage.getItem("user");
-
-  const email = JSON.parse(user).email;
+    const user = localStorage.getItem("user");
+    if (user) {
+      const email = JSON.parse(user).email;
+      setEmail(email);
+    }
+  }, []);
 
   const [userListings, setUserListings] = useState({
     title: "",
