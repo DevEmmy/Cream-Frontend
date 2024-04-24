@@ -32,7 +32,7 @@ const CreateCarListing = () => {
 
   useEffect(() => {
     const fetchSubcategories = async () => {
-      const response = await getSubCategories({ router, subcategory });
+      const response = await getSubCategories(router, subcategory );
       setSubcategories(response.data);
     };
     fetchSubcategories();

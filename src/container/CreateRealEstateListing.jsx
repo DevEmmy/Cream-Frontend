@@ -37,7 +37,7 @@ const CreateRealEstateListing = () => {
   const subcategory = "640e4a12975b9d627cbc5e4f";
   useEffect(() => {
     const fetchSubcategories = async () => {
-      const response = await getSubCategories({ router, subcategory });
+      const response = await getSubCategories(router, subcategory );
       setSubcategories(response.data);
     };
     fetchSubcategories();
