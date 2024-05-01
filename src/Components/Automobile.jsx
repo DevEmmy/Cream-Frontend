@@ -15,7 +15,19 @@ const Automobile = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [totalData, setTotalData] = useState(0);
-  const images = ["/cra5.jpeg", "/cra6.jpeg", "/cra7.jpeg"];
+  const images = [
+    "/cra5.jpeg",
+    "/cra6.jpeg",
+    "/cra7.jpeg",
+    "Eado 8.jpg",
+    "f main.jpg",
+    "GAC main.jpg",
+    "Eado main.jpg",
+    "GAC5.jpg",
+    "GS8 18.jpg",
+    "k main.jpg",
+    "t30.jpg",
+  ];
 
   const fetchData = async () => {
     setLoading(true);
