@@ -11,6 +11,9 @@ import { useRouter } from "next/router";
 import { success, error as showError } from "@/services/toaster";
 import { getSubCategories } from "@/services/request";
 import useLocalStorage from "use-local-storage";
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(import('react-quill'), {ssr: false});
 
 const CreateRealEstateListing = () => {
   const [outDoorProp, setOutDoorProp] = useState([]);
@@ -34,10 +37,10 @@ const CreateRealEstateListing = () => {
   const [size, setSize] = useState(0);
 
   const [subcategories, setSubcategories] = useState([]);
-  const subcategory = "640e4a12975b9d627cbc5e4f";
+  const category = "640e4a12975b9d627cbc5e4f";
   useEffect(() => {
     const fetchSubcategories = async () => {
-      const response = await getSubCategories({ router, subcategory });
+      const response = await getSubCategories({ router, category });
       setSubcategories(response.data);
     };
     fetchSubcategories();
@@ -168,8 +171,14 @@ const CreateRealEstateListing = () => {
   const router = useRouter();
 
   const handleChange = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
+    let name = e.target?.name;
+    let value = e.target?.value;
+    if (name === undefined) {
+      name = 'description'
+      value = e
+      setUserListings({...userListings, [name]: value})
+      //console.log(userListings.description)
+    }
     if (name === "price") {
       let price = parseInt(value.replace(/,/g, "")) || 0;
       acceptNumbersOnly(name, price);
@@ -287,12 +296,17 @@ const CreateRealEstateListing = () => {
         </div>
         <div className="section">
           <p>Description</p>
-          <textarea
+          <ReactQuill theme="snow"
+          className="w-full border-2 border-black   rounded-md outline-none focus:outline-none focus:ring-1 focus:ring-primary1"
             type="text"
             name="description"
+            id="description"
+            value={userListings.description}
+            //rows="40"
             required
             onChange={handleChange}
           />
+         
         </div>
         <div className="section">
           <hr />
