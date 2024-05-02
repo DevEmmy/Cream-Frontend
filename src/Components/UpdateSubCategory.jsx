@@ -26,8 +26,10 @@ function UpdateSubcategory() {
   useEffect(() => {
     const getSubcategories = async () => {
       const response = await getSubCategories({ router, category });
-      setSubcategories(response.data);
-      console.log("data", subcategories);
+      if (response) {
+        setSubcategories(response.data);
+        console.log("data", subcategories);
+      }
     };
     getSubcategories();
 

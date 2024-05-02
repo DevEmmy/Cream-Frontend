@@ -389,13 +389,13 @@ export const suscribeToNewsLetter = async (email) => {
     });
 };
 
-export const getSubCategories = async (router, subcategory) => {
-  console.log("id", subcategory);
+export const getSubCategories = async ({ router, category }) => {
+  console.log("id", category);
   const axiosInstanceWithRouter = createAxiosInstance(router);
 
   try {
     const response = await axiosInstanceWithRouter.get(
-      `/subcategory/category/${subcategory}`
+      `/subcategory/category/${category}`
     );
 
     //toast.dismiss(toastId);

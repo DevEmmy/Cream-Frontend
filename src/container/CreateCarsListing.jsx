@@ -10,6 +10,10 @@ import { useRouter } from "next/router";
 import { success, error as showError } from "@/services/toaster";
 import { createAxiosInstance } from "@/services/axiosConfig";
 import { getSubCategories } from "@/services/request";
+//import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(import('react-quill'), {ssr: false});
 
 const CreateCarListing = () => {
   const [valid, setValid] = useState(false);
@@ -28,11 +32,11 @@ const CreateCarListing = () => {
   const navigate = useRouter();
 
   const [subcategories, setSubcategories] = useState([]);
-  const subcategory = "640e4a13975b9d627cbc5e51";
+  const category = "640e4a13975b9d627cbc5e51";
 
   useEffect(() => {
     const fetchSubcategories = async () => {
-      const response = await getSubCategories({ router, subcategory });
+      const response = await getSubCategories({ router, category });
       setSubcategories(response.data);
     };
     fetchSubcategories();
@@ -166,9 +170,16 @@ const CreateCarListing = () => {
   //   console.log(priceToInteger(userListings.price));
   // }, [userListings.price]);
 
+
   const handleChange = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
+    let name = e.target?.name;
+    let value = e.target?.value;
+    if (name === undefined) {
+      name = 'description'
+      value = e
+      setUserListings({...userListings, [name]: value})
+      //console.log(userListings.description)
+    }
     if (name === "price") {
       let price = parseInt(value.replace(/,/g, "")) || 0;
       acceptNumbersOnly(name, price);
@@ -290,11 +301,16 @@ const CreateCarListing = () => {
           <p>Car Model</p>
           <input type="text" name="model" required onChange={handleChange} />
         </div> */}
+         
         <div className="section">
           <p>About the Car</p>
-          <textarea
+          <ReactQuill theme="snow"
+          className="w-full border-2 border-black outline-none rounded-md focus:outline-none focus:ring-1 focus:ring-primary1"
             type="text"
             name="description"
+            id="description"
+            value={userListings.description}
+            //rows="40"
             required
             onChange={handleChange}
           />
