@@ -65,7 +65,7 @@ const Profile = () => {
             />
           )}
           <div
-            className="cover h-[40vh] cursor-pointer"
+            className="cover h-[40vh] sm:h-[30vh] cursor-pointer"
             onClick={() => {
               setShowCover(true);
             }}

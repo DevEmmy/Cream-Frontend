@@ -54,7 +54,7 @@ const ProfileImage = ({ data, id, type, setShowImage, setShowCover }) => {
     console.log("lll", userDetails);
 
     await axiosInstanceWithRouter
-      .put(`/user/profile-picture`, userDetails)
+      .patch(`/user/profile-picture`, userDetails)
       .then((res) => {
         console.log("response", res);
         success(res.data.message);
