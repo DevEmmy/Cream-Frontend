@@ -15,11 +15,16 @@ const LandingPage = () => {
     "/cpre2.jpg",
     "/cra6.jpeg",
     "/cpre3.jpg",
+    "f main.jpg",
     "/cpre4.jpg",
     "/cra7.jpeg",
     "/cpre1.jpg",
+    "k main.jpg",
+    "/cpre8.jpg",
+    "GAC main.jpg",
     // "pic14.jpg",
   ];
+
   return (
     <div className="scroll-smooth">
       <Nav />
