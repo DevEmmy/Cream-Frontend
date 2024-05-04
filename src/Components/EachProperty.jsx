@@ -14,6 +14,7 @@ import TimeAgo from "react-timeago";
 import PictureModal from "./PictureModal";
 import { SpinnerCircular } from "spinners-react";
 import { createAxiosInstance } from "@/services/axiosConfig";
+import DOMPurify from "isomorphic-dompurify";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 const EachProperty = () => {
@@ -89,6 +90,8 @@ const EachProperty = () => {
       }
     });
   };
+
+  const sanitizedDescription = DOMPurify.sanitize(listing?.description);
 
   //
   return (
@@ -186,11 +189,9 @@ const EachProperty = () => {
 
           <div className="grid grid-cols-2 gap-6 my-10 items-start justify-start md:grid-cols-1">
             <div className="items-start flex flex-col">
-              <p className="font-[700] text-[1.2em]">Description</p>
+              <p className="font-[700] ">Description</p>
               <p className="flex flex-col items-start text-justify">
-                {formatDesc(listing?.description).map((item, i) => {
-                  return <p className="text-gray-700">{item}</p>;
-                })}
+              {sanitizedDescription}
               </p>
             </div>
 
