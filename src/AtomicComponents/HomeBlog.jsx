@@ -11,7 +11,7 @@ function HomeBlog() {
 
   const fetchArticles = async () => {
     setIsLoading(true);
-    const data = await getArticles();
+    // const data = await getArticles();
     //console.log("title", data.data[0].title);
     //console.log(data);
     setArticles(data);
@@ -83,16 +83,6 @@ function HomeBlog() {
                 <button className="sm:text-[0.8em]">Learn more</button>
                 <RiArrowRightUpFill />
               </Link>
-
-              {/* <div className="  py-3  mt-5 bg-blue-500  text-black rounded-md"> */}
-              {/* <Link
-                href={`/blog/${article._id}`}
-                className="bg-red-500 flex flex-row items-center sm:text-[0.5em] sm:px-2 mt-4 "
-              >
-                <button>Learn more</button>
-                <RiArrowRightUpFill />
-              </Link> */}
-              {/* </div> */}
             </div>
           </li>
         ))}
