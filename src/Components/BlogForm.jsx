@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Footer from "@/AtomicComponents/Footer";
 import Nav from "@/AtomicComponents/Nav";
 import { postArticle } from "@/services/request";
@@ -7,9 +7,9 @@ import RealEstate from "./RealEstate";
 import { useRouter } from "next/navigation";
 import { error } from "@/services/toaster";
 // import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(import('react-quill'), {ssr: false});
+import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 
 const BlogForm = () => {
   const [formData, setFormData] = useState({
@@ -43,34 +43,33 @@ const BlogForm = () => {
 
   const handleInputChange = (e) => {
     // console.log(e)
-    if(e.target){
+    if (e.target) {
       const { name, value } = e.target;
-    if (name === "category") {
-      setFormData({
-        ...formData,
-        [name]: category_id[value],
-      });
+      if (name === "category") {
+        setFormData({
+          ...formData,
+          [name]: category_id[value],
+        });
+      } else {
+        setFormData({
+          ...formData,
+          [name]: value,
+        });
+      }
     } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
-    }
-    else{
-      const name ="body"
-      const value = e
-    if (name === "category") {
-      setFormData({
-        ...formData,
-        [name]: category_id[value],
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+      const name = "body";
+      const value = e;
+      if (name === "category") {
+        setFormData({
+          ...formData,
+          [name]: category_id[value],
+        });
+      } else {
+        setFormData({
+          ...formData,
+          [name]: value,
+        });
+      }
     }
   };
 
@@ -163,27 +162,27 @@ const BlogForm = () => {
           </div>
 
           <div className="h-52">
-          <label
-            htmlFor="body"
-            className="block mb-1 mt-2 text-gray-700 font-bold"
-          >
-            Body:
-          </label>
-          <ReactQuill theme="snow"
-          
-            id="body"
-            name="body"
-            value={formData.body}
-            className="w-full px-4 py-2 border  rounded-md focus:outline-none focus:ring-1 focus:ring-primary1"
-            rows="40"
-            onChange={handleInputChange}
-            required
-          />
+            <label
+              htmlFor="body"
+              className="block mb-1 mt-2 text-gray-700 font-bold"
+            >
+              Body:
+            </label>
+            <ReactQuill
+              theme="snow"
+              id="body"
+              name="body"
+              value={formData.body}
+              className="w-full px-4 py-2 border overflow-auto max-h-[200px] rounded-md focus:outline-none focus:ring-1 focus:ring-primary1"
+              rows="10"
+              onChange={handleInputChange}
+              required
+            />
           </div>
 
           <label
             htmlFor="coverImage"
-            className="block mb-1 mt-2 text-gray-700 font-bold"
+            className="block mb-1 mt-12 text-gray-700 font-bold"
           >
             Cover Image:
           </label>
