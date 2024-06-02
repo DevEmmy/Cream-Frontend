@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useState, useEffect } from "react";
 import { X } from "heroicons-react";
@@ -11,9 +12,9 @@ import { success, error as showError } from "@/services/toaster";
 import { createAxiosInstance } from "@/services/axiosConfig";
 import { getSubCategories } from "@/services/request";
 //import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(import('react-quill'), {ssr: false});
+import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 
 const CreateCarListing = () => {
   const [valid, setValid] = useState(false);
@@ -170,14 +171,13 @@ const CreateCarListing = () => {
   //   console.log(priceToInteger(userListings.price));
   // }, [userListings.price]);
 
-
   const handleChange = (e) => {
     let name = e.target?.name;
     let value = e.target?.value;
     if (name === undefined) {
-      name = 'description'
-      value = e
-      setUserListings({...userListings, [name]: value})
+      name = "description";
+      value = e;
+      setUserListings({ ...userListings, [name]: value });
       //console.log(userListings.description)
     }
     if (name === "price") {
@@ -271,7 +271,7 @@ const CreateCarListing = () => {
         </>
       )}
       <div className="form_Content">
-        {email === "creamnigeria@gmail.com" && (
+        {email !== "creamnigeria@gmail.com" && (
           <div className="section">
             <p>Subcategory</p>
             <select
@@ -301,11 +301,12 @@ const CreateCarListing = () => {
           <p>Car Model</p>
           <input type="text" name="model" required onChange={handleChange} />
         </div> */}
-         
+
         <div className="section">
           <p>About the Car</p>
-          <ReactQuill theme="snow"
-          className="w-full border-2 border-black outline-none rounded-md focus:outline-none focus:ring-1 focus:ring-primary1"
+          <ReactQuill
+            theme="snow"
+            className="w-full border-2 border-black outline-none rounded-md focus:outline-none focus:ring-1 focus:ring-primary1"
             type="text"
             name="description"
             id="description"

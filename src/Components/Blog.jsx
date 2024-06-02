@@ -76,7 +76,7 @@ const Blog = () => {
                   posted on {new Date(article.createdAt).toLocaleString()}
                 </p> */}
                 <div className="  ">
-                  <p
+                  <div
                     className="text-ellipsis sm:text-[0.8em] line-clamp-6 sm:line-clamp-3"
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(article.body),

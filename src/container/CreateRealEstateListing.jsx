@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useState } from "react";
 import { X } from "heroicons-react";
@@ -11,9 +12,9 @@ import { useRouter } from "next/router";
 import { success, error as showError } from "@/services/toaster";
 import { getSubCategories } from "@/services/request";
 import useLocalStorage from "use-local-storage";
-import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(import('react-quill'), {ssr: false});
+import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 
 const CreateRealEstateListing = () => {
   const [outDoorProp, setOutDoorProp] = useState([]);
@@ -60,6 +61,8 @@ const CreateRealEstateListing = () => {
       setEmail(JSON.parse(user).email);
     }
   }, []);
+
+  // Set the value received from the local storage to a local state
 
   const [userListings, setUserListings] = useState({
     title: "",
@@ -174,9 +177,9 @@ const CreateRealEstateListing = () => {
     let name = e.target?.name;
     let value = e.target?.value;
     if (name === undefined) {
-      name = 'description'
-      value = e
-      setUserListings({...userListings, [name]: value})
+      name = "description";
+      value = e;
+      setUserListings({ ...userListings, [name]: value });
       //console.log(userListings.description)
     }
     if (name === "price") {
@@ -253,7 +256,10 @@ const CreateRealEstateListing = () => {
               setPopUp(false);
             }}
           >
-            <div className="md:w-1/3 md:h-1/3 w-2/3 h-1/4 bg-[white] flex justify-center rounded-xl items-center">
+            <div
+              className="md:w-1/3 md:h-1/3 w-2/3 h-1/4 bg-[white] flex justify-center rounded-xl items-center"
+              suppressHydrationWarning
+            >
               <div className="flex flex-col justify-center items-center p-5">
                 <p className="text-xl text-center font-bold">
                   Seems there is a connection error.{" "}
@@ -267,24 +273,25 @@ const CreateRealEstateListing = () => {
         </>
       )}
       <div className="form_Content">
-        {email === "creamnigeria@gmail.com" && (
-          <div className="section">
-            <p>Subcategory</p>
-            <select
-              value={userListings.subcategory}
-              name="subcategory"
-              onChange={handleChange}
-            >
-              <option value="">Select...</option>
-              {subcategories?.map((option, index) => (
-                <option key={index} value={option._id}>
-                  {option.name}
-                </option>
-              ))}
-            </select>
-            {/* <p>You selected: {selectedOption}</p> */}
-          </div>
-        )}
+        <div className="section">
+          <p>Subcategory</p>
+          <select
+            disabled={email !== "creamnigeria@gmail.com"}
+            value={userListings.subcategory}
+            name="subcategory"
+            onChange={handleChange}
+            suppressHydrationWarning
+          >
+            <option value="">Select...</option>
+            {subcategories?.map((option, index) => (
+              <option key={index} value={option._id} suppressHydrationWarning>
+                {option.name}
+              </option>
+            ))}
+          </select>
+          {/* <p>You selected: {selectedOption}</p> */}
+        </div>
+
         <div className="section">
           <p>Location</p>
           <input type="text" name="location" required onChange={handleChange} />
@@ -296,8 +303,9 @@ const CreateRealEstateListing = () => {
         </div>
         <div className="section">
           <p>Description</p>
-          <ReactQuill theme="snow"
-          className="w-full border-2 border-black   rounded-md outline-none focus:outline-none focus:ring-1 focus:ring-primary1"
+          <ReactQuill
+            theme="snow"
+            className="w-full border-2 border-black   rounded-md outline-none focus:outline-none focus:ring-1 focus:ring-primary1"
             type="text"
             name="description"
             id="description"
@@ -306,7 +314,6 @@ const CreateRealEstateListing = () => {
             required
             onChange={handleChange}
           />
-         
         </div>
         <div className="section">
           <hr />
@@ -636,9 +643,9 @@ const CreateRealEstateListing = () => {
             {userListings["forRent"] === true ? (
               <p>Price per Day</p>
             ) : (
-              <p>
+              <div>
                 <p>Price</p>
-              </p>
+              </div>
             )}
             <div className="price">
               <input
