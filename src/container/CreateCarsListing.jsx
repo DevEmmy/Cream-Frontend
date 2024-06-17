@@ -16,7 +16,7 @@ import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 
-const CreateCarListing = () => {
+const CreateCarListing = ({ email }) => {
   const [valid, setValid] = useState(false);
   const [error, setError] = useState(false);
   const [changing, setChanging] = useState(false);
@@ -43,16 +43,6 @@ const CreateCarListing = () => {
     fetchSubcategories();
     console.log("subcategories", subcategories);
     //console.log("ssd", subcategories);
-  }, []);
-
-  const [email, setEmail] = useState();
-
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      const email = JSON.parse(user).email;
-      setEmail(email);
-    }
   }, []);
 
   const [userListings, setUserListings] = useState({
@@ -271,7 +261,7 @@ const CreateCarListing = () => {
         </>
       )}
       <div className="form_Content">
-        {email !== "creamnigeria@gmail.com" && (
+        {email === "creamnigeria@gmail.com" && (
           <div className="section">
             <p>Subcategory</p>
             <select
