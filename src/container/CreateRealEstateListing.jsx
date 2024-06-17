@@ -16,7 +16,7 @@ import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 
-const CreateRealEstateListing = () => {
+const CreateRealEstateListing = ({ email }) => {
   const [outDoorProp, setOutDoorProp] = useState([]);
   const [inDoorProp, setInDoorProp] = useState([]);
   const [viewProp, setViewProp] = useState([]);
@@ -52,15 +52,6 @@ const CreateRealEstateListing = () => {
   useEffect(() => {
     console.log("subcategories", subcategories);
   }, [subcategories]);
-
-  const [email, setEmail] = useState();
-
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      setEmail(JSON.parse(user).email);
-    }
-  }, []);
 
   // Set the value received from the local storage to a local state
 
@@ -273,24 +264,26 @@ const CreateRealEstateListing = () => {
         </>
       )}
       <div className="form_Content">
-        <div className="section">
-          <p>Subcategory</p>
-          <select
-            disabled={email !== "creamnigeria@gmail.com"}
-            value={userListings.subcategory}
-            name="subcategory"
-            onChange={handleChange}
-            suppressHydrationWarning
-          >
-            <option value="">Select...</option>
-            {subcategories?.map((option, index) => (
-              <option key={index} value={option._id} suppressHydrationWarning>
-                {option.name}
-              </option>
-            ))}
-          </select>
-          {/* <p>You selected: {selectedOption}</p> */}
-        </div>
+        {email === "creamnigeria@gmail.com" && (
+          <div className="section">
+            <p>Subcategory</p>
+            <select
+              //disabled={email !== "kolaiwalewa@gmail.com"}
+              value={userListings.subcategory}
+              name="subcategory"
+              onChange={handleChange}
+              //suppressHydrationWarning
+            >
+              <option value="">Select...</option>
+              {subcategories?.map((option, index) => (
+                <option key={index} value={option._id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
+            {/* <p>You selected: {selectedOption}</p> */}
+          </div>
+        )}
 
         <div className="section">
           <p>Location</p>
