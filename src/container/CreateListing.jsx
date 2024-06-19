@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
@@ -19,6 +20,22 @@ const CreateListing = () => {
       type: "Cars",
     },
   ];
+
+  const [email, setEmail] = useState(null);
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      console.log("User found:", parsedUser);
+      setEmail(parsedUser.email);
+    }
+  }, []);
+
+  // Function to toggle `trigger` state
+  const updateEmail = () => {
+    setTrigger((prev) => !prev);
+  };
 
   useEffect(() => {
     scrollToRef(top);
@@ -51,8 +68,10 @@ const CreateListing = () => {
       </ListingHead>
       <ListingForm>
         <div className="body">
-          {listing === "Real Estate" && <CreateRealEstateListing />}
-          {listing === "Cars" && <CreateCarsListing />}
+          {listing === "Real Estate" && (
+            <CreateRealEstateListing email={email} />
+          )}
+          {listing === "Cars" && <CreateCarsListing email={email} />}
         </div>
       </ListingForm>
     </>
