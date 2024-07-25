@@ -60,7 +60,7 @@ const CreateRealEstateListing = ({ email }) => {
     location: "",
     locationISO: "",
     category: "640e4a12975b9d627cbc5e4f",
-    subcategory: "",
+    subcategory: null,
     description: "",
     forRent: false,
     images: images,
