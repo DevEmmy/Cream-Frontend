@@ -78,9 +78,9 @@ function HomeBlog() {
 
               <Link
                 href={`/blog/${article._id}`}
-                className=" w-[20%] sm:w-[30%] gap-2 flex-row flex items-center mt-2 hover:bg-inherit focus:bg-inherit active:bg-inherit"
+                className="w-[25%] sm:w-[35%] gap-2 flex-row flex items-center mt-2 hover:bg-inherit focus:bg-inherit active:bg-inherit"
               >
-                <button className="sm:text-[0.8em]">Learn more</button>
+                <div className="sm:text-[0.8em]">Learn more</div>
                 <RiArrowRightUpFill />
               </Link>
             </div>
