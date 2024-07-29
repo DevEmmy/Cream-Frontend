@@ -190,9 +190,12 @@ const EachProperty = () => {
           <div className="grid grid-cols-2 gap-6 my-10 items-start justify-start md:grid-cols-1">
             <div className="items-start flex flex-col">
               <p className="font-[700] ">Description</p>
-              <p className="flex flex-col items-start text-justify">
-              {sanitizedDescription}
-              </p>
+              <div
+                className="flex flex-col text-left"
+                dangerouslySetInnerHTML={{
+                  __html: sanitizedDescription,
+                }}
+              />
             </div>
 
             {listing?.postedBy?._id !== data?._id ? (
